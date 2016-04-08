@@ -1,0 +1,29 @@
+m255
+K3
+13
+cModel Technology
+Z0 d/home/user3/spring16/aj2672/lab3-qsys/simulation/modelsim
+vSoCKit_Top
+DXx6 sv_std 3 std 0 22 F[19LRNL:5;XmIFh[XOPn1
+!i10b 1
+!s100 =aYnmXOA4^2<YNgCze]8T2
+I;5AR8_Tm`3Rb2n957HDgk1
+VobKo1f53K3KTzFEL<VOYh1
+!s105 SoCKit_Top_svo_unit
+S1
+Z1 d/home/user3/spring16/aj2672/lab3-qsys/simulation/modelsim
+w1459280432
+8SoCKit_Top.svo
+FSoCKit_Top.svo
+L0 31
+Z2 OV;L;10.1d;51
+r1
+!s85 0
+31
+!s108 1459280460.454218
+!s107 SoCKit_Top.svo|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+.|SoCKit_Top.svo|
+!s101 -O0
+o-sv -work work -O0
+!s92 -sv -work work +incdir+. -O0
+n@so@c@kit_@top
