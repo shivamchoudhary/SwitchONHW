@@ -1,5 +1,7 @@
 module Scheduler(	input logic clk,
 						input logic [7:0] data0, data1, data2, data3,
+						input logic empty0, empty1, empty2, empty3,
+						
 						output logic [2:0] sel0, sel1, sel2, sel3,
 						output logic en0, en1, en2, en3,
 						output logic rdreq0, rdreq1, rdreq2, rdreq3);
@@ -44,9 +46,9 @@ module Scheduler(	input logic clk,
 	always_ff @(posedge clk) begin
 		rdreq0 = 0; rdreq1 = 0; rdreq2 = 0; rdreq3 = 0;
 		en0 = 0; en1 = 0; en2 = 0; en3 = 0;
-		rdreq0 = set_rd(data0[1:0], 00);
-		rdreq1 = set_rd(data1[1:0], 01);
-		rdreq2 = set_rd(data2[1:0], 10);
-		rdreq3 = set_rd(data3[1:0], 11);
+		rdreq0 = set_rd(data0[1:0], 00) && !empty0;
+		rdreq1 = set_rd(data1[1:0], 01) && !empty1;
+		rdreq2 = set_rd(data2[1:0], 10) && !empty2;
+		rdreq3 = set_rd(data3[1:0], 11) && !empty3;
 	end	
 endmodule

@@ -17,6 +17,8 @@ module Buffer(	input logic clk,
 	initial begin
 		rdcount0 <= 0; rdcount1 <= 0; rdcount2 <= 0; rdcount3 <= 0;
 		wrcount0 <= 0; wrcount1 <= 0; wrcount2 <= 0; wrcount3 <= 0;
+		ramrd0 = 0; ramrd1 = 0; ramrd2 = 0; ramrd3 = 0;
+		ramwr0 = 0; ramwr1 = 0; ramwr2 = 0; ramwr3 = 0;
 	end
 	
 	RAM ram0(.clock(clk), .data(result0), .rdaddress(rdcount0), .rden(ramrd0), .wraddress(wrcount0), .wren(ramwr0), .q(ramdata0));
