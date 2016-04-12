@@ -1,3 +1,7 @@
+# Tags
+tags
+TAGS
+
 # Object files
 *.o
 *.ko
@@ -34,3 +38,10 @@ SoCKit_Top.*
 
 # Backup 
 *.bak
+
+# Verilator Files
+obj_dir/
+*.vcd
+# Tags
+tags
+TAGS
