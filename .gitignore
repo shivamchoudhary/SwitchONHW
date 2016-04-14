@@ -38,7 +38,7 @@ db/*
 *.dSYM/
 
 # Backup 
-*.bak
+*.sv.bak
 
 # Verilator Files
 obj_dir/

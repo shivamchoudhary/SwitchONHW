@@ -17,8 +17,8 @@ module Buffer(	input logic clk,
 	initial begin
 		rdcount1 <= 0; rdcount2 <= 0; rdcount3 <= 0;
 		wrcount1 <= 0; wrcount2 <= 0; wrcount3 <= 0;
-		ramrd1 = 0; ramrd2 = 0; ramrd3 = 0;
-		ramwr1 = 0; ramwr2 = 0; ramwr3 = 0;
+		ramrd1 = 1; ramrd2 = 1; ramrd3 = 1;
+		ramwr1 = 1; ramwr2 = 1; ramwr3 = 1;
 	end
 	
 	RAM ram1(.clock(clk), .data(result1), .rdaddress(rdcount1), .rden(ramrd1), .wraddress(wrcount1), .wren(ramwr1), .q(ramdata1));
@@ -29,36 +29,31 @@ module Buffer(	input logic clk,
 		hex1 <= seven_segment(data1[1:0]);
 		hex2 <= seven_segment(data2[1:0]);
 		hex3 <= seven_segment(data3[1:0]);
-		ramwr1 = 0; ramwr2 = 0; ramwr3 = 0;
 
-		if(en1 && (result1 == 1)) begin  									//if there is a value on the output port
-			hex4 <= seven_segment(result1[1:0]);				//display value on the monitor
-			ramwr1 <= 1;												//set ramwrite to 1 which writes data in the ram
-			wrcount1 <= wrcount1 + 1;								//set count of values to 1
-		end
+		//if there is a value on the output port display value on the monitor
+		//set ramwrite to 1 which writes data in the ram set count of values to 1
+		if(en1 && (result1 == 1)) begin  														
+			hex4 <= seven_segment(result1[1:0]);				
+			wrcount1 <= wrcount1 + 1;
+		end																
 		else	begin
 			hex4 <= 0;
-			ramwr1 <= 0;
 		end
 
 		if(en2 && (result2 == 2)) begin 
 			hex5 <= seven_segment(result2[1:0]);
-			ramwr2 <= 1;
 			wrcount2 <= wrcount2 + 1;
 		end
 		else begin
 			hex5 <= 0;
-			ramwr2 <= 0;
 		end
 		
 		if(en3 && (result3 == 3)) begin 
 			hex6 <= seven_segment(result3[1:0]);
-			ramwr3 <= 1;
 			wrcount3 <= wrcount3 + 1;
 		end
 		else begin
 			hex6 <= 0;
-			ramwr3 <= 0;
 		end
 	end
 	
@@ -70,40 +65,30 @@ module Buffer(	input logic clk,
 				3'b100 : readdata <= wrcount3;
 				3'b001 : 
 					if (rdcount1 < wrcount1) begin
-						ramrd1 <= 1;
 						readdata <= ramdata1;
 						rdcount1 <= rdcount1 + 1;
 					end
 					else begin
-						ramrd1 <= 0;
 						readdata <= 255;
 					end
 				3'b010 : 
 					if (rdcount2 < wrcount2) begin
-						ramrd2 <= 1;
 						readdata <= ramdata2;
 						rdcount2 <= rdcount2+1;
 					end
 					else begin
-						ramrd2 <= 0;
 						readdata <= 255;
 					end
 				3'b011 : 
 					if (rdcount3 < wrcount3) begin
-						ramrd3 <= 1;
 						readdata <= ramdata3;
 						rdcount3 <= rdcount3+1;
 					end
 					else begin
-						ramrd3 <= 0;
 						readdata <= 255;
 					end
 				default : readdata <= 8'b11111111;
 			endcase
-		end
-		else begin
-			ramrd1 = 0; ramrd2 = 0; ramrd3 = 0; 
-			readdata <= 8'b11111111;
 		end
 	end
 		
