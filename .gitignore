@@ -31,7 +31,8 @@ TAGS
 *.i*86
 *.x86_64
 *.hex
-SoCKit_Top.*
+SoCKit_Top*
+db/*
 
 # Debug files
 *.dSYM/
@@ -42,6 +43,10 @@ SoCKit_Top.*
 # Verilator Files
 obj_dir/
 *.vcd
+
 # Tags
 tags
 TAGS
+
+#Simulation
+simulation/*

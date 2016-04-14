@@ -1,6 +1,6 @@
 module Packet_Display(
  input logic 	    clk50, reset,   
- input logic [7:0]  hex0, hex1, hex2, hex3, hex4, hex5, hex6, hex7,
+ input logic [7:0]  hex1, hex2, hex3, hex4, hex5, hex6,
  output logic [7:0] VGA_R, VGA_G, VGA_B,
  output logic 	    VGA_CLK, VGA_HS, VGA_VS, VGA_BLANK_n, VGA_SYNC_n);
 
@@ -107,7 +107,7 @@ module Packet_Display(
 
    logic 			     inChar; // In any character
 
-   assign inChar = (vcount[9:7] == 3'd0 ||vcount[9:7] ==3'd1 || vcount[9:7] == 3'd2 ||vcount[9:7] ==3'd3) &&
+   assign inChar = (vcount[9:7] == 3'd0 ||vcount[9:7] ==3'd1 || vcount[9:7] == 3'd2) &&
 		   (hcount[10:7] == 4'd6 || hcount[10:7] == 4'd3);
    
    logic [2:0] 			     charx; // Coordinate within the 8x16 char
@@ -137,14 +137,13 @@ module Packet_Display(
 	assign column = hcount[9:7];
    assign row = vcount[9:7];
    logic [7:0] curSegs;
-   assign curSegs = column == 3'd3 && row== 3'd0 ? hex0 :
-		    column == 3'd3 && row== 3'd1 ? hex1 :
-		    column == 3'd3 && row== 3'd2 ? hex2 :
-		    column == 3'd3 && row== 3'd3 ? hex3 :
+   assign curSegs = 
+		    column == 3'd3 && row== 3'd0 ? hex1 :
+		    column == 3'd3 && row== 3'd1 ? hex2 :
+		    column == 3'd3 && row== 3'd2 ? hex3 :
 			 column == 3'd6 && row== 3'd0 ? hex4 :
 		    column == 3'd6 && row== 3'd1 ? hex5 :
-		    column == 3'd6 && row== 3'd2 ? hex6 :
-		    hex7;
+		    column == 3'd6 && row== 3'd2 ? hex6 : 0;
    
    always_comb begin
       {VGA_R, VGA_G, VGA_B} = {8'h00, 8'h0, 8'h0}; 
