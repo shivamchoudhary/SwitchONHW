@@ -42,11 +42,11 @@ module VGA_LED(input logic        clk,
    Packet_Display packet_Display(.clk50(clk), .*);
 	
    always_ff @(posedge clk)begin			//Enqueue to the fifo 
-		if (chipselect && write) begin
-			case(address)
-				3'b001 : begin
-					wrreq1 <= 1;
-					din1 <= writedata;
+		if (chipselect && write) begin   // Data is on the avalon bus
+			case(address) 						// Check the address sent from userspace
+				3'b001 : begin 				// FIFO1
+					wrreq1 <= 1; 				// Set Write Request FIFO1 to 1
+					din1 <= writedata;		// Send data on din1 (after one clock cycle)
 				end
 				3'b010 : begin
 					wrreq2 <= 1;
@@ -65,10 +65,10 @@ module VGA_LED(input logic        clk,
 			wrreq1 <= 0; wrreq2 <= 0; wrreq3 <= 0;
 		end
 	end
-
-	always_ff @(posedge clk) begin
-		ramen1 <= sel1[0] | sel1[1] ;
-		ramen2 <= sel2[0] | sel2[1] ;
-		ramen3 <= sel3[0] | sel3[1] ;
+   // ramen1 controls the input to RAM 1 if sel1 is enabled
+	always_ff @(posedge clk) begin 
+		ramen1 <= (sel1[0] || sel1[1]) && !empty1;
+		ramen2 <= (sel2[0] || sel2[1]) && !empty2;
+		ramen3 <= (sel3[0] || sel3[1]) && !empty3;
 	end		
 endmodule
