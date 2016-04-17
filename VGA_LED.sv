@@ -12,12 +12,12 @@ module VGA_LED(input logic        clk,
 
 	logic [7:0] din1, din2, din3;				//inputs to the four fifos
 	logic [7:0] data0, data1, data2, data3;		//outputs from the four fifos
-	logic [2:0] sel1, sel2, sel3;				//select lines to the four multiplexers
+	logic [1:0] sel1, sel2, sel3;				//select lines to the four multiplexers
 	logic rdreq1, rdreq2, rdreq3;			//enables enqueue in the queue
 	logic wrreq1, wrreq2, wrreq3;			//enables dequeue in the queue
 	logic empty1, empty2, empty3; 
 	logic full1, full2, full3;
-	logic en1, en2, en3;
+	logic ramen1, ramen2, ramen3;
 	logic [7:0] result1, result2, result3;
 	logic [1:0] usedw1, usedw2, usedw3; 
 	logic [7:0] hex1, hex2, hex3,
@@ -27,7 +27,6 @@ module VGA_LED(input logic        clk,
 		data0 <= 0;
 		wrreq1 <= 0; wrreq2 <= 0; wrreq3 <= 0;
 		rdreq1 <= 0; rdreq2 <= 0; rdreq3 <= 0;
-		en1 <= 0; en2 <= 0; en3 <= 0;
 	end
 
 	Fifo fifo1(.clock(clk), .data(din1), .rdreq(rdreq1), .wrreq(wrreq1), .empty(empty1), .full(full1), .q(data1), .usedw(usedw1));	
@@ -65,6 +64,11 @@ module VGA_LED(input logic        clk,
 		else begin
 			wrreq1 <= 0; wrreq2 <= 0; wrreq3 <= 0;
 		end
-	end 
-		
+	end
+
+	always_ff @(posedge clk) begin
+		ramen1 <= sel1[0] | sel1[1] ;
+		ramen2 <= sel2[0] | sel2[1] ;
+		ramen3 <= sel3[0] | sel3[1] ;
+	end		
 endmodule

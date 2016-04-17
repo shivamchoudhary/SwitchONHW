@@ -143,7 +143,7 @@ module Packet_Display(
 		    column == 3'd3 && row== 3'd2 ? hex3 :
 			 column == 3'd6 && row== 3'd0 ? hex4 :
 		    column == 3'd6 && row== 3'd1 ? hex5 :
-		    column == 3'd6 && row== 3'd2 ? hex6 : 0;
+			 hex6 ;
    
    always_comb begin
       {VGA_R, VGA_G, VGA_B} = {8'h00, 8'h0, 8'h0}; 
