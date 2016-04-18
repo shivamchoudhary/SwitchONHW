@@ -1,9 +1,10 @@
+buffer: 
+	verilator -Wno-lint -cc --trace Buffer.sv --exe buffercounter.cpp
+	make -j -C obj_dir/ -f VBuffer.mk VBuffer
+	obj_dir/VBuffer
+
 scheduler:
-<<<<<<< Updated upstream
 	verilator -Wno-lint -cc --trace Scheduler.sv --exe counter.cpp
-=======
-	verilator -cc --trace Scheduler.sv --exe counter.cpp
->>>>>>> Stashed changes
 	make -j -C obj_dir/ -f VScheduler.mk VScheduler
 	obj_dir/VScheduler
 test:
@@ -20,4 +21,4 @@ run:
 	obj_dir/VScheduler
 clean:
 	rm -rf obj_dir
-	rm -f  counter.vcd
+	rm -f  *.vcd
