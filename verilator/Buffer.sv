@@ -2,7 +2,7 @@ module Buffer( input logic      clk,
         input logic [7:0]       result1,result2,result3,
         input logic             chipselect, read,
         input logic [2:0]       address,
-        input logic             ramen1,ramen2,ramen3,
+        input logic             en1,en2,en3,
         input logic [7:0]       data1,data2,data3,
         output logic [7:0]      hex1,hex2,hex3,hex4,hex5,hex6,
         output logic [7:0]      readdata);
@@ -23,16 +23,16 @@ module Buffer( input logic      clk,
                 hex1<=data1[1:0];
                 hex2<=data2[1:0];
                 hex3<=data3[1:0];
-                if (ramen1) begin
+                if (en1) begin
                         hex4 <=result1[1:0];
                         wrcount1 <=wrcount1+1;
 
                 end
-                if(ramen2) begin
+                if(en2) begin
                         hex5 <= result2[1:0];
                         wrcount2 <=wrcount2+1;
                 end
-                if (ramen3) begin
+                if (en3) begin
                         hex6 <=result3[1:0];
                         wrcount3 <=wrcount3 +1;
                 end
@@ -91,13 +91,6 @@ module Buffer( input logic      clk,
                 end
                 else
                         readdata <=251;
-                        if (read1)
-                        begin
-                                                        read1<=0;
-                                                        rdcount1 <=rdcount1+1;
-                                                end
-
-
         end
 
         endmodule
