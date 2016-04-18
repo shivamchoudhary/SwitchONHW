@@ -1,3 +1,7 @@
+vgaled:
+	verilator -Wno-lint -cc -trace VGA_LED.sv --exe vgacounter.cpp
+	make -j -C obj_dir/ -f VVGA_LED.mk VVGA_LED
+	obj_dir/VVGA_LED
 buffer: 
 	verilator -Wno-lint -cc --trace Buffer.sv --exe buffercounter.cpp
 	make -j -C obj_dir/ -f VBuffer.mk VBuffer
