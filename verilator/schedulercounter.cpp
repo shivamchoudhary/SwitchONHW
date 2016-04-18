@@ -13,10 +13,9 @@ int main(int argc, char** argv)
     // init trace dump
     Verilated::traceEverOn(true);
     VerilatedVcdC* tfp = new VerilatedVcdC;
-
+    top->v->reset=1;
     top->trace(tfp, 99);
     tfp->open("scheduler.vcd");
-
     // initialize simulation inputs
     top->clk    = 1;
     top->empty1 = 0;

@@ -1,7 +1,8 @@
 module VGA_LED(input            clk,
         input logic             reset,
         input logic [7:0]       writedata,
-        input logic             write,read,
+        input logic             write,
+        input logic             read,
         input                   chipselect,
         input logic [2:0]       address,
         output logic [7:0]      VGA_R, VGA_G, VGA_B,
@@ -17,7 +18,7 @@ module VGA_LED(input            clk,
         logic wrreq1,wrreq2,wrreq3;
         logic empty1,empty2,empty3;
         logic full1,full2,full3;
-        logic ramen1,ramen2,ramen3;
+        logic en1,en2,en3;
         logic [7:0] result1,result2,result3;
         logic [1:0] usedw1,usedw2,usedw3;
         logic [7:0] hex1,hex2,hex3,hex4,hex5,hex6;
@@ -27,19 +28,21 @@ module VGA_LED(input            clk,
                 rdreq1 = 0;rdreq2=0;rdreq3=0;
         end
         Scheduler scheduler(.*);
+        Buffer buffer(.*);
         always_ff @(posedge clk) begin
-                if (chipselect &&write) begin
+                if (chipselect && write) begin
                         case(address)
-                                3'b001: begin 
+                                3'b01: begin 
                                         wrreq1 <=1;
                                         din1 <= writedata;
                                 end
-                                3'b010: begin
+
+                                3'b10: begin
                                         wrreq2 <=2;
                                         din2<= writedata;
 
                                 end
-                                3'b011: begin
+                                3'b11: begin
                                         wrreq3 <=1;
                                         din3<=writedata;
 
@@ -52,11 +55,6 @@ module VGA_LED(input            clk,
                 else begin
                         wrreq1<=0;wrreq2<=0;wrreq3<=0;
                 end
-        end
-        always_ff @(posedge clk) begin
-                ramen1 <=sel1[0] | sel1[1];
-                ramen2 <=sel2[0] | sel2[1];
-                ramen3 <=sel3[0] | sel3[1];
         end
 endmodule
 
