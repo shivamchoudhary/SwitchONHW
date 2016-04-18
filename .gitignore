@@ -32,7 +32,7 @@ TAGS
 *.x86_64
 *.hex
 SoCKit_Top*
-db/*
+db/
 
 # Debug files
 *.dSYM/
