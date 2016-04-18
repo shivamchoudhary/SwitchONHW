@@ -9,40 +9,36 @@ module Buffer(	input logic clk,
 					output logic [7:0] readdata);
 
 	logic ramrd1, ramrd2, ramrd3;					
-	logic ramwr1, ramwr2, ramwr3;
-	logic aclr;
 	logic read1, read2, read3;
-	logic ramdata1, ramdata2, ramdata3;	
+	logic [7:0] ramdata1, ramdata2, ramdata3;	
 	logic[13:0] wrcount1, wrcount2, wrcount3;
 	logic[13:0] rdcount1, rdcount2, rdcount3;
 	
 	initial begin
-		rdcount1 <= 0; rdcount2 <= 0; rdcount3 <= 0;
-		wrcount1 <= 0; wrcount2 <= 0; wrcount3 <= 0;
-		ramrd1 <= 1; ramrd2 <= 1; ramrd3 <= 1;
-		ramwr1 <= 0; ramwr2 <= 0; ramwr3 <= 0;
-		read1 <= 0; read2 <= 0; read3 <= 0;
-		aclr <= 0;;
+		rdcount1 = 0; rdcount2 = 0; rdcount3 = 0;
+		wrcount1 = 0; wrcount2 = 0; wrcount3 = 0;
+		ramrd1 = 1; ramrd2 = 1; ramrd3 = 1;
+		read1 = 0; read2 = 0; read3 = 0;
 	end
 	
-	RAM ram1(.clock(clk), .data(result1), .rdaddress(rdcount1), .rden(ramrd1), .wraddress(wrcount1), .wren(ramen1), .q(ramdata1), .aclr(aclr));
-	RAM ram2(.clock(clk), .data(result2), .rdaddress(rdcount2), .rden(ramrd2), .wraddress(wrcount2), .wren(ramen2), .q(ramdata2), .aclr(aclr));
-	RAM ram3(.clock(clk), .data(result3), .rdaddress(rdcount3), .rden(ramrd3), .wraddress(wrcount3), .wren(ramen3), .q(ramdata3), .aclr(aclr));
+	RAM ram1(.clock(clk), .data(result1), .rdaddress(rdcount1), .rden(ramrd1), .wraddress(wrcount1), .wren(ramen1), .q(ramdata1));
+	RAM ram2(.clock(clk), .data(result2), .rdaddress(rdcount2), .rden(ramrd2), .wraddress(wrcount2), .wren(ramen2), .q(ramdata2));
+	RAM ram3(.clock(clk), .data(result3), .rdaddress(rdcount3), .rden(ramrd3), .wraddress(wrcount3), .wren(ramen3), .q(ramdata3));
 	
 	always_ff @(posedge clk)begin				//dequeue from fifo and display on led
 		hex1 <= seven_segment(data1[1:0]);
 		hex2 <= seven_segment(data2[1:0]);
 		hex3 <= seven_segment(data3[1:0]);
 
-		if(ramen1) begin
+		if(ramen1 && result1) begin
 			hex4 <= seven_segment(result1[1:0]);
 			wrcount1 <= wrcount1 + 1;
 		end
-		if(ramen2) begin
+		if(ramen2 && result2) begin
 			hex5 <= seven_segment(result2[1:0]);
 			wrcount2 <= wrcount2 + 1;
 		end
-		if(ramen3) begin
+		if(ramen3 && result3) begin
 			hex6 <= seven_segment(result3[1:0]);
 			wrcount3 <= wrcount3 + 1;
 		end

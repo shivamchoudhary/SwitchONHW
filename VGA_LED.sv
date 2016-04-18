@@ -24,9 +24,9 @@ module VGA_LED(input logic        clk,
 				   hex4, hex5, hex6;
 					
 	initial begin
-		data0 <= 0;
-		wrreq1 <= 0; wrreq2 <= 0; wrreq3 <= 0;
-		rdreq1 <= 0; rdreq2 <= 0; rdreq3 <= 0;
+		data0 = 0;
+		wrreq1 = 0; wrreq2 = 0; wrreq3 = 0;
+		rdreq1 = 0; rdreq2 = 0; rdreq3 = 0;
 	end
 
 	Fifo fifo1(.clock(clk), .data(din1), .rdreq(rdreq1), .wrreq(wrreq1), .empty(empty1), .full(full1), .q(data1), .usedw(usedw1));	
@@ -67,8 +67,8 @@ module VGA_LED(input logic        clk,
 	end
    // ramen1 controls the input to RAM 1 if sel1 is enabled
 	always_ff @(posedge clk) begin 
-		ramen1 <= (sel1[0] || sel1[1]) && !empty1;
-		ramen2 <= (sel2[0] || sel2[1]) && !empty2;
-		ramen3 <= (sel3[0] || sel3[1]) && !empty3;
+		ramen1 <= sel1[0] | sel1[1];
+		ramen2 <= sel2[0] | sel2[1];
+		ramen3 <= sel3[0] | sel3[1];
 	end		
 endmodule
