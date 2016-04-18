@@ -1,5 +1,9 @@
 scheduler:
+<<<<<<< Updated upstream
 	verilator -Wno-lint -cc --trace Scheduler.sv --exe counter.cpp
+=======
+	verilator -cc --trace Scheduler.sv --exe counter.cpp
+>>>>>>> Stashed changes
 	make -j -C obj_dir/ -f VScheduler.mk VScheduler
 	obj_dir/VScheduler
 test:

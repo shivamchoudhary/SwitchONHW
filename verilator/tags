@@ -53,7 +53,10 @@ trace	obj_dir/VScheduler__Trace__Slow.cpp	/^void VScheduler::trace (VerilatedVcd
 traceChg	obj_dir/VScheduler__Trace.cpp	/^void VScheduler::traceChg(VerilatedVcd* vcdp, void* userthis, uint32_t code) {$/;"	f	class:VScheduler
 traceChgThis	obj_dir/VScheduler__Trace.cpp	/^void VScheduler::traceChgThis(VScheduler__Syms* __restrict vlSymsp, VerilatedVcd* vcdp, uint32_t code) {$/;"	f	class:VScheduler
 traceChgThis__2	obj_dir/VScheduler__Trace.cpp	/^void VScheduler::traceChgThis__2(VScheduler__Syms* __restrict vlSymsp, VerilatedVcd* vcdp, uint32_t code) {$/;"	f	class:VScheduler
+<<<<<<< Updated upstream
 traceChgThis__3	obj_dir/VScheduler__Trace.cpp	/^void VScheduler::traceChgThis__3(VScheduler__Syms* __restrict vlSymsp, VerilatedVcd* vcdp, uint32_t code) {$/;"	f	class:VScheduler
+=======
+>>>>>>> Stashed changes
 traceFull	obj_dir/VScheduler__Trace__Slow.cpp	/^void VScheduler::traceFull(VerilatedVcd* vcdp, void* userthis, uint32_t code) {$/;"	f	class:VScheduler
 traceFullThis	obj_dir/VScheduler__Trace__Slow.cpp	/^void VScheduler::traceFullThis(VScheduler__Syms* __restrict vlSymsp, VerilatedVcd* vcdp, uint32_t code) {$/;"	f	class:VScheduler
 traceFullThis__1	obj_dir/VScheduler__Trace__Slow.cpp	/^void VScheduler::traceFullThis__1(VScheduler__Syms* __restrict vlSymsp, VerilatedVcd* vcdp, uint32_t code) {$/;"	f	class:VScheduler

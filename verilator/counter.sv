@@ -1,5 +1,3 @@
-
-
 module counter #(
   parameter WIDTH = 8
 )(
@@ -26,4 +24,3 @@ else     o_n <= wen ? dat : o_n + {{WIDTH-1{1'b0}}, cen};
 
 
 endmodule
-
