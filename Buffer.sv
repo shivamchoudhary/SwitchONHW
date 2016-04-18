@@ -10,7 +10,7 @@ module Buffer(	input logic clk,
 
 	logic ramrd1, ramrd2, ramrd3;					
 	logic read1, read2, read3;
-	logic write1, write2, write3;
+	logic wren1, wren2, wren3;
 	logic [7:0] ramdata1, ramdata2, ramdata3;	
 	logic[13:0] wrcount1, wrcount2, wrcount3;
 	logic[13:0] rdcount1, rdcount2, rdcount3;
@@ -20,41 +20,41 @@ module Buffer(	input logic clk,
 		wrcount1 = 0; wrcount2 = 0; wrcount3 = 0;
 		ramrd1 = 1; ramrd2 = 1; ramrd3 = 1;
 		read1 = 0; read2 = 0; read3 = 0;
-		write1 = 0; write2 = 0; write3 = 0;
 	end
 	
-	RAM ram1(.clock(clk), .data(result1), .rdaddress(rdcount1), .rden(ramrd1), .wraddress(wrcount1), .wren(en1), .q(ramdata1));
-	RAM ram2(.clock(clk), .data(result2), .rdaddress(rdcount2), .rden(ramrd2), .wraddress(wrcount2), .wren(en2), .q(ramdata2));
-	RAM ram3(.clock(clk), .data(result3), .rdaddress(rdcount3), .rden(ramrd3), .wraddress(wrcount3), .wren(en3), .q(ramdata3));
+	RAM ram1(.clock(clk), .data(result1), .rdaddress(rdcount1), .rden(ramrd1), .wraddress(wrcount1), .wren(wren1), .q(ramdata1));
+	RAM ram2(.clock(clk), .data(result2), .rdaddress(rdcount2), .rden(ramrd2), .wraddress(wrcount2), .wren(wren2), .q(ramdata2));
+	RAM ram3(.clock(clk), .data(result3), .rdaddress(rdcount3), .rden(ramrd3), .wraddress(wrcount3), .wren(wren3), .q(ramdata3));
 	
 	always_ff @(posedge clk)begin				//dequeue from fifo and display on led
 		hex1 <= seven_segment(data1[1:0]);
 		hex2 <= seven_segment(data2[1:0]);
 		hex3 <= seven_segment(data3[1:0]);
-
-//		if(write1)begin
-//			write1 <= 0;
-//			wrcount1 <= wrcount1 + 1;
-//		end
-//		if(write2)begin
-//			write2 <= 0;
-//			wrcount2 <= wrcount2 + 1;
-//		end
-//		if(write3)begin
-//			write3 <= 0;
-//			wrcount3 <= wrcount3 + 1;
-//		end
-		if(en1) begin
+		
+		if(en1 && result1) begin
+			wren1 <= 1;
 			hex4 <= seven_segment(result1[1:0]);
 			wrcount1 <= wrcount1 + 1;
+		end 
+		else begin
+			wren1 <= 0;
+			hex4 <= 0;
 		end
-		if(en2) begin
+		if(en2 && result2) begin
 			hex5 <= seven_segment(result2[1:0]);
 			wrcount2 <= wrcount2 + 1;
 		end
-		if(en3) begin
+		else begin
+			wren2 <= 0;
+			hex5 <= 0;
+		end
+		if(en3 && result3) begin
 			hex6 <= seven_segment(result3[1:0]);
 			wrcount3 <= wrcount3 + 1;
+		end
+		else begin
+			wren3 <= 0;
+			hex6 <= 0;
 		end
 	end
 	
