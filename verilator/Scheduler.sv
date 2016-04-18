@@ -14,31 +14,34 @@ module Scheduler(input logic clk,
                                 if (!en1 && !empty1) begin
                                         en1=1;
                                         sel1 = 01;
+                                        rdreq1 = 1;
                                 end
                                 else begin
-                                        sel1 =0;
+                                        rdreq1 =0;
                                 end
                         end
                         2'b10 : begin 
                                 if (!en2 && !empty1) begin
                                         en2=1;
                                         sel2 = 01;
+                                        rdreq1 = 1;
                                 end
                                 else begin
-                                        sel2 =0;
+                                        rdreq1 =0;
                                 end
                         end
                         2'b11 : begin 
                                 if (!en3 && !empty1) begin
                                         en3=1;
                                         sel3 = 01;
+                                        rdreq1 = 1;
                                 end
                                 else begin
-                                        sel3 =0;
+                                        rdreq1 =0;
                                 end
                         end
                         default:begin
-                                sel1=0;sel2=0;sel3=0;
+                                rdreq1 = 1;
                         end
                 endcase
                 //For FIFO 2
@@ -47,31 +50,34 @@ module Scheduler(input logic clk,
                                 if (!en1 && !empty2) begin
                                         en1=1;
                                         sel1 = 10;
+                                        rdreq2 = 1;        
                                 end
                                 else begin
-                                        sel1 =0;
+                                        rdreq2 =0;
                                 end
                         end
                         2'b10 : begin 
                                 if (!en2 && !empty2) begin
                                         en2=1;
-                                        //sel2 = 10;
+                                        sel2 = 10;
+                                        rdreq2 = 1;
                                 end
                                 else begin
-                                        sel2 =0;
+                                        rdreq2 =0;
                                 end
                         end
                         2'b11 : begin 
                                 if (!en3 && !empty2) begin
                                         en3=1;
-                                        //sel3 = 10;
+                                        sel3 = 10;
+                                        rdreq2 = 1;
                                 end
                                 else begin
-                                        sel3 =0;
+                                        rdreq2 =0;
                                 end
                         end
                         default:begin
-                                sel1=0;sel2=0;sel3=0;
+                                rdreq2=1;
                         end
                 endcase
                 case (data3[1:0])
@@ -79,36 +85,36 @@ module Scheduler(input logic clk,
                                 if (!en1 && !empty3) begin
                                         en1=1;
                                         sel1 = 11;
+                                        rdreq3 = 1;
                                 end
                                 else begin
-                                        sel1 =0;
+                                        rdreq3 =0;
                                 end
                         end
                         2'b10 : begin 
                                 if (!en2 && !empty3) begin
                                         en2=1;
                                         sel2 = 11;
+                                        rdreq3 = 1;
                                 end
                                 else begin
-                                        sel2 =0;
+                                        rdreq3 =0;
                                 end
                         end
                         2'b11 : begin 
                                 if (!en3 && !empty3) begin
                                         en3=1;
                                         sel3 = 11;
+                                        rdreq3 = 1;
                                 end
                                 else begin
-                                        sel3 =0;
+                                        rdreq3 =0;
                                 end
                         end
                         default:begin
-                                sel1=0;sel2=0;sel3=0;
+                                        rdreq3 = 1;
                         end
                 endcase
-
-
-
         end
 endmodule
 

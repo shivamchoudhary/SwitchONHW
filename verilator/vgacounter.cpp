@@ -21,6 +21,13 @@ int main(int argc, char** argv)
      // run simulation for 100 clock periods
     for(int i = 0; i < 100; i++)
     {   
+        if (i>=10 && i<14){
+                top->chipselect=1;
+        }
+        else{
+                top->chipselect=0;
+        }
+
         for(int clk = 0; clk < 2; ++clk)
         {
             top->eval();

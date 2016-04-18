@@ -53,7 +53,7 @@ int main(int argc, char** argv)
         }
         // Generate read signals
         
-        if(i>11&&i<13){
+        if(i>10&&i<19){
                 top->chipselect=1;
                 top->read = 1;
                 top->address = 1;

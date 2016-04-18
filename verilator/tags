@@ -4,120 +4,67 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-PERL	obj_dir/VBuffer.mk	/^PERL = perl$/;"	m
-PERL	obj_dir/VScheduler.mk	/^PERL = perl$/;"	m
-SYSTEMC_INCLUDE	obj_dir/VBuffer.mk	/^SYSTEMC_INCLUDE ?= $/;"	m
-SYSTEMC_INCLUDE	obj_dir/VScheduler.mk	/^SYSTEMC_INCLUDE ?= $/;"	m
-SYSTEMC_LIBDIR	obj_dir/VBuffer.mk	/^SYSTEMC_LIBDIR ?= $/;"	m
-SYSTEMC_LIBDIR	obj_dir/VScheduler.mk	/^SYSTEMC_LIBDIR ?= $/;"	m
-SYSTEMPERL	obj_dir/VBuffer.mk	/^SYSTEMPERL = $/;"	m
-SYSTEMPERL	obj_dir/VScheduler.mk	/^SYSTEMPERL = $/;"	m
-SYSTEMPERL_INCLUDE	obj_dir/VBuffer.mk	/^SYSTEMPERL_INCLUDE = $/;"	m
-SYSTEMPERL_INCLUDE	obj_dir/VScheduler.mk	/^SYSTEMPERL_INCLUDE = $/;"	m
-TOPp	obj_dir/VBuffer__Syms.h	/^    VBuffer*                       TOPp;$/;"	m	class:VBuffer__Syms
-TOPp	obj_dir/VScheduler__Syms.h	/^    VScheduler*                    TOPp;$/;"	m	class:VScheduler__Syms
-VBuffer__Syms	obj_dir/VBuffer__Syms.cpp	/^VBuffer__Syms::VBuffer__Syms(VBuffer* topp, const char* namep)$/;"	f	class:VBuffer__Syms
-VBuffer__Syms	obj_dir/VBuffer__Syms.h	/^class VBuffer__Syms : public VerilatedSyms {$/;"	c
-VERILATOR_ROOT	obj_dir/VBuffer.mk	/^VERILATOR_ROOT = \/usr\/local\/Cellar\/verilator\/3.874\/share\/verilator$/;"	m
-VERILATOR_ROOT	obj_dir/VScheduler.mk	/^VERILATOR_ROOT = \/usr\/local\/Cellar\/verilator\/3.874\/share\/verilator$/;"	m
-VL_CTOR_IMP	obj_dir/VBuffer.cpp	/^VL_CTOR_IMP(VBuffer) {$/;"	f
-VL_CTOR_IMP	obj_dir/VScheduler.cpp	/^VL_CTOR_IMP(VScheduler) {$/;"	f
-VL_INCLUDE_OPT	obj_dir/VBuffer__ALLcls.cpp	/^#define VL_INCLUDE_OPT /;"	d	file:
-VL_INCLUDE_OPT	obj_dir/VBuffer__ALLsup.cpp	/^#define VL_INCLUDE_OPT /;"	d	file:
-VL_INCLUDE_OPT	obj_dir/VScheduler__ALLcls.cpp	/^#define VL_INCLUDE_OPT /;"	d	file:
-VL_INCLUDE_OPT	obj_dir/VScheduler__ALLsup.cpp	/^#define VL_INCLUDE_OPT /;"	d	file:
-VL_MODULE	obj_dir/VBuffer.h	/^VL_MODULE(VBuffer) {$/;"	f
-VL_MODULE	obj_dir/VScheduler.h	/^VL_MODULE(VScheduler) {$/;"	f
-VM_COVERAGE	obj_dir/VBuffer_classes.mk	/^VM_COVERAGE = 0$/;"	m
-VM_COVERAGE	obj_dir/VScheduler_classes.mk	/^VM_COVERAGE = 0$/;"	m
-VM_MODPREFIX	obj_dir/VBuffer.mk	/^VM_MODPREFIX = VBuffer$/;"	m
-VM_MODPREFIX	obj_dir/VScheduler.mk	/^VM_MODPREFIX = VScheduler$/;"	m
-VM_PCLI	obj_dir/VBuffer.mk	/^VM_PCLI = 1$/;"	m
-VM_PCLI	obj_dir/VScheduler.mk	/^VM_PCLI = 1$/;"	m
-VM_PREFIX	obj_dir/VBuffer.mk	/^VM_PREFIX = VBuffer$/;"	m
-VM_PREFIX	obj_dir/VScheduler.mk	/^VM_PREFIX = VScheduler$/;"	m
-VM_SC	obj_dir/VBuffer.mk	/^VM_SC = 0$/;"	m
-VM_SC	obj_dir/VScheduler.mk	/^VM_SC = 0$/;"	m
-VM_SC_TARGET_ARCH	obj_dir/VBuffer.mk	/^VM_SC_TARGET_ARCH = linux$/;"	m
-VM_SC_TARGET_ARCH	obj_dir/VScheduler.mk	/^VM_SC_TARGET_ARCH = linux$/;"	m
-VM_SP	obj_dir/VBuffer.mk	/^VM_SP = 0$/;"	m
-VM_SP	obj_dir/VScheduler.mk	/^VM_SP = 0$/;"	m
-VM_SP_OR_SC	obj_dir/VBuffer.mk	/^VM_SP_OR_SC = 0$/;"	m
-VM_SP_OR_SC	obj_dir/VScheduler.mk	/^VM_SP_OR_SC = 0$/;"	m
-VM_TRACE	obj_dir/VBuffer_classes.mk	/^VM_TRACE = 1$/;"	m
-VM_TRACE	obj_dir/VScheduler_classes.mk	/^VM_TRACE = 1$/;"	m
-VM_USER_CFLAGS	obj_dir/VBuffer.mk	/^VM_USER_CFLAGS = \\$/;"	m
-VM_USER_CFLAGS	obj_dir/VScheduler.mk	/^VM_USER_CFLAGS = \\$/;"	m
-VM_USER_CLASSES	obj_dir/VBuffer.mk	/^VM_USER_CLASSES = \\$/;"	m
-VM_USER_CLASSES	obj_dir/VScheduler.mk	/^VM_USER_CLASSES = \\$/;"	m
-VM_USER_DIR	obj_dir/VBuffer.mk	/^VM_USER_DIR = \\$/;"	m
-VM_USER_DIR	obj_dir/VScheduler.mk	/^VM_USER_DIR = \\$/;"	m
-VM_USER_LDLIBS	obj_dir/VBuffer.mk	/^VM_USER_LDLIBS = \\$/;"	m
-VM_USER_LDLIBS	obj_dir/VScheduler.mk	/^VM_USER_LDLIBS = \\$/;"	m
-VScheduler__Syms	obj_dir/VScheduler__Syms.cpp	/^VScheduler__Syms::VScheduler__Syms(VScheduler* topp, const char* namep)$/;"	f	class:VScheduler__Syms
-VScheduler__Syms	obj_dir/VScheduler__Syms.h	/^class VScheduler__Syms : public VerilatedSyms {$/;"	c
-_VBuffer_H_	obj_dir/VBuffer.h	/^#define _VBuffer_H_$/;"	d
-_VBuffer__Syms_H_	obj_dir/VBuffer__Syms.h	/^#define _VBuffer__Syms_H_$/;"	d
-_VScheduler_H_	obj_dir/VScheduler.h	/^#define _VScheduler_H_$/;"	d
-_VScheduler__Syms_H_	obj_dir/VScheduler__Syms.h	/^#define _VScheduler__Syms_H_$/;"	d
-__Vconfigure	obj_dir/VBuffer.cpp	/^void VBuffer::__Vconfigure(VBuffer__Syms* vlSymsp, bool first) {$/;"	f	class:VBuffer
-__Vconfigure	obj_dir/VScheduler.cpp	/^void VScheduler::__Vconfigure(VScheduler__Syms* vlSymsp, bool first) {$/;"	f	class:VScheduler
-__Vm_activity	obj_dir/VBuffer__Syms.h	/^    bool	__Vm_activity;		\/\/\/< Used by trace routines to determine change occurred$/;"	m	class:VBuffer__Syms
-__Vm_activity	obj_dir/VScheduler__Syms.h	/^    bool	__Vm_activity;		\/\/\/< Used by trace routines to determine change occurred$/;"	m	class:VScheduler__Syms
-__Vm_didInit	obj_dir/VBuffer__Syms.h	/^    bool	__Vm_didInit;$/;"	m	class:VBuffer__Syms
-__Vm_didInit	obj_dir/VScheduler__Syms.h	/^    bool	__Vm_didInit;$/;"	m	class:VScheduler__Syms
-__Vm_namep	obj_dir/VBuffer__Syms.h	/^    const char* __Vm_namep;$/;"	m	class:VBuffer__Syms
-__Vm_namep	obj_dir/VScheduler__Syms.h	/^    const char* __Vm_namep;$/;"	m	class:VScheduler__Syms
-_change_request	obj_dir/VBuffer.cpp	/^VL_INLINE_OPT QData VBuffer::_change_request(VBuffer__Syms* __restrict vlSymsp) {$/;"	f	class:VBuffer
-_change_request	obj_dir/VScheduler.cpp	/^VL_INLINE_OPT QData VScheduler::_change_request(VScheduler__Syms* __restrict vlSymsp) {$/;"	f	class:VScheduler
-_eval	obj_dir/VBuffer.cpp	/^void VBuffer::_eval(VBuffer__Syms* __restrict vlSymsp) {$/;"	f	class:VBuffer
-_eval	obj_dir/VScheduler.cpp	/^void VScheduler::_eval(VScheduler__Syms* __restrict vlSymsp) {$/;"	f	class:VScheduler
-_eval_initial	obj_dir/VBuffer.cpp	/^void VBuffer::_eval_initial(VBuffer__Syms* __restrict vlSymsp) {$/;"	f	class:VBuffer
-_eval_initial	obj_dir/VScheduler.cpp	/^void VScheduler::_eval_initial(VScheduler__Syms* __restrict vlSymsp) {$/;"	f	class:VScheduler
-_eval_initial_loop	obj_dir/VBuffer.cpp	/^void VBuffer::_eval_initial_loop(VBuffer__Syms* __restrict vlSymsp) {$/;"	f	class:VBuffer
-_eval_initial_loop	obj_dir/VScheduler.cpp	/^void VScheduler::_eval_initial_loop(VScheduler__Syms* __restrict vlSymsp) {$/;"	f	class:VScheduler
-_eval_settle	obj_dir/VBuffer.cpp	/^void VBuffer::_eval_settle(VBuffer__Syms* __restrict vlSymsp) {$/;"	f	class:VBuffer
-_eval_settle	obj_dir/VScheduler.cpp	/^void VScheduler::_eval_settle(VScheduler__Syms* __restrict vlSymsp) {$/;"	f	class:VScheduler
-_initial__TOP__2	obj_dir/VBuffer.cpp	/^void VBuffer::_initial__TOP__2(VBuffer__Syms* __restrict vlSymsp) {$/;"	f	class:VBuffer
-_sequent__TOP__1	obj_dir/VBuffer.cpp	/^VL_INLINE_OPT void VBuffer::_sequent__TOP__1(VBuffer__Syms* __restrict vlSymsp) {$/;"	f	class:VBuffer
-_sequent__TOP__1	obj_dir/VScheduler.cpp	/^VL_INLINE_OPT void VScheduler::_sequent__TOP__1(VScheduler__Syms* __restrict vlSymsp) {$/;"	f	class:VScheduler
-eval	obj_dir/VBuffer.cpp	/^void VBuffer::eval() {$/;"	f	class:VBuffer
-eval	obj_dir/VScheduler.cpp	/^void VScheduler::eval() {$/;"	f	class:VScheduler
-final	obj_dir/VBuffer.cpp	/^void VBuffer::final() {$/;"	f	class:VBuffer
-final	obj_dir/VScheduler.cpp	/^void VScheduler::final() {$/;"	f	class:VScheduler
-getClearActivity	obj_dir/VBuffer__Syms.h	/^    inline bool getClearActivity() { bool r=__Vm_activity; __Vm_activity=false; return r;}$/;"	f	class:VBuffer__Syms
-getClearActivity	obj_dir/VScheduler__Syms.h	/^    inline bool getClearActivity() { bool r=__Vm_activity; __Vm_activity=false; return r;}$/;"	f	class:VScheduler__Syms
+PERL	obj_dir/VVGA_LED.mk	/^PERL = perl$/;"	m
+SYSTEMC_INCLUDE	obj_dir/VVGA_LED.mk	/^SYSTEMC_INCLUDE ?= $/;"	m
+SYSTEMC_LIBDIR	obj_dir/VVGA_LED.mk	/^SYSTEMC_LIBDIR ?= $/;"	m
+SYSTEMPERL	obj_dir/VVGA_LED.mk	/^SYSTEMPERL = $/;"	m
+SYSTEMPERL_INCLUDE	obj_dir/VVGA_LED.mk	/^SYSTEMPERL_INCLUDE = $/;"	m
+TOPp	obj_dir/VVGA_LED__Syms.h	/^    VVGA_LED*                      TOPp;$/;"	m	class:VVGA_LED__Syms
+VERILATOR_ROOT	obj_dir/VVGA_LED.mk	/^VERILATOR_ROOT = \/usr\/local\/Cellar\/verilator\/3.874\/share\/verilator$/;"	m
+VL_CTOR_IMP	obj_dir/VVGA_LED.cpp	/^VL_CTOR_IMP(VVGA_LED) {$/;"	f
+VL_INCLUDE_OPT	obj_dir/VVGA_LED__ALLcls.cpp	/^#define VL_INCLUDE_OPT /;"	d	file:
+VL_INCLUDE_OPT	obj_dir/VVGA_LED__ALLsup.cpp	/^#define VL_INCLUDE_OPT /;"	d	file:
+VL_MODULE	obj_dir/VVGA_LED.h	/^VL_MODULE(VVGA_LED) {$/;"	f
+VM_COVERAGE	obj_dir/VVGA_LED_classes.mk	/^VM_COVERAGE = 0$/;"	m
+VM_MODPREFIX	obj_dir/VVGA_LED.mk	/^VM_MODPREFIX = VVGA_LED$/;"	m
+VM_PCLI	obj_dir/VVGA_LED.mk	/^VM_PCLI = 1$/;"	m
+VM_PREFIX	obj_dir/VVGA_LED.mk	/^VM_PREFIX = VVGA_LED$/;"	m
+VM_SC	obj_dir/VVGA_LED.mk	/^VM_SC = 0$/;"	m
+VM_SC_TARGET_ARCH	obj_dir/VVGA_LED.mk	/^VM_SC_TARGET_ARCH = linux$/;"	m
+VM_SP	obj_dir/VVGA_LED.mk	/^VM_SP = 0$/;"	m
+VM_SP_OR_SC	obj_dir/VVGA_LED.mk	/^VM_SP_OR_SC = 0$/;"	m
+VM_TRACE	obj_dir/VVGA_LED_classes.mk	/^VM_TRACE = 1$/;"	m
+VM_USER_CFLAGS	obj_dir/VVGA_LED.mk	/^VM_USER_CFLAGS = \\$/;"	m
+VM_USER_CLASSES	obj_dir/VVGA_LED.mk	/^VM_USER_CLASSES = \\$/;"	m
+VM_USER_DIR	obj_dir/VVGA_LED.mk	/^VM_USER_DIR = \\$/;"	m
+VM_USER_LDLIBS	obj_dir/VVGA_LED.mk	/^VM_USER_LDLIBS = \\$/;"	m
+VVGA_LED__Syms	obj_dir/VVGA_LED__Syms.cpp	/^VVGA_LED__Syms::VVGA_LED__Syms(VVGA_LED* topp, const char* namep)$/;"	f	class:VVGA_LED__Syms
+VVGA_LED__Syms	obj_dir/VVGA_LED__Syms.h	/^class VVGA_LED__Syms : public VerilatedSyms {$/;"	c
+_VVGA_LED_H_	obj_dir/VVGA_LED.h	/^#define _VVGA_LED_H_$/;"	d
+_VVGA_LED__Syms_H_	obj_dir/VVGA_LED__Syms.h	/^#define _VVGA_LED__Syms_H_$/;"	d
+__Vconfigure	obj_dir/VVGA_LED.cpp	/^void VVGA_LED::__Vconfigure(VVGA_LED__Syms* vlSymsp, bool first) {$/;"	f	class:VVGA_LED
+__Vm_activity	obj_dir/VVGA_LED__Syms.h	/^    bool	__Vm_activity;		\/\/\/< Used by trace routines to determine change occurred$/;"	m	class:VVGA_LED__Syms
+__Vm_didInit	obj_dir/VVGA_LED__Syms.h	/^    bool	__Vm_didInit;$/;"	m	class:VVGA_LED__Syms
+__Vm_namep	obj_dir/VVGA_LED__Syms.h	/^    const char* __Vm_namep;$/;"	m	class:VVGA_LED__Syms
+_change_request	obj_dir/VVGA_LED.cpp	/^VL_INLINE_OPT QData VVGA_LED::_change_request(VVGA_LED__Syms* __restrict vlSymsp) {$/;"	f	class:VVGA_LED
+_eval	obj_dir/VVGA_LED.cpp	/^void VVGA_LED::_eval(VVGA_LED__Syms* __restrict vlSymsp) {$/;"	f	class:VVGA_LED
+_eval_initial	obj_dir/VVGA_LED.cpp	/^void VVGA_LED::_eval_initial(VVGA_LED__Syms* __restrict vlSymsp) {$/;"	f	class:VVGA_LED
+_eval_initial_loop	obj_dir/VVGA_LED.cpp	/^void VVGA_LED::_eval_initial_loop(VVGA_LED__Syms* __restrict vlSymsp) {$/;"	f	class:VVGA_LED
+_eval_settle	obj_dir/VVGA_LED.cpp	/^void VVGA_LED::_eval_settle(VVGA_LED__Syms* __restrict vlSymsp) {$/;"	f	class:VVGA_LED
+_initial__TOP__1	obj_dir/VVGA_LED.cpp	/^void VVGA_LED::_initial__TOP__1(VVGA_LED__Syms* __restrict vlSymsp) {$/;"	f	class:VVGA_LED
+_sequent__TOP__2	obj_dir/VVGA_LED.cpp	/^VL_INLINE_OPT void VVGA_LED::_sequent__TOP__2(VVGA_LED__Syms* __restrict vlSymsp) {$/;"	f	class:VVGA_LED
+eval	obj_dir/VVGA_LED.cpp	/^void VVGA_LED::eval() {$/;"	f	class:VVGA_LED
+final	obj_dir/VVGA_LED.cpp	/^void VVGA_LED::final() {$/;"	f	class:VVGA_LED
+getClearActivity	obj_dir/VVGA_LED__Syms.h	/^    inline bool getClearActivity() { bool r=__Vm_activity; __Vm_activity=false; return r;}$/;"	f	class:VVGA_LED__Syms
 main	buffercounter.cpp	/^int main(int argc, char** argv)$/;"	f
 main	counter.cpp	/^int main(int argc, char** argv)$/;"	f
 main	counter_tb.cpp	/^int main(int argc, char **argv, char **env) {$/;"	f
+main	schedulercounter.cpp	/^int main(int argc, char** argv)$/;"	f
 main	test.cpp	/^int main(int argc, char **argv, char **env) {$/;"	f
-name	obj_dir/VBuffer__Syms.h	/^    inline const char* name() { return __Vm_namep; }$/;"	f	class:VBuffer__Syms
-name	obj_dir/VScheduler__Syms.h	/^    inline const char* name() { return __Vm_namep; }$/;"	f	class:VScheduler__Syms
-trace	obj_dir/VBuffer__Trace__Slow.cpp	/^void VBuffer::trace (VerilatedVcdC* tfp, int, int) {$/;"	f	class:VBuffer
-trace	obj_dir/VScheduler__Trace__Slow.cpp	/^void VScheduler::trace (VerilatedVcdC* tfp, int, int) {$/;"	f	class:VScheduler
-traceChg	obj_dir/VBuffer__Trace.cpp	/^void VBuffer::traceChg(VerilatedVcd* vcdp, void* userthis, uint32_t code) {$/;"	f	class:VBuffer
-traceChg	obj_dir/VScheduler__Trace.cpp	/^void VScheduler::traceChg(VerilatedVcd* vcdp, void* userthis, uint32_t code) {$/;"	f	class:VScheduler
-traceChgThis	obj_dir/VBuffer__Trace.cpp	/^void VBuffer::traceChgThis(VBuffer__Syms* __restrict vlSymsp, VerilatedVcd* vcdp, uint32_t code) {$/;"	f	class:VBuffer
-traceChgThis	obj_dir/VScheduler__Trace.cpp	/^void VScheduler::traceChgThis(VScheduler__Syms* __restrict vlSymsp, VerilatedVcd* vcdp, uint32_t code) {$/;"	f	class:VScheduler
-traceChgThis__2	obj_dir/VBuffer__Trace.cpp	/^void VBuffer::traceChgThis__2(VBuffer__Syms* __restrict vlSymsp, VerilatedVcd* vcdp, uint32_t code) {$/;"	f	class:VBuffer
-traceChgThis__2	obj_dir/VScheduler__Trace.cpp	/^void VScheduler::traceChgThis__2(VScheduler__Syms* __restrict vlSymsp, VerilatedVcd* vcdp, uint32_t code) {$/;"	f	class:VScheduler
-traceChgThis__3	obj_dir/VBuffer__Trace.cpp	/^void VBuffer::traceChgThis__3(VBuffer__Syms* __restrict vlSymsp, VerilatedVcd* vcdp, uint32_t code) {$/;"	f	class:VBuffer
-traceChgThis__3	obj_dir/VScheduler__Trace.cpp	/^void VScheduler::traceChgThis__3(VScheduler__Syms* __restrict vlSymsp, VerilatedVcd* vcdp, uint32_t code) {$/;"	f	class:VScheduler
-traceChgThis__4	obj_dir/VBuffer__Trace.cpp	/^void VBuffer::traceChgThis__4(VBuffer__Syms* __restrict vlSymsp, VerilatedVcd* vcdp, uint32_t code) {$/;"	f	class:VBuffer
-traceChgThis__5	obj_dir/VBuffer__Trace.cpp	/^void VBuffer::traceChgThis__5(VBuffer__Syms* __restrict vlSymsp, VerilatedVcd* vcdp, uint32_t code) {$/;"	f	class:VBuffer
-traceFull	obj_dir/VBuffer__Trace__Slow.cpp	/^void VBuffer::traceFull(VerilatedVcd* vcdp, void* userthis, uint32_t code) {$/;"	f	class:VBuffer
-traceFull	obj_dir/VScheduler__Trace__Slow.cpp	/^void VScheduler::traceFull(VerilatedVcd* vcdp, void* userthis, uint32_t code) {$/;"	f	class:VScheduler
-traceFullThis	obj_dir/VBuffer__Trace__Slow.cpp	/^void VBuffer::traceFullThis(VBuffer__Syms* __restrict vlSymsp, VerilatedVcd* vcdp, uint32_t code) {$/;"	f	class:VBuffer
-traceFullThis	obj_dir/VScheduler__Trace__Slow.cpp	/^void VScheduler::traceFullThis(VScheduler__Syms* __restrict vlSymsp, VerilatedVcd* vcdp, uint32_t code) {$/;"	f	class:VScheduler
-traceFullThis__1	obj_dir/VBuffer__Trace__Slow.cpp	/^void VBuffer::traceFullThis__1(VBuffer__Syms* __restrict vlSymsp, VerilatedVcd* vcdp, uint32_t code) {$/;"	f	class:VBuffer
-traceFullThis__1	obj_dir/VScheduler__Trace__Slow.cpp	/^void VScheduler::traceFullThis__1(VScheduler__Syms* __restrict vlSymsp, VerilatedVcd* vcdp, uint32_t code) {$/;"	f	class:VScheduler
-traceInit	obj_dir/VBuffer__Trace__Slow.cpp	/^void VBuffer::traceInit(VerilatedVcd* vcdp, void* userthis, uint32_t code) {$/;"	f	class:VBuffer
-traceInit	obj_dir/VScheduler__Trace__Slow.cpp	/^void VScheduler::traceInit(VerilatedVcd* vcdp, void* userthis, uint32_t code) {$/;"	f	class:VScheduler
-traceInitThis	obj_dir/VBuffer__Trace__Slow.cpp	/^void VBuffer::traceInitThis(VBuffer__Syms* __restrict vlSymsp, VerilatedVcd* vcdp, uint32_t code) {$/;"	f	class:VBuffer
-traceInitThis	obj_dir/VScheduler__Trace__Slow.cpp	/^void VScheduler::traceInitThis(VScheduler__Syms* __restrict vlSymsp, VerilatedVcd* vcdp, uint32_t code) {$/;"	f	class:VScheduler
-traceInitThis__1	obj_dir/VBuffer__Trace__Slow.cpp	/^void VBuffer::traceInitThis__1(VBuffer__Syms* __restrict vlSymsp, VerilatedVcd* vcdp, uint32_t code) {$/;"	f	class:VBuffer
-traceInitThis__1	obj_dir/VScheduler__Trace__Slow.cpp	/^void VScheduler::traceInitThis__1(VScheduler__Syms* __restrict vlSymsp, VerilatedVcd* vcdp, uint32_t code) {$/;"	f	class:VScheduler
-~VBuffer	obj_dir/VBuffer.cpp	/^VBuffer::~VBuffer() {$/;"	f	class:VBuffer
-~VBuffer__Syms	obj_dir/VBuffer__Syms.h	/^    ~VBuffer__Syms() {};$/;"	f	class:VBuffer__Syms
-~VScheduler	obj_dir/VScheduler.cpp	/^VScheduler::~VScheduler() {$/;"	f	class:VScheduler
-~VScheduler__Syms	obj_dir/VScheduler__Syms.h	/^    ~VScheduler__Syms() {};$/;"	f	class:VScheduler__Syms
+main	vgacounter.cpp	/^int main(int argc, char** argv)$/;"	f
+name	obj_dir/VVGA_LED__Syms.h	/^    inline const char* name() { return __Vm_namep; }$/;"	f	class:VVGA_LED__Syms
+trace	obj_dir/VVGA_LED__Trace__Slow.cpp	/^void VVGA_LED::trace (VerilatedVcdC* tfp, int, int) {$/;"	f	class:VVGA_LED
+traceChg	obj_dir/VVGA_LED__Trace.cpp	/^void VVGA_LED::traceChg(VerilatedVcd* vcdp, void* userthis, uint32_t code) {$/;"	f	class:VVGA_LED
+traceChgThis	obj_dir/VVGA_LED__Trace.cpp	/^void VVGA_LED::traceChgThis(VVGA_LED__Syms* __restrict vlSymsp, VerilatedVcd* vcdp, uint32_t code) {$/;"	f	class:VVGA_LED
+traceChgThis__2	obj_dir/VVGA_LED__Trace.cpp	/^void VVGA_LED::traceChgThis__2(VVGA_LED__Syms* __restrict vlSymsp, VerilatedVcd* vcdp, uint32_t code) {$/;"	f	class:VVGA_LED
+traceChgThis__3	obj_dir/VVGA_LED__Trace.cpp	/^void VVGA_LED::traceChgThis__3(VVGA_LED__Syms* __restrict vlSymsp, VerilatedVcd* vcdp, uint32_t code) {$/;"	f	class:VVGA_LED
+traceChgThis__4	obj_dir/VVGA_LED__Trace.cpp	/^void VVGA_LED::traceChgThis__4(VVGA_LED__Syms* __restrict vlSymsp, VerilatedVcd* vcdp, uint32_t code) {$/;"	f	class:VVGA_LED
+traceChgThis__5	obj_dir/VVGA_LED__Trace.cpp	/^void VVGA_LED::traceChgThis__5(VVGA_LED__Syms* __restrict vlSymsp, VerilatedVcd* vcdp, uint32_t code) {$/;"	f	class:VVGA_LED
+traceFull	obj_dir/VVGA_LED__Trace__Slow.cpp	/^void VVGA_LED::traceFull(VerilatedVcd* vcdp, void* userthis, uint32_t code) {$/;"	f	class:VVGA_LED
+traceFullThis	obj_dir/VVGA_LED__Trace__Slow.cpp	/^void VVGA_LED::traceFullThis(VVGA_LED__Syms* __restrict vlSymsp, VerilatedVcd* vcdp, uint32_t code) {$/;"	f	class:VVGA_LED
+traceFullThis__1	obj_dir/VVGA_LED__Trace__Slow.cpp	/^void VVGA_LED::traceFullThis__1(VVGA_LED__Syms* __restrict vlSymsp, VerilatedVcd* vcdp, uint32_t code) {$/;"	f	class:VVGA_LED
+traceInit	obj_dir/VVGA_LED__Trace__Slow.cpp	/^void VVGA_LED::traceInit(VerilatedVcd* vcdp, void* userthis, uint32_t code) {$/;"	f	class:VVGA_LED
+traceInitThis	obj_dir/VVGA_LED__Trace__Slow.cpp	/^void VVGA_LED::traceInitThis(VVGA_LED__Syms* __restrict vlSymsp, VerilatedVcd* vcdp, uint32_t code) {$/;"	f	class:VVGA_LED
+traceInitThis__1	obj_dir/VVGA_LED__Trace__Slow.cpp	/^void VVGA_LED::traceInitThis__1(VVGA_LED__Syms* __restrict vlSymsp, VerilatedVcd* vcdp, uint32_t code) {$/;"	f	class:VVGA_LED
+~VVGA_LED	obj_dir/VVGA_LED.cpp	/^VVGA_LED::~VVGA_LED() {$/;"	f	class:VVGA_LED
+~VVGA_LED__Syms	obj_dir/VVGA_LED__Syms.h	/^    ~VVGA_LED__Syms() {};$/;"	f	class:VVGA_LED__Syms

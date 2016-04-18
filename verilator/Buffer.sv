@@ -40,6 +40,7 @@ module Buffer( input logic      clk,
         // For reading data from the RAM
         always_ff @(posedge clk)begin
                 ramrd1<=1;ramrd2<=1;ramrd3<=1;
+                
                 if (chipselect &&read)begin
                         case(address)
                                 3'b000:readdata<=rdcount1;
@@ -90,6 +91,13 @@ module Buffer( input logic      clk,
                 end
                 else
                         readdata <=251;
+                        if (read1)
+                        begin
+                                                        read1<=0;
+                                                        rdcount1 <=rdcount1+1;
+                                                end
+
+
         end
 
         endmodule
