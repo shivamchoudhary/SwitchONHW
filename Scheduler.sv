@@ -2,9 +2,8 @@ module Scheduler(	input logic clk,
 						input logic [7:0] data1, data2, data3,
 						input logic empty1, empty2, empty3,
 						output logic [1:0] sel1, sel2, sel3,
+						output logic en1, en2, en3,
 						output logic rdreq1, rdreq2, rdreq3);
-
-	logic en1, en2, en3;
 	
 	function logic set_rd(logic[7:0] data, logic[1:0] in, logic empty);
 		case(data[1:0])
