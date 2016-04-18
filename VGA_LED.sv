@@ -17,7 +17,7 @@ module VGA_LED(input logic        clk,
 	logic wrreq1, wrreq2, wrreq3;			//enables dequeue in the queue
 	logic empty1, empty2, empty3; 
 	logic full1, full2, full3;
-	logic ramen1, ramen2, ramen3;
+	logic en1, en2, en3;
 	logic [7:0] result1, result2, result3;
 	logic [1:0] usedw1, usedw2, usedw3; 
 	logic [7:0] hex1, hex2, hex3,
@@ -64,11 +64,5 @@ module VGA_LED(input logic        clk,
 		else begin
 			wrreq1 <= 0; wrreq2 <= 0; wrreq3 <= 0;
 		end
-	end
-   // ramen1 controls the input to RAM 1 if sel1 is enabled
-	always_ff @(posedge clk) begin 
-		ramen1 <= sel1[0] | sel1[1];
-		ramen2 <= sel2[0] | sel2[1];
-		ramen3 <= sel3[0] | sel3[1];
-	end		
+	end	
 endmodule
