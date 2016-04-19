@@ -23,6 +23,9 @@ test:
 	make -j -C obj_dir/ -f Valtsyncram.mk Valtsyncram
 	obj_dir/Valtsyncram
 
+mux:
+	verilator -Wno-lint -cc --trace lpm_mux.v --top-module lpm_mux --exe countermux.cpp 
+	make -j -C obj_dir/ -f Vlpm_mux.mk Vlpm_mux
 
 clean:
 	rm -rf obj_dir
