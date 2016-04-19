@@ -35,7 +35,7 @@ module Scheduler(input logic clk,
 					else 
 						return 0;			
 					end
-			default : return 0;
+			default : return 1;
 		endcase
 	endfunction
 	
@@ -44,7 +44,12 @@ module Scheduler(input logic clk,
 	// Makes sure that more than one packet is not sent to the same o/p port in one clock cycle.
 		en1 = 0; en2 = 0; en3 = 0;	
 	// Similar to en. But, sel is an external signal to Scheduler and is required in megamux and setting ramen1.
-		sel1 = 0; sel2 = 0; sel3 = 0;
+		sel1 = 0; sel2 = 0; sel3 = 0; //Select the input port on which the data should come from.
+                //Eg data 1 = 2;data2 = 3;data3=1; 
+                //So now data 1 needs to go
+                //to output 2 therefore select 2 should turn horizontal bar 01
+                //on. So select 2 should be 01. Select 3 should be 10. 
+                
 	// Analyze each incoming packet and send them through the crossbar.	
 		rdreq1 = set_rd(data1, 01, empty1);
 		rdreq2 = set_rd(data2, 10, empty2);
