@@ -25,30 +25,30 @@ int main(int argc, char** argv)
         // Write to RAM 1
         //RAM 1
         if (i>10&&i<=14){
-                top->ramen1 = 1; //Enable ramen1 for 1 clock cycles
+                top->en1 = 1; //Enable ramen1 for 1 clock cycles
                 top ->result1 = 2; //Put data on the result signal
         }
         else{
-                top->ramen1=0; //Toggle ramen1
+                top->en1=0; //Toggle ramen1
                 top->result1 = 0; //Toggle result 1
         }
         //RAM 2
         if (i>=15 && i<=19){
-                top->ramen2 = 1;
+                top->en2 = 1;
                 top->result2 = 1;
 
         }
         else{
-                top->ramen2 = 0;
+                top->en2 = 0;
                 top->result2 = 0;
         }
         //RAM3 
         if (i>20 && i<=24){
-                top->ramen3=1;
+                top->en3=1;
                 top->result3=1;
         }
         else{
-                top->ramen3 = 0;
+                top->en3 = 0;
                 top->result3=0;
         }
         // Generate read signals

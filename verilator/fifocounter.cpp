@@ -1,16 +1,21 @@
 //For easy interfacing with the Scheduler
-#include "Vscfifo.h" 
+#include "VFifo.h" 
 #include "verilated.h" 
 #include "verilated_vcd_c.h" 
-vluint64_t main_time =0;
-double sc_time_stamp(){
-        return main_time;
-}
+vluint64_t main_time = 0;       // Current simulation time
+        // This is a 64-bit integer to reduce wrap over issues and
+        // allow modulus.  You can also use a double, if you wish.
+        double sc_time_stamp () {       // Called by $time in Verilog
+            return main_time;           // converts to double, to match
+                                        // what SystemC does
+        }
 int main(int argc, char** argv)
 {
     Verilated::commandArgs(argc, argv);
+
     // init top verilog instance
-    Vscfifo* top = new Vscfifo();
+    VFifo* top = new VFifo();
+
     // init trace dump
     Verilated::traceEverOn(true);
     VerilatedVcdC* tfp = new VerilatedVcdC;
@@ -23,7 +28,7 @@ int main(int argc, char** argv)
      // run simulation for 100 clock periods
     for(int i = 0; i < 100; i++)
     {   
-        if (i>10 && i<20){
+        if (i>10 && i<=12){
                 top->data=1;
                 top->wrreq = 1;
         }

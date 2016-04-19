@@ -21,12 +21,21 @@ module VGA_LED(input            clk,
         logic en1,en2,en3;
         logic [7:0] result1,result2,result3;
         logic [1:0] usedw1,usedw2,usedw3;
+        logic [7:0] muxin1,muxin2,muxin3;
         logic [7:0] hex1,hex2,hex3,hex4,hex5,hex6;
         initial begin
                 data0=0;
                 wrreq1=0; wrreq2=0;wrreq3=0;
                 rdreq1 = 0;rdreq2=0;rdreq3=0;
         end
+        Fifo fifo1(.clock(clk), .data(din1), .rdreq(rdreq1), .wrreq(wrreq1),
+                .empty(empty1), .full(full1), .q(data1), .usedw(usedw1));	
+	Fifo fifo2(.clock(clk), .data(din2), .rdreq(rdreq2), .wrreq(wrreq2), 
+                .empty(empty2), .full(full2), .q(data2), .usedw(usedw2));	
+	Fifo fifo3(.clock(clk), .data(din3), .rdreq(rdreq3), .wrreq(wrreq3),
+                .empty(empty3), .full(full3), .q(data3), .usedw(usedw3));	
+
+
         Scheduler scheduler(.*);
         Buffer buffer(.*);
         always_ff @(posedge clk) begin
@@ -65,6 +74,12 @@ module VGA_LED(input            clk,
                 else begin
                         wrreq1<=0;wrreq2<=0;wrreq3<=0;
                 end
+        end
+        always_ff @(posedge clk) begin
+                muxin1 <=data1;
+                muxin2 <=data2;
+                muxin3 <=data3;
+
         end
 endmodule
 
