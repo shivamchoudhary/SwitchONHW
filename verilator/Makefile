@@ -18,6 +18,12 @@ fifo:
 	verilator -Wno-INITIALDLY -Wno-lint -Wno-MULTIDRIVEN --top-module Fifo -cc --trace Fifo.v --exe fifocounter.cpp  
 	make -j -C obj_dir/ -f VFifo.mk VFifo
 	obj_dir/VFifo
+test:
+	verilator -Wno-INITIALDLY -Wno-lint -Wno-MULTIDRIVEN -Wno-UNOPTFLAT -Wno-COMBDLY -top-module altsyncram -cc --trace altsyncram.v --exe ramcounter.cpp 
+	make -j -C obj_dir/ -f Valtsyncram.mk Valtsyncram
+	obj_dir/Valtsyncram
+
+
 clean:
 	rm -rf obj_dir
 	rm -f  *.vcd
