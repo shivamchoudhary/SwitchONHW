@@ -1,3 +1,6 @@
+// Single Clock FIFO initializer. We are using this file to generate the
+// waveforms for the scfifo.
+//
 // Copyright (C) 1991-2013 Altera Corporation
 // Your use of Altera Corporation's design tools, logic functions 
 // and other software and tools, and its AMPP partner logic 

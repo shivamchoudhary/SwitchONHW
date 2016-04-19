@@ -26,6 +26,8 @@ int main(int argc, char** argv)
     top->clk    = 1;
     top->chipselect = 1;
     top->write =1;
+    top->reset =0;
+    top->read = 0;
     // run simulation for 100 clock periods
     for(int i = 0; i < 100; i++)
 
@@ -36,12 +38,36 @@ int main(int argc, char** argv)
         }
 
         else if (i>=12 &&i <14){
-                top->address = 1;
+                top->address = 2;
                 top->writedata =3;
         }
         else if (i>=14 && i<16){
                 top->address = 3;
                 top->writedata = 7;
+        }
+        else if (i>=16 && i<18){
+                top->address = 1;
+                top->writedata = 10;
+        }
+        else if (i>=18 && i<20){
+                top->address = 2;
+                top->writedata = 11;
+        }
+        else if (i>=20 && i<22){
+                top->address = 3;
+                top->writedata = 3;
+        }
+        else if (i>=22 && i<24){
+                top->address = 1;
+                top->writedata = 1;
+        }
+        else if (i>=24 && i<26){
+                top->address = 2;
+                top->writedata = 6;
+        }
+        else if (i>=26 && i<28){
+                top->address = 3;
+                top->writedata = 2;
         }
         else{
                 top->address =0;

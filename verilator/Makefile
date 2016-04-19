@@ -2,7 +2,7 @@
 #because the IP Cores we are using don't have arbit coding styles. So it becomes
 #important to compile them without warnings.
 vgaled:
-	verilator -Wno-INITIALDLY -Wno-lint -Wno-MULTIDRIVEN --top-module VGA_LED -cc -trace VGA_LED.sv  --exe vgacounter.cpp 
+	verilator -Wno-INITIALDLY -Wno-lint -Wno-MULTIDRIVEN --Wno-UNOPTFLAT -Wno-COMBDLY -top-module VGA_LED -cc -trace VGA_LED.sv  --exe vgacounter.cpp 
 	make -j -C obj_dir/ -f VVGA_LED.mk  VVGA_LED 
 	obj_dir/VVGA_LED
 buffer: 

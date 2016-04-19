@@ -5,7 +5,11 @@ module Scheduler(input logic clk,
 		output logic en1, en2, en3,
 		output logic rdreq1, rdreq2, rdreq3);
 	
+logic written;
 
+initial begin
+        written = 0;
+end
 	function logic set_rd(logic[7:0] data, logic[1:0] in, logic empty);
 		case(data[1:0])
 			2'b01 : begin
@@ -35,16 +39,18 @@ module Scheduler(input logic clk,
 					else 
 						return 0;			
 					end
-			default : return 1;
+			default : return 0;
 		endcase
 	endfunction
 	
 	always_ff @(posedge clk) begin
+                if(!written)begin
+                        written = 1;
 	// Init en's to Zero. We later set these to 1 as an data becomes available on the corresponding output port. 
 	// Makes sure that more than one packet is not sent to the same o/p port in one clock cycle.
-		en1 = 0; en2 = 0; en3 = 0;	
+//		en1 = 0; en2 = 0; en3 = 0;	
 	// Similar to en. But, sel is an external signal to Scheduler and is required in megamux and setting ramen1.
-		sel1 = 0; sel2 = 0; sel3 = 0; //Select the input port on which the data should come from.
+//		sel1 = 0; sel2 = 0; sel3 = 0; //Select the input port on which the data should come from.
                 //Eg data 1 = 2;data2 = 3;data3=1; 
                 //So now data 1 needs to go
                 //to output 2 therefore select 2 should turn horizontal bar 01
@@ -54,5 +60,12 @@ module Scheduler(input logic clk,
 		rdreq1 = set_rd(data1, 01, empty1);
 		rdreq2 = set_rd(data2, 10, empty2);
 		rdreq3 = set_rd(data3, 11, empty3);
+        end
+        else begin
+                written = 0;
+		en1 = 0; en2 = 0; en3 = 0;	
+		sel1 = 0; sel2 = 0; sel3 = 0; //Select the input port on which the data should come from.
+                rdreq1 = 0; rdreq2 = 0; rdreq3 = 0;
+        end
 	end	
 endmodule

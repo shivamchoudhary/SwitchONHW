@@ -29,7 +29,7 @@ int main(int argc, char** argv)
     for(int i = 0; i < 100; i++)
     {   
         if (i>10 && i<=12){
-                top->data=1;
+                top->data=8;
                 top->wrreq = 1;
         }
         else{
