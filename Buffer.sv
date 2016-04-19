@@ -1,12 +1,12 @@
 module Buffer(	input logic clk,
 					input logic [7:0] result1, result2, result3,
 					input logic chipselect, read, 
-					input logic [2:0] address,
+					input logic [63:0] address,
 					input logic en1, en2, en3,
 					input logic [7:0] data1, data2, data3,
 					
 					output logic [7:0] hex1, hex2, hex3, hex4, hex5, hex6,
-					output logic [7:0] readdata);
+					output logic [63:0] readdata);
 
 	logic ramrd1, ramrd2, ramrd3;					
 	logic read1, read2, read3;

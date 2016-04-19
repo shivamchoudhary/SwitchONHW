@@ -1,14 +1,14 @@
 module VGA_LED(input logic        clk,
 	       input logic 	  reset,
-			 input logic [7:0] writedata,
+			 input logic [63:0] writedata,
 	       input logic 	  write, read,
 	       input 		  chipselect,
-	       input logic [2:0]  address,
+	       input logic [63:0]  address,
 			
 	       output logic [7:0] VGA_R, VGA_G, VGA_B,
 	       output logic 	  VGA_CLK, VGA_HS, VGA_VS, VGA_BLANK_n,
 	       output logic 	  VGA_SYNC_n,
-			 output logic [7:0] readdata);
+			 output logic [63:0] readdata);
 
 	logic [7:0] din1, din2, din3;				//inputs to the four fifos
 	logic [7:0] data0, data1, data2, data3;		//outputs from the four fifos
