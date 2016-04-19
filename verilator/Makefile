@@ -8,21 +8,13 @@ buffer:
 	obj_dir/VBuffer
 
 scheduler:
-	verilator -Wno-lint -cc --trace Scheduler.sv --exe counter.cpp
+	verilator -Wno-lint -cc --trace Scheduler.sv --exe schedulercounter.cpp
 	make -j -C obj_dir/ -f VScheduler.mk VScheduler
 	obj_dir/VScheduler
-test:
-	verilator -Wall --cc --trace Test.sv --exe counter_tb.cpp
-build:
-	make -j -C obj_dir/ -f VTest.mk VTest
-dff:
-	verilator -Wall -cc --trace Dff.sv --exe counter.cpp
-	make -j -C obj_dir/ -f VDff.mk VDff
-	obj_dir/VDff
-run_dff:
-	obj_dir/Vdff
-run:
-	obj_dir/VScheduler
+fifo:
+	verilator -Wno-INITIALDLY -Wno-lint -Wno-MULTIDRIVEN --top-module scfifo -cc --trace scfifo.v --exe fifocounter.cpp  
+	make -j -C obj_dir/ -f Vscfifo.mk Vscfifo
+	obj_dir/Vscfifo
 clean:
 	rm -rf obj_dir
 	rm -f  *.vcd

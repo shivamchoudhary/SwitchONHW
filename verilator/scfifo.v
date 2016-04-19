@@ -2214,10 +2214,10 @@ module scfifo ( data,
                 almost_empty);
 
 // GLOBAL PARAMETER DECLARATION
-    parameter lpm_width               = 1;
+    parameter lpm_width               = 8;
     parameter lpm_widthu              = 1;
-    parameter lpm_numwords            = 2;
-    parameter lpm_showahead           = "OFF";
+    parameter lpm_numwords            = 4;
+    parameter lpm_showahead           = "ON";
     parameter lpm_type                = "scfifo";
     parameter lpm_hint                = "USE_EAB=ON";
     parameter intended_device_family  = "Stratix";
@@ -2259,7 +2259,6 @@ module scfifo ( data,
     reg [lpm_widthu-1:0] count_id;
     reg [lpm_widthu-1:0] read_id;
     reg [lpm_widthu-1:0] write_id;
-    
     wire valid_rreq;
     reg valid_wreq;
     reg write_flag;
