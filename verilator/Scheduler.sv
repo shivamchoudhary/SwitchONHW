@@ -35,7 +35,7 @@ module Scheduler(input logic clk,
 					else 
 						return 0;			
 					end
-			default : return 1;
+			default : return 0;
 		endcase
 	endfunction
 	
