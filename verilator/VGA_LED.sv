@@ -35,17 +35,27 @@ module VGA_LED(input            clk,
                                 3'b01: begin 
                                         wrreq1 <=1;
                                         din1 <= writedata;
+                                        if (wrreq2)
+                                                wrreq2 <=0;
+                                        if (wrreq3)
+                                                wrreq3<=0;
                                 end
-
                                 3'b10: begin
-                                        wrreq2 <=2;
+                                        wrreq2 <=1;
                                         din2<= writedata;
-
+                                        if (wrreq1)
+                                                wrreq1 <=0;
+                                        if (wrreq3)
+                                                wrreq3<=0;
                                 end
                                 3'b11: begin
                                         wrreq3 <=1;
                                         din3<=writedata;
-
+                                        if (wrreq1)
+                                                wrreq1 <=0;
+                                        if (wrreq2)
+                                                wrreq2<=0;
+                       
                                 end
                                 default: begin
                                         wrreq1 <=0;wrreq2 <=0;wrreq3 <=0;
