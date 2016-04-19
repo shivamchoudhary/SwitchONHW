@@ -18,6 +18,14 @@ module Buffer( input logic      clk,
                 ramrd1 = 1; ramrd2=1;ramrd3=1;
                 ramwr1 = 0;ramwr2=0;ramwr3=0;
         end
+        RAM ram1(.clock(clk), .data(result1), .rdaddress(rdcount1), 
+                .rden(ramrd1), .wraddress(wrcount1), .wren(en1), .q(ramdata1));
+        RAM ram2(.clock(clk), .data(result2), .rdaddress(rdcount2), 
+                .rden(ramrd2), .wraddress(wrcount2), .wren(en2), .q(ramdata2));
+	RAM ram3(.clock(clk), .data(result3), .rdaddress(rdcount3), 
+                .rden(ramrd3), .wraddress(wrcount3), .wren(en3), .q(ramdata3));
+	
+
         //For writing data to the RAM
         always_ff @(posedge clk) begin
                 hex1<=data1[1:0];
