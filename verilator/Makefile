@@ -99,6 +99,7 @@ mux:
 		$(mux_SIM)$ 
 	make -j -C obj_dir/ -f Vlpm_mux.mk Vlpm_mux
 	obj_dir/Vlpm_mux
+
 clean:
 	rm -rf obj_dir
 	rm -f  *.vcd
