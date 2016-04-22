@@ -56,8 +56,8 @@ module Buffer(	input logic clk,
 		if(chipselect && read) begin	
 			case(address)
 				8: readdata <= rdcount1;
-				9: readdata <= rdcount1;
-				10: readdata <= rdcount1;
+				9: readdata <= rdcount2;
+				10: readdata <= rdcount3;
 				11: readdata <= wrcount1;
 				12: readdata <= wrcount2;
 				13: readdata <= wrcount3;
@@ -76,7 +76,7 @@ module Buffer(	input logic clk,
 						
 				2 : 
 					if(rdcount2 < wrcount2)
-						if(!read2) begin
+						if(!read2) begin:
 							readdata <= ramdata2;
 							read2 <= 1;
 						end
