@@ -1,3 +1,17 @@
+//START_MODULE_NAME------------------------------------------------------------
+//
+// Module Name     :  Buffer
+//
+// Description     :  Gets data from the Crossbar switch and puts in the RAM.
+// 
+// Limitation      :  Look at timing diagram closely there is a clock delay.
+// 
+// Results expected: Whatever is coming from userspace will be available in
+//                   the RAMS with proper sorting i.e RAM 1 contains packets 
+//                   just for RAM1
+//
+//END_MODULE_NAME--------------------------------------------------------------
+
 module Buffer( input logic      clk,
         input logic [7:0]       result1,result2,result3,
         input logic             chipselect, read,

@@ -56,6 +56,7 @@ module VGA_LED(input            clk,
                 .data3x(muxin3), .sel(sel2), .result(result2));
 	megamux megamux3(.data0x(data0),.data1x(muxin1), .data2x(muxin2), 
                 .data3x(muxin3), .sel(sel3), .result(result3));
+        Packet_Display packet_Display(.clk50(clk), .*);
 
         always_ff @(posedge clk) begin
                 if (chipselect && write) begin
