@@ -1,16 +1,3 @@
-//START_MODULE_NAME------------------------------------------------------------
-// Original Author : Stephen Edwards
-// Module Name     :  Packet Display
-//
-// Description     :  Gets data and emulates it on the LED Switch
-// 
-// Limitation      : Flawless
-// 
-// Results expected: It has two ports input and output,both should light up
-// 
-//
-//END_MODULE_NAME--------------------------------------------------------------
-
 module Packet_Display(
  input logic 	    clk50, reset,   
  input logic [7:0]  hex1, hex2, hex3, hex4, hex5, hex6,

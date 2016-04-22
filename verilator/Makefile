@@ -100,6 +100,13 @@ mux:
 	make -j -C obj_dir/ -f Vlpm_mux.mk Vlpm_mux
 	obj_dir/Vlpm_mux
 
+#Compiles the scheduler depends on None. This is the Crossbar switch 
+test_rand=testrandomcounter.cpp
+random:
+	verilator -Wno-lint -cc --trace test_random.sv --exe $(test_rand)$
+	make -j -C obj_dir/ -f Vtest_random.mk Vtest_random
+	obj_dir/Vtest_random
+
 clean:
 	rm -rf obj_dir
 	rm -f  *.vcd
