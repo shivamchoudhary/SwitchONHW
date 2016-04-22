@@ -1,26 +1,27 @@
 module VGA_LED(input logic        clk,
 	       input logic 	  reset,
-			 input logic [63:0] writedata,
-	       input logic 	  write, read,
+			 input logic [31:0] writedata,
+	       input logic 	  write, read, 
+			 input logic [3:0] byteenable, 
 	       input 		  chipselect,
-	       input logic [63:0]  address,
+	       input logic [3:0]  address,
 			
 	       output logic [7:0] VGA_R, VGA_G, VGA_B,
 	       output logic 	  VGA_CLK, VGA_HS, VGA_VS, VGA_BLANK_n,
 	       output logic 	  VGA_SYNC_n,
-			 output logic [63:0] readdata);
+			 output logic [31:0] readdata);
 
-	logic [7:0] din1, din2, din3;				//inputs to the four fifos
-	logic [7:0] data0, data1, data2, data3;		//outputs from the four fifos
-	logic [1:0] sel1, sel2, sel3;				//select lines to the four multiplexers
-	logic rdreq1, rdreq2, rdreq3;			//enables enqueue in the queue
-	logic wrreq1, wrreq2, wrreq3;			//enables dequeue in the queue
+	logic [31:0] din1, din2, din3;						//inputs to the four fifos
+	logic [31:0] data0, data1, data2, data3;		//outputs from the four fifos
+	logic [1:0] sel1, sel2, sel3;						//select lines to the four multiplexers
+	logic rdreq1, rdreq2, rdreq3;						//enables enqueue in the queue
+	logic wrreq1, wrreq2, wrreq3;						//enables dequeue in the queue
 	logic empty1, empty2, empty3; 
 	logic full1, full2, full3;
 	logic en1, en2, en3;
-	logic [7:0] result1, result2, result3;
+	logic [31:0] result1, result2, result3;
 	logic [1:0] usedw1, usedw2, usedw3; 
-	logic [7:0] muxin1, muxin2, muxin3;
+	logic [31:0] muxin1, muxin2, muxin3;
 	logic [7:0] hex1, hex2, hex3,
 				   hex4, hex5, hex6;
 					
@@ -44,10 +45,10 @@ module VGA_LED(input logic        clk,
 	
    always_ff @(posedge clk)begin			//Enqueue to the fifo 
 		if (chipselect && write) begin   // Data is on the avalon bus
-			case(address) 						// Check the address sent from userspace
+			case(address[2:0]) 						// Check the address sent from userspace
 				3'b001 : begin 				// FIFO1
 					wrreq1 <= 1; 				// Set Write Request FIFO1 to 1
-					din1 <= writedata;		// Send data on din1 (after one clock cycle)
+					din1 <= writedata[31:0];		// Send data on din1 (after one clock cycle)
 					if (wrreq2)
 						wrreq2 <= 0;
 					if (wrreq3)
@@ -55,7 +56,7 @@ module VGA_LED(input logic        clk,
 				end
 				3'b010 : begin
 					wrreq2 <= 1;
-					din2 <= writedata;
+					din2 <= writedata[31:0];
 					if (wrreq1)
 						wrreq1 <= 0;
 					if (wrreq3)
@@ -63,7 +64,7 @@ module VGA_LED(input logic        clk,
 				end
 				3'b011 : begin
 					wrreq3 <= 1;
-					din3 <= writedata;
+					din3 <= writedata[31:0];
 					if (wrreq2)
 						wrreq2 <= 0;
 					if (wrreq1)

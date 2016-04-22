@@ -1,18 +1,19 @@
 module Buffer(	input logic clk,
-					input logic [7:0] result1, result2, result3,
-					input logic chipselect, read, 
-					input logic [63:0] address,
+					input logic [31:0] result1, result2, result3,
+					input logic chipselect, read,
+					input logic [3:0] byteenable, 
+					input logic [3:0] address,
 					input logic en1, en2, en3,
-					input logic [7:0] data1, data2, data3,
+					input logic [31:0] data1, data2, data3,
 					
 					output logic [7:0] hex1, hex2, hex3, hex4, hex5, hex6,
-					output logic [63:0] readdata);
+					output logic [31:0] readdata);
 
 	logic ramrd1, ramrd2, ramrd3;					
 	logic read1, read2, read3;
-	logic [7:0] ramdata1, ramdata2, ramdata3;	
-	logic[13:0] wrcount1, wrcount2, wrcount3;
-	logic[13:0] rdcount1, rdcount2, rdcount3;
+	logic [31:0] ramdata1, ramdata2, ramdata3;	
+	logic[11:0] wrcount1, wrcount2, wrcount3;
+	logic[11:0] rdcount1, rdcount2, rdcount3;
 	
 	initial begin
 		rdcount1 = 0; rdcount2 = 0; rdcount3 = 0;
@@ -54,11 +55,13 @@ module Buffer(	input logic clk,
 		ramrd1 <= 1; ramrd2 <= 1; ramrd3 <= 1;
 		if(chipselect && read) begin	
 			case(address)
-				3'b000 : readdata <= rdcount1;
-				3'b110 : readdata <= wrcount1;
-				3'b101 : readdata <= wrcount2;
-				3'b100 : readdata <= wrcount3;
-				3'b001 : 
+				8: readdata <= rdcount1;
+				9: readdata <= rdcount1;
+				10: readdata <= rdcount1;
+				11: readdata <= wrcount1;
+				12: readdata <= wrcount2;
+				13: readdata <= wrcount3;
+				1 : 
 					if(rdcount1 < wrcount1)
 						if(!read1) begin
 							readdata <= ramdata1;
@@ -71,7 +74,7 @@ module Buffer(	input logic clk,
 					else
 						readdata <= 255;
 						
-				3'b010 : 
+				2 : 
 					if(rdcount2 < wrcount2)
 						if(!read2) begin
 							readdata <= ramdata2;
@@ -83,7 +86,7 @@ module Buffer(	input logic clk,
 						end
 					else
 						readdata <= 255;
-				3'b011 : 
+				3 : 
 					if(rdcount3 < wrcount3)		
 						if(!read3) begin
 							readdata <= ramdata3;
