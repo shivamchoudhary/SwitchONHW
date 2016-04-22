@@ -76,7 +76,7 @@ module Buffer(	input logic clk,
 						
 				2 : 
 					if(rdcount2 < wrcount2)
-						if(!read2) begin:
+						if(!read2) begin
 							readdata <= ramdata2;
 							read2 <= 1;
 						end
