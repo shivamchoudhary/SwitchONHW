@@ -52,10 +52,10 @@ module Scheduler(	input logic clk,
 	// Similar to en. But, sel is an external signal to Scheduler and is required in megamux and setting ramen1.
 //		sel1 = 0; sel2 = 0; sel3 = 0;
 	// Analyze each incoming packet and send them through the crossbar.	
-		written = 1;
-		rdreq1 = set_rd(data1, 01, empty1);
-		rdreq2 = set_rd(data2, 10, empty2);
-		rdreq3 = set_rd(data3, 11, empty3);
+			written = 1;
+			rdreq1 = set_rd(data1, 01, empty1);
+			rdreq2 = set_rd(data2, 10, empty2);
+			rdreq3 = set_rd(data3, 11, empty3);
 		end
 		else begin
 			written = 0;
