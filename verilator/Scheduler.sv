@@ -5,7 +5,7 @@ module Scheduler(	input logic clk,
 						output logic en1, en2, en3,
 						output logic rdreq1, rdreq2, rdreq3);
 	
-	logic written;
+	logic[1:0] written;
 	
 	initial begin
 		written = 0;
@@ -57,20 +57,20 @@ module Scheduler(	input logic clk,
 	endfunction
 	
 	always_ff @(posedge clk) 
-		if(!written) begin
+		if(written==2) begin
 	// Init en's to Zero. We later set these to 1 as an data becomes available on the corresponding output port. 
 	// Makes sure that more than one packet is not sent to the same o/p port in one clock cycle.
 //		en1 = 0; en2 = 0; en3 = 0;	
 	// Similar to en. But, sel is an external signal to Scheduler and is required in megamux and setting ramen1.
 //		sel1 = 0; sel2 = 0; sel3 = 0;
 	// Analyze each incoming packet and send them through the crossbar.	
-    		written = 1;
+    		written = 0;
 		    rdreq1 = set_rd(data1, 01, usedw1);
 		    rdreq2 = set_rd(data2, 10, usedw2);
 		    rdreq3 = set_rd(data3, 11, usedw3);
 		end
 		else begin
-			written = 0;
+			written = written + 1;
 			sel1 = 0; sel2 = 0; sel3 = 0;
 			en1 = 0; en2 = 0; en3 = 0;	
 			rdreq1 = 0; rdreq2 = 0; rdreq3 = 0;
