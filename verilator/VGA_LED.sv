@@ -2,7 +2,6 @@ module VGA_LED(input logic        clk,
 	       input logic 	  reset,
 			 input logic [31:0] writedata,
 	       input logic 	  write, read, 
-			 input logic [3:0] byteenable, 
 	       input 		  chipselect,
 	       input logic [3:0]  address,
 			
@@ -35,9 +34,9 @@ module VGA_LED(input logic        clk,
 	Fifo fifo2(.clock(clk), .data(din2), .rdreq(rdreq2), .wrreq(wrreq2), .empty(empty2), .full(full2), .q(data2), .usedw(usedw2));	
 	Fifo fifo3(.clock(clk), .data(din3), .rdreq(rdreq3), .wrreq(wrreq3), .empty(empty3), .full(full3), .q(data3), .usedw(usedw3));	
 
-	megamux megamux1(.data0x(data0),	.data1x(muxin1), .data2x(muxin2), .data3x(muxin3), .sel(sel1), .result(result1));
-	megamux megamux2(.data0x(data0),	.data1x(muxin1), .data2x(muxin2), .data3x(muxin3), .sel(sel2), .result(result2));
-	megamux megamux3(.data0x(data0),	.data1x(muxin1), .data2x(muxin2), .data3x(muxin3), .sel(sel3), .result(result3));
+	megamux megamux1(.data0x(data0),	.data1x(data1), .data2x(data2), .data3x(data3), .sel(sel1), .result(result1));
+	megamux megamux2(.data0x(data0),	.data1x(data1), .data2x(data2), .data3x(data3), .sel(sel2), .result(result2));
+	megamux megamux3(.data0x(data0),	.data1x(data1), .data2x(data2), .data3x(data3), .sel(sel3), .result(result3));
 	
 	Scheduler scheduler(.*);
 	Buffer buffer(.*);

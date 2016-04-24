@@ -1,7 +1,6 @@
 module Buffer(	input logic clk,
 					input logic [31:0] result1, result2, result3,
 					input logic chipselect, read,
-					input logic [3:0] byteenable, 
 					input logic [3:0] address,
 					input logic en1, en2, en3,
 					input logic [31:0] data1, data2, data3,
@@ -17,7 +16,7 @@ module Buffer(	input logic clk,
 	
 	initial begin
 		rdcount1 = 0; rdcount2 = 0; rdcount3 = 0;
-		wrcount1 = 1; wrcount2 = 0; wrcount3 = 0;
+		wrcount1 = 0; wrcount2 = 0; wrcount3 = 0;
 		ramrd1 = 1; ramrd2 = 1; ramrd3 = 1;
 		read1 = 0; read2 = 0; read3 = 0;
 	end
@@ -31,19 +30,19 @@ module Buffer(	input logic clk,
 		hex2 <= seven_segment(data2[1:0]);
 		hex3 <= seven_segment(data3[1:0]);
 		
-		if(en1 && result1) begin
+		if(en1) begin
 			hex4 <= seven_segment(result1[1:0]);
 			wrcount1 <= wrcount1 + 1;
 		end
 		else
 			hex4 <= 0;
-		if(en2 && result2) begin
+		if(en2) begin
 			hex5 <= seven_segment(result2[1:0]);
 			wrcount2 <= wrcount2 + 1;
 		end
 		else
 			hex5 <= 0;
-		if(en3 && result3) begin
+		if(en3) begin
 			hex6 <= seven_segment(result3[1:0]);
 			wrcount3 <= wrcount3 + 1;
 		end
