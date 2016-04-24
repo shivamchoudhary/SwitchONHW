@@ -34,39 +34,39 @@ int main(int argc, char** argv)
     // run simulation for 100 clock periods
     for(int i = 0; i < 100; i++)
     {   
-        if (i>=10 &&i<12){
+        if (i>=10 && i<12 && i%2==0){
                 top->address = 1;
                 top->writedata = rand()+1;
         }
-        else if (i>=12 &&i <14){
+        else if (i>=12 && i<14 && i%2==0){
                 top->address = 2;
                 top->writedata = rand()+1;
         }
-        else if (i>=14 && i<16){
+        else if (i>=14 && i<16 && i%2==0){
                 top->address = 3;
                 top->writedata = rand()+1;
         }
-        else if (i>=16 && i<18){
+        else if (i>=16 && i<18 && i%2==0){
                 top->address = 1;
                 top->writedata = rand()+1;
         }
-        else if (i>=18 && i<20){
+        else if (i>=18 && i<20 && i%2==0){
                 top->address = 2;
                 top->writedata = rand()+1;
         }
-        else if (i>=20 && i<22){
+        else if (i>=20 && i<22 && i%2==0){
                 top->address = 3;
                 top->writedata = rand()+1;
         }
-        else if (i>=22 && i<24){
+        else if (i>=22 && i<24 && i%2==0){
                 top->address = 1;
                 top->writedata = rand()+1;
         }
-        else if (i>=24 && i<26){
+        else if (i>=24 && i<26 && i%2==0){
                 top->address = 2;
                 top->writedata = rand()+1;
         }
-        else if (i>=26 && i<28){
+        else if (i>=26 && i<28 && i%2==0){
                 top->address = 3;
                 top->writedata = rand()+1;
         }
