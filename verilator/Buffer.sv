@@ -12,7 +12,7 @@ module Buffer(input logic clk,
   input logic         chipselect, read,
   input logic [3:0]   address,
   input logic         out_ram_wr1, out_ram_wr2, out_ram_wr3,
-  input logic [31:0]  fifo_out1, fifo_out2, fifo_out3,
+  input logic [31:0]  input1, input2, input3,
 
   output logic [7:0]  hex1, hex2, hex3, hex4, hex5, hex6,
   output logic [31:0] readdata);
@@ -39,9 +39,9 @@ module Buffer(input logic clk,
 
         //dequeue from fifo and display on led
   always_ff @(posedge clk)begin
-    hex1 <= seven_segment(fifo_out1[1:0]);
-    hex2 <= seven_segment(fifo_out2[1:0]);
-    hex3 <= seven_segment(fifo_out3[1:0]);
+    hex1 <= seven_segment(input1[1:0]);
+    hex2 <= seven_segment(input2[1:0]);
+    hex3 <= seven_segment(input3[1:0]);
 
     if(out_ram_wr1) begin
       hex4 <= seven_segment(output1[1:0]);
