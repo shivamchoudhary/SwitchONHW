@@ -12,26 +12,26 @@ module VGA_LED(input logic      clk,
 
     // Naming convention is the part of module the signal is for followed by
     // the use of the signal, written in camel case. For example, fifo_in
-	logic [31:0] fifo_in1, fifo_in2, fifo_in3;						//inputs to the four fifos
-	logic [31:0] fifo_out0, fifo_out1, fifo_out2, fifo_out3;		//outputs from the four fifos
-	logic [1:0] fifo_size1, fifo_size2, fifo_size3; 
-	logic fifo_rd1, fifo_rd2, fifo_rd3;						//enables enqueue in the queue
-	logic fifo_wr1, fifo_wr2, fifo_wr3;						//enables dequeue in the queue
-	logic fifo_empty1, fifo_empty2, fifo_empty3; 
-	logic fifo_full1, fifo_full2, fifo_full3;
+	logic [31:0]    fifo_in1, fifo_in2, fifo_in3;						//inputs to the four fifos
+	logic [31:0]    fifo_out1, fifo_out2, fifo_out3;		//outputs from the four fifos
+	logic [1:0]     fifo_size1, fifo_size2, fifo_size3; 
+	logic           fifo_rd1, fifo_rd2, fifo_rd3;						//enables enqueue in the queue
+	logic           fifo_wr1, fifo_wr2, fifo_wr3;						//enables dequeue in the queue
+	logic           fifo_empty1, fifo_empty2, fifo_empty3; 
+	logic           fifo_full1, fifo_full2, fifo_full3;
 
-    logic input1, input2, input3;
-    logic input_ram_in1, input_ram_in2, input_ram_in3;
-    logic input_ram_rd_add1, input_ram_rd_add2, input_ram_rd_add3;
-    logic input_ram_rden1, input_ram_rden2, input_ram_rden3;
-    logic input_ram_wr_add1, input_ram_wr_add2, input_ram_wr_add3;
-    logic input_ram_wren1, input_ram_wren2, input_ram_wren3;
+    logic [31:0]    input1, input2, input3;
+    logic [11:0]    input_ram_rd_add1, input_ram_rd_add2, input_ram_rd_add3;
+    logic           input_ram_rden1, input_ram_rden2, input_ram_rden3;
+    logic [31:0]    input_ram_in1, input_ram_in2, input_ram_in3;
+    logic [11:0]    input_ram_wr_add1, input_ram_wr_add2, input_ram_wr_add3;
+    logic           input_ram_wren1, input_ram_wren2, input_ram_wren3;
 
-	logic out_ram_wr1, out_ram_wr2, out_ram_wr3;
-	logic [1:0] mux_sel1, mux_sel2, mux_sel3;						//select lines to the four multiplexers
-	logic [31:0] output1, output2, output3;
+	logic           out_ram_wr1, out_ram_wr2, out_ram_wr3;
+	logic [1:0]     mux_sel1, mux_sel2, mux_sel3;						//select lines to the four multiplexers
+	logic [31:0]    output1, output2, output3;
 
-    logic [7:0] hex1, hex2, hex3, hex4, hex5, hex6;
+    logic [7:0]     hex1, hex2, hex3, hex4, hex5, hex6;
 					
 	initial begin
 		fifo_out0 = 0;
