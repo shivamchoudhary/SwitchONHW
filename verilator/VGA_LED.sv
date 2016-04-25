@@ -1,27 +1,23 @@
-module VGA_LED(input logic      clk,
-	        input logic 	    reset,
-			input logic [31:0]  writedata,
-	        input logic 	    write, read, 
-	        input               chipselect,
-	        input logic [3:0]   address,
-			
-	        output logic [7:0]  VGA_R, VGA_G, VGA_B,
-	        output logic 	    VGA_CLK, VGA_HS, VGA_VS, VGA_BLANK_n,
-	        output logic 	    VGA_SYNC_n,
-            output logic [31:0] readdata);
+module VGA_LED( input logic         clk,
+	              input logic 	      reset,
+			          input logic  [31:0]  writedata,
+	              input logic 	      write, read, 
+	              input               chipselect,
+	              input logic  [3:0]   address,
+	              output logic [7:0]  VGA_R, VGA_G, VGA_B,
+	              output logic 	      VGA_CLK, VGA_HS, VGA_VS, VGA_BLANK_n,
+	              output logic 	      VGA_SYNC_n,
+                output logic [31:0] readdata);
 
-    // Naming convention is the part of module the signal is for followed by
-    // the use of the signal, written in camel case. For example, fifo_in
-	logic [31:0] fifo_in1, fifo_in2, fifo_in3;						//inputs to the four fifos
-	logic [31:0] fifo_out0, fifo_out1, fifo_out2, fifo_out3;		//outputs from the four fifos
+  logic [31:0] fifo_in1, fifo_in2, fifo_in3;	//inputs to the 3 fifos
+	logic [31:0] fifo_out0, fifo_out1, fifo_out2, fifo_out3; //outputs from 4 fifos
 	logic [1:0] fifo_size1, fifo_size2, fifo_size3; 
-	logic fifo_rd1, fifo_rd2, fifo_rd3;						//enables enqueue in the queue
-	logic fifo_wr1, fifo_wr2, fifo_wr3;						//enables dequeue in the queue
-	logic fifo_empty1, fifo_empty2, fifo_empty3; 
+	logic fifo_rd1, fifo_rd2, fifo_rd3;		//enables enqueue in the queue
+	logic fifo_wr1, fifo_wr2, fifo_wr3;		//enables dequeue in the queue
+	logic fifo_empty1, fifo_empty2, fifo_empty3;  
 	logic fifo_full1, fifo_full2, fifo_full3;
-
 	logic out_ram_wr1, out_ram_wr2, out_ram_wr3;
-	logic [1:0] mux_sel1, mux_sel2, mux_sel3;						//select lines to the four multiplexers
+	logic [1:0] mux_sel1, mux_sel2, mux_sel3;//select lines to the four multiplexers
 	logic [31:0] output1, output2, output3;
 
     logic [7:0] hex1, hex2, hex3, hex4, hex5, hex6;
