@@ -21,7 +21,7 @@ module Buffer(input logic clk,
   logic read_cycle1, read_cycle2, read_cycle3;
   logic [31:0] ram_out1, ram_out2, ram_out3;	
   logic[11:0] ram_wr_add1, ram_wr_add2, ram_wr_add3;
-  logic[11:0] ram_rd_add1, ram_rd_add2, wam_rd_add3;
+  logic[11:0] ram_rd_add1, ram_rd_add2, ram_rd_add3;
 
   initial begin
     ram_rd_add1 = 0; ram_rd_add2 = 0; ram_rd_add3 = 0;
