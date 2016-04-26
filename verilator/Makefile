@@ -109,6 +109,10 @@ random:
 	verilator -Wno-lint -cc --trace test_random.sv --exe $(test_rand)$
 	make -j -C obj_dir/ -f Vtest_random.mk Vtest_random
 	obj_dir/Vtest_random
+ram:
+	verilator $(WFLAGS) -I $(INCLUDES)$  -cc --trace RAM.v -top-module RAM --exe ramcounter.cpp
+	make -j -C obj_dir/ -f VRAM.mk VRAM
+	obj_dir/VRAM
 
 clean:
 	rm -rf obj_dir
