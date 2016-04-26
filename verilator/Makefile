@@ -66,7 +66,7 @@ TOPMODULE=VGA_LED # Name of the TOP MODULE into which all modules will be mushed
 # TOP level module depends on Fifo.v Scheduler.v Buffer.v megamux.v
 VGA_LED_SIM=vgacounter.cpp # Define the simulation file you for this module.
 vgaled:
-	verilator $(WFLAGS) -top-module $(TOPMODULE) -cc -trace VGA_LED.sv \
+	verilator $(WFLAGS) -top-module $(TOPMODULE) -I altera_mf.v -cc -trace VGA_LED.sv \
 		--exe $(VGA_LED_SIM) 
 	make -j -C obj_dir/ -f VVGA_LED.mk  VVGA_LED 
 	obj_dir/VVGA_LED
