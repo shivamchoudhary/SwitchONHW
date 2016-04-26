@@ -1,10 +1,13 @@
 # SwitchON hardware simulation file. Compiles all the modules individually or 
 # can compile them into one top module.
 
+# List the includes here
+# altera_mf.v contains scfifo and altsync modules.
+INCLUDES=altera_mf.v
 # List all the warning flags with the reason to skip them.
 
 WFLAGS= -Wno-INITIALDLY -Wno-lint -Wno-MULTIDRIVEN -Wno-UNOPTFLAT -Wno-COMBDLY
-
+#WFLAGS=
 # Warning Flags Description(http://www.veripool.org/projects/verilator/wiki/
 # Manual-verilator)
 # 1)-Wno-INITIALDLY:-
@@ -66,8 +69,8 @@ TOPMODULE=VGA_LED # Name of the TOP MODULE into which all modules will be mushed
 # TOP level module depends on Fifo.v Scheduler.v Buffer.v megamux.v
 VGA_LED_SIM=vgacounter.cpp # Define the simulation file you for this module.
 vgaled:
-	verilator $(WFLAGS) -top-module $(TOPMODULE) -I altera_mf.v -cc -trace VGA_LED.sv \
-		--exe $(VGA_LED_SIM) 
+	verilator $(WFLAGS) -top-module $(TOPMODULE) -I $(INCLUDES) -cc \
+		-trace VGA_LED.sv --exe $(VGA_LED_SIM) 
 	make -j -C obj_dir/ -f VVGA_LED.mk  VVGA_LED 
 	obj_dir/VVGA_LED
 
