@@ -13,6 +13,8 @@ module Buffer(input logic clk,
   input logic [3:0]   address,
   input logic         out_ram_wr1, out_ram_wr2, out_ram_wr3,
   input logic [31:0]  input1, input2, input3,
+  input logic [11:0]    input_ram_rd_add1, input_ram_rd_add2, input_ram_rd_add3,
+  input logic [11:0]    input_ram_wr_add1, input_ram_wr_add2, input_ram_wr_add3,
 
   output logic [7:0]  hex1, hex2, hex3, hex4, hex5, hex6,
   output logic [31:0] readdata);
@@ -66,12 +68,18 @@ always_ff @(posedge clk) begin
   ram_rd1 <= 1; ram_rd2 <= 1; ram_rd3 <= 1;
   if(chipselect && read) begin	
     case(address)
-      8:  readdata <= ram_rd_add1;
-      9:  readdata <= ram_rd_add2;
-      10: readdata <= ram_rd_add3;
-      11: readdata <= ram_wr_add1;
-      12: readdata <= ram_wr_add2;
-      13: readdata <= ram_wr_add3;
+		4: readdata <= input_ram_rd_add1;
+		5: readdata <= input_ram_rd_add2;
+		6: readdata <= input_ram_rd_add3;
+      7: readdata <= input_ram_wr_add1;
+		8: readdata <= input_ram_wr_add2; 
+		9: readdata <= input_ram_wr_add3;
+		10: readdata <= ram_rd_add1;
+      11: readdata <= ram_rd_add2;
+      12: readdata <= ram_rd_add3;
+      13: readdata <= ram_wr_add1;
+      14: readdata <= ram_wr_add2;
+      15: readdata <= ram_wr_add3;
       1 :
         if(ram_rd_add1 < ram_wr_add1)
           if(!read_cycle1) begin

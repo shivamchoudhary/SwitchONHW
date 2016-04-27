@@ -32,11 +32,14 @@ module VGA_LED(input logic      clk,
 	logic [31:0]    output1, output2, output3;
 
     logic [7:0]     hex1, hex2, hex3, hex4, hex5, hex6;
+	 logic				write1, write2, write3;
 					
 	initial begin
+		write1 = 0; write2 = 0; write3 = 0;
 		fifo_out0 = 0;
 		fifo_wr1 = 0; fifo_wr2 = 0; fifo_wr3 = 0;
 		fifo_rd1 = 0; fifo_rd2 = 0; fifo_rd3 = 0;
+		input_ram_wr_add1 = 0; input_ram_wr_add2 = 0; input_ram_wr_add3 = 0;
 	end
 
     RAM input_ram1(.clock(clk), .data(input_ram_wr_in1), 
@@ -67,60 +70,57 @@ module VGA_LED(input logic      clk,
 	Buffer buffer(.*);
     Packet_Display packet_Display(.clk50(clk), .*);
 	
-    always_ff @(posedge clk)begin			
+    always_ff @(posedge clk)begin
+		if(write1)begin
+			write1 <= 0;
+			input_ram_wr_add1 <= input_ram_wr_add1 + 1;	
+		end
+		if(write2)begin
+			write2 <= 0;
+			input_ram_wr_add2 <= input_ram_wr_add2 + 1;	
+		end
+		if(write3)begin
+			write3 <= 0;
+			input_ram_wr_add3 <= input_ram_wr_add3 + 1;	
+		end
 		if (chipselect && write) begin   
 			case(address[2:0]) 						
-
 				3'b001 : begin 				
 					input_ram_wren1 <= 1; 				
-					input_ram_wr_in1 <= writedata[31:0];	
-                    input_ram_wr_add1 <= input_ram_wr_add1 + 1;
-                    if (input_ram_wren2) begin
+					input_ram_wr_in1 <= writedata[31:0];
+					write1 <= 1;
+					if (input_ram_wren2) 
 						input_ram_wren2 <= 0;
-                        //input_ram_wr_add2 <= input_ram_wr_add2 + 1;
-                    end
-                    if (input_ram_wren3) begin
+					if (input_ram_wren3) 
 						input_ram_wren3 <= 0;
-                        //input_ram_wr_add3 <= input_ram_wr_add3 + 1;
-                    end
 				end
-				
+			
 				3'b010 : begin
 					input_ram_wren2 <= 1; 				
-					input_ram_wr_in2 <= writedata[31:0];		
-                    input_ram_wr_add2 <= input_ram_wr_add2 + 1;
-                    if (input_ram_wren1) begin
+					input_ram_wr_in2 <= writedata[31:0];
+					write2 <= 1;
+					if (input_ram_wren1) 
 						input_ram_wren1 <= 0;
-                        //input_ram_wr_add1 <= input_ram_wr_add1 + 1;
-                    end
-					if (input_ram_wren3) begin
+					if (input_ram_wren3) 
 						input_ram_wren3 <= 0;
-                        //input_ram_wr_add3 <= input_ram_wr_add3 + 1;
-                    end
 				end
 				
 				3'b011 : begin
 					input_ram_wren3 <= 1; 				
 					input_ram_wr_in3 <= writedata[31:0];		
-                    input_ram_wr_add3 <= input_ram_wr_add3 + 1;
-                    if (input_ram_wren2) begin
-                        //input_ram_rden1 <= 1;
+					write3 <= 1;
+					if (input_ram_wren2) 
 						input_ram_wren2 <= 0;
-                        //input_ram_wr_add2 <= input_ram_wr_add2 + 1;
-                    end
-                    if (input_ram_wren1) begin
+					if (input_ram_wren1) 
 						input_ram_wren1 <= 0;
-                        //input_ram_wr_add1 <= input_ram_wr_add1 + 1;
-                    end
 				end
-				
 				default : begin
-					input_ram_wren1 <= 0; input_ram_wren1 <= 0; input_ram_wren1 <= 0;
+					input_ram_wren1 <= 0; input_ram_wren2 <= 0; input_ram_wren3 <= 0;
 				end
 			endcase
 		end
 		else begin
-			input_ram_wren1 <= 0; input_ram_wren1 <= 0; input_ram_wren1 <= 0;
+			input_ram_wren1 <= 0; input_ram_wren2 <= 0; input_ram_wren3 <= 0;
 		end
 	end
 endmodule

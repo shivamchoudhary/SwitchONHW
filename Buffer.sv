@@ -13,9 +13,8 @@ module Buffer(input logic clk,
   input logic [3:0]   address,
   input logic         out_ram_wr1, out_ram_wr2, out_ram_wr3,
   input logic [31:0]  input1, input2, input3,
-  input logic [11:0]    input_ram_rd_add1, input_ram_rd_add2, input_ram_rd_add3;
-  input logic [11:0]    input_ram_wr_add1, input_ram_wr_add2, input_ram_wr_add3;
-
+  input logic [11:0]    input_ram_rd_add1, input_ram_rd_add2, input_ram_rd_add3,
+  input logic [11:0]    input_ram_wr_add1, input_ram_wr_add2, input_ram_wr_add3,
 
   output logic [7:0]  hex1, hex2, hex3, hex4, hex5, hex6,
   output logic [31:0] readdata);
