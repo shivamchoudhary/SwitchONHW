@@ -2,7 +2,7 @@ set_global_assignment -entity "lab3" -library "lab3" -name IP_TOOL_NAME "Qsys"
 set_global_assignment -entity "lab3" -library "lab3" -name IP_TOOL_VERSION "13.1.1"
 set_global_assignment -entity "lab3" -library "lab3" -name IP_TOOL_ENV "Qsys"
 set_global_assignment -library "lab3" -name SOPCINFO_FILE [file join $::quartus(qip_path) "../../lab3.sopcinfo"]
-set_global_assignment -entity "lab3" -library "lab3" -name SLD_INFO "QSYS_NAME lab3 HAS_SOPCINFO 1 GENERATION_ID 1461306346"
+set_global_assignment -entity "lab3" -library "lab3" -name SLD_INFO "QSYS_NAME lab3 HAS_SOPCINFO 1 GENERATION_ID 1461713514"
 set_global_assignment -library "lab3" -name MISC_FILE [file join $::quartus(qip_path) "../../lab3.cmp"]
 set_global_assignment -library "lab3" -name SLD_FILE [file join $::quartus(qip_path) "lab3.regmap"]
 set_global_assignment -library "lab3" -name MISC_FILE [file join $::quartus(qip_path) "lab3_hps_0_hps.svd"]
@@ -101,6 +101,7 @@ set_global_assignment -library "lab3" -name SYSTEMVERILOG_FILE [file join $::qua
 set_global_assignment -library "lab3" -name SYSTEMVERILOG_FILE [file join $::quartus(qip_path) "submodules/altera_merlin_slave_translator.sv"]
 set_global_assignment -library "lab3" -name SYSTEMVERILOG_FILE [file join $::quartus(qip_path) "submodules/altera_merlin_master_translator.sv"]
 set_global_assignment -library "lab3" -name SYSTEMVERILOG_FILE [file join $::quartus(qip_path) "submodules/VGA_LED.sv"]
+set_global_assignment -library "lab3" -name SYSTEMVERILOG_FILE [file join $::quartus(qip_path) "submodules/VGA_LED_Emulator.sv"]
 set_global_assignment -library "lab3" -name SYSTEMVERILOG_FILE [file join $::quartus(qip_path) "submodules/Buffer.sv"]
 set_global_assignment -library "lab3" -name SYSTEMVERILOG_FILE [file join $::quartus(qip_path) "submodules/Packet_Display.sv"]
 set_global_assignment -library "lab3" -name SYSTEMVERILOG_FILE [file join $::quartus(qip_path) "submodules/Scheduler.sv"]

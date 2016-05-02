@@ -42,8 +42,7 @@ Info: merlin_domain_transform: After transform: 12 modules, 44 connections
 Info: merlin_router_transform: After transform: 16 modules, 56 connections
 Info: merlin_burst_transform: After transform: 17 modules, 59 connections
 Info: merlin_network_to_switch_transform: After transform: 24 modules, 73 connections
-Info: merlin_width_transform: After transform: 26 modules, 79 connections
-Info: merlin_clock_and_reset_bridge_transform: After transform: 30 modules, 107 connections
+Info: merlin_clock_and_reset_bridge_transform: After transform: 28 modules, 99 connections
 Info: merlin_hierarchy_transform: After transform: 5 modules, 14 connections
 Info: merlin_mm_transform: After transform: 5 modules, 14 connections
 Warning: hps_0.f2h_irq0: Cannot connect clock for irq_mapper.sender
@@ -61,14 +60,14 @@ Info: No custom instruction connections, skipping transform
 Info: reset_adaptation_transform: After transform: 11 modules, 26 connections
 Info: master_0: "lab3" instantiated altera_jtag_avalon_master "master_0"
 Info: vga_led_0: "lab3" instantiated vga_led "vga_led_0"
-Info: pipeline_bridge_swap_transform: After transform: 26 modules, 74 connections
+Info: pipeline_bridge_swap_transform: After transform: 24 modules, 68 connections
 Info: No custom instruction connections, skipping transform 
 Info: merlin_initial_interconnect_transform: After transform: 0 modules, 0 connections
 Info: No Avalon connections, skipping transform 
-Info: merlin_hierarchy_transform: After transform: 26 modules, 74 connections
+Info: merlin_hierarchy_transform: After transform: 24 modules, 68 connections
 Info: merlin_initial_interconnect_transform: After transform: 0 modules, 0 connections
 Info: No Avalon connections, skipping transform 
-Info: merlin_hierarchy_transform: After transform: 26 modules, 74 connections
+Info: merlin_hierarchy_transform: After transform: 24 modules, 68 connections
 Info: mm_interconnect_0: "lab3" instantiated altera_merlin_interconnect_wrapper "mm_interconnect_0"
 Info: irq_mapper: "lab3" instantiated altera_irq_mapper "irq_mapper"
 Info: rst_controller: "lab3" instantiated altera_reset_controller "rst_controller"
@@ -101,10 +100,7 @@ Info: cmd_xbar_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "
 Info: rsp_xbar_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_xbar_demux"
 Info: rsp_xbar_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_xbar_mux"
 Info: Reusing file /home/user3/spring16/aj2672/lab3-qsys/lab3/synthesis/submodules/altera_merlin_arbitrator.sv
-Info: width_adapter: "mm_interconnect_0" instantiated altera_merlin_width_adapter "width_adapter"
-Info: Reusing file /home/user3/spring16/aj2672/lab3-qsys/lab3/synthesis/submodules/altera_merlin_address_alignment.sv
-Info: Reusing file /home/user3/spring16/aj2672/lab3-qsys/lab3/synthesis/submodules/altera_merlin_burst_uncompressor.sv
 Info: border: "hps_io" instantiated altera_interface_generator "border"
-Info: lab3: Done "lab3" with 31 modules, 86 files, 1933251 bytes
+Info: lab3: Done "lab3" with 30 modules, 88 files, 1881997 bytes
 Info: ip-generate succeeded.
 Info: Finished: Create HDL design files for synthesis

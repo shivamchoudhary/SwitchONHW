@@ -105,6 +105,6 @@ Info: width_adapter: "mm_interconnect_0" instantiated altera_merlin_width_adapte
 Info: Reusing file /home/user3/spring16/aj2672/lab3-qsys/lab3/synthesis/submodules/altera_merlin_address_alignment.sv
 Info: Reusing file /home/user3/spring16/aj2672/lab3-qsys/lab3/synthesis/submodules/altera_merlin_burst_uncompressor.sv
 Info: border: "hps_io" instantiated altera_interface_generator "border"
-Info: lab3: Done "lab3" with 31 modules, 86 files, 1930207 bytes
+Info: lab3: Done "lab3" with 31 modules, 86 files, 1930208 bytes
 Info: ip-generate succeeded.
 Info: Finished: Create HDL design files for synthesis

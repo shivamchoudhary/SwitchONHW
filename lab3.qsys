@@ -586,12 +586,12 @@
    version="13.1"
    start="clk_0.clk_reset"
    end="master_0.clk_reset" />
+ <connection kind="clock" version="13.1" start="clk_0.clk" end="vga_led_0.clock" />
  <connection
    kind="reset"
    version="13.1"
    start="clk_0.clk_reset"
    end="vga_led_0.reset_sink" />
- <connection kind="clock" version="13.1" start="clk_0.clk" end="vga_led_0.clock" />
  <connection
    kind="avalon"
    version="13.1"
