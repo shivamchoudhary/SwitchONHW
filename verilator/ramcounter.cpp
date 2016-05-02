@@ -29,12 +29,12 @@ int main(int argc, char** argv)
      // run simulation for 100 clock periods
     for(int i = 0; i < 100; i++)
     {   
-            if (i>=2 && i<4){
+            if (i>=13 && i<15){
                     top->data = 0xA;
                     top->wren = 0x1;
                     top->wraddress = 0x1;
             }
-            else if (i>=4 && i<6){
+            else if (i>=15 && i<17){
                     top->data = 0xB;
                     top->wren = 0x1;
                     top->wraddress = 0x2;
@@ -44,11 +44,11 @@ int main(int argc, char** argv)
                     top->wren = 0;
             }
 
-            if (i>=6 && i<8){
+            if (i>=17 && i<19){
                     top->rden = 0x1;
                     top->rdaddress = 0x1;
             }
-            else if (i>=8 && i<10){
+            else if (i>=19 && i<21){
                     top->rden = 0x1;
                     top->rdaddress = 0x2;
             }
