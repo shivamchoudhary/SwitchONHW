@@ -1,4 +1,3 @@
-
 // ============================================================
 // File Name: Buffer.sv
 //
@@ -13,7 +12,9 @@ module Buffer(input logic clk,
   input logic         chipselect, read,
   input logic [3:0]   address,
   input logic         out_ram_wr1, out_ram_wr2, out_ram_wr3,
-  input logic [31:0]  fifo_out1, fifo_out2, fifo_out3,
+  input logic [31:0]  input1, input2, input3,
+  input logic [11:0]    input_ram_rd_add1, input_ram_rd_add2, input_ram_rd_add3,
+  input logic [11:0]    input_ram_wr_add1, input_ram_wr_add2, input_ram_wr_add3,
 
   output logic [7:0]  hex1, hex2, hex3, hex4, hex5, hex6,
   output logic [31:0] readdata);
@@ -40,9 +41,9 @@ module Buffer(input logic clk,
 
         //dequeue from fifo and display on led
   always_ff @(posedge clk)begin
-    hex1 <= seven_segment(fifo_out1[1:0]);
-    hex2 <= seven_segment(fifo_out2[1:0]);
-    hex3 <= seven_segment(fifo_out3[1:0]);
+    hex1 <= seven_segment(input1[1:0]);
+    hex2 <= seven_segment(input2[1:0]);
+    hex3 <= seven_segment(input3[1:0]);
 
     if(out_ram_wr1) begin
       hex4 <= seven_segment(output1[1:0]);
@@ -67,22 +68,30 @@ always_ff @(posedge clk) begin
   ram_rd1 <= 1; ram_rd2 <= 1; ram_rd3 <= 1;
   if(chipselect && read) begin	
     case(address)
-      8:  readdata <= ram_rd_add1;
-      9:  readdata <= ram_rd_add2;
-      10: readdata <= ram_rd_add3;
-      11: readdata <= ram_wr_add1;
-      12: readdata <= ram_wr_add2;
-      13: readdata <= ram_wr_add3;
+		4: readdata <= input_ram_rd_add1;
+		5: readdata <= input_ram_rd_add2;
+		6: readdata <= input_ram_rd_add3;
+      7: readdata <= input_ram_wr_add1;
+		8: readdata <= input_ram_wr_add2; 
+		9: readdata <= input_ram_wr_add3;
+		10: readdata <= ram_rd_add1;
+      11: readdata <= ram_rd_add2;
+      12: readdata <= ram_rd_add3;
+      13: readdata <= ram_wr_add1;
+      14: readdata <= ram_wr_add2;
+      15: readdata <= ram_wr_add3;
       1 :
         if(ram_rd_add1 < ram_wr_add1)
           if(!read_cycle1) begin
             readdata <= ram_out1;
             read_cycle1 <= 1;
           end
-			  else begin
-				 read_cycle1 <= 0;
-				 ram_rd_add1 <= ram_rd_add1 + 1;
-			  end
+
+        else begin
+          read_cycle1 <= 0;
+          ram_rd_add1 <= ram_rd_add1 + 1;
+        end
+
         else
           readdata <= 255;
                 
@@ -92,27 +101,29 @@ always_ff @(posedge clk) begin
             readdata <= ram_out2;
             read_cycle2 <= 1;
           end
+
           else begin
             read_cycle2 <= 0;
             ram_rd_add2 <= ram_rd_add2 + 1;
           end
+
         else
           readdata <= 255;
-			 
       3 : 
         if(ram_rd_add3 < ram_wr_add3)		
           if(!read_cycle3) begin
             readdata <= ram_out3;
             read_cycle3 <= 1;
           end
+
           else begin
             read_cycle3 <= 0;
             ram_rd_add3 <= ram_rd_add3 + 1;
           end
         else
           readdata <= 255;				
-      
-		default : readdata <= 252;
+      default : 
+              readdata <= 252;
     endcase
   end
 
