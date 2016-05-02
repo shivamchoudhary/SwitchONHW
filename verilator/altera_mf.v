@@ -3283,7 +3283,9 @@ module altsyncram   (
     reg i_rden_reg_a;
     reg i_rden_reg_b;
     reg i_read_flag_a;
+    // verilator lint_off BLKANDNBLK
     reg i_read_flag_b;
+    // verilator lint_on BLKANDNBLK
     reg i_write_flag_a;
     reg i_write_flag_b;
     reg good_to_go_a;
@@ -3313,9 +3315,13 @@ module altsyncram   (
     reg i_address_aclr_b_prev;
     reg i_outdata_aclr_a_prev;
     reg i_outdata_aclr_b_prev;
+    // verilator lint_off BLKANDNBLK
     reg i_force_reread_a;
+    // verilator lint_on BLKANDNBLK
     reg i_force_reread_a1;
+    // verilator lint_off BLKANDNBLK
     reg i_force_reread_b;
+ // verilator lint_on BLKANDNBLK
     reg i_force_reread_b1;
     reg i_force_reread_a_signal;
     reg i_force_reread_b_signal;
