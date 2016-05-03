@@ -13,7 +13,7 @@ module VGA_LED(input logic      clk,
     // Naming convention is the part of module the signal is for followed by
     // the use of the signal, written in camel case. For example, fifo_in
 	logic [31:0]    fifo_in1, fifo_in2, fifo_in3;						
-	logic [31:0]    fifo_out0, fifo_out1, fifo_out2, fifo_out3;		
+	logic [31:0]    fifo_out1, fifo_out2, fifo_out3;		
 	logic [1:0]     fifo_size1, fifo_size2, fifo_size3; 
 	logic           fifo_rd1, fifo_rd2, fifo_rd3;						
 	logic           fifo_wr1, fifo_wr2, fifo_wr3;					
@@ -28,7 +28,6 @@ module VGA_LED(input logic      clk,
     logic           input_ram_wren1, input_ram_wren2, input_ram_wren3;
 
 	logic           out_ram_wr1, out_ram_wr2, out_ram_wr3;
-	logic [1:0]     mux_sel1, mux_sel2, mux_sel3;						
 	logic [31:0]    output1, output2, output3;
 
     logic [7:0]     hex1, hex2, hex3, hex4, hex5, hex6;
@@ -36,7 +35,6 @@ module VGA_LED(input logic      clk,
 					
 	initial begin
 	    enable = 0;
-		fifo_out0 = 0;
 		fifo_wr1 = 0; fifo_wr2 = 0; fifo_wr3 = 0;
 		fifo_rd1 = 0; fifo_rd2 = 0; fifo_rd3 = 0;
 		input_ram_wr_add1 = 0; input_ram_wr_add2 = 0; input_ram_wr_add3 = 0;
@@ -59,13 +57,6 @@ module VGA_LED(input logic      clk,
     Fifo fifo3(.clock(clk), .data(fifo_in3), .rdreq(fifo_rd3), .wrreq(fifo_wr3), 
         .empty(fifo_empty3), .full(fifo_full3), .q(fifo_out3), .usedw(fifo_size3));	
 
-	//megamux megamux1(.data0x(fifo_out0), .data1x(input1), .data2x(input2), 
-		//.data3x(input3), .sel(mux_sel1), .result(output1));
-	//megamux megamux2(.data0x(fifo_out0), .data1x(input1), .data2x(input2), 
-		//.data3x(input3), .sel(mux_sel2), .result(output2));
-	//megamux megamux3(.data0x(fifo_out0), .data1x(input1), .data2x(input2), 
-		//.data3x(input3), .sel(mux_sel3), .result(output3));	
-	
     Scheduler scheduler(.*);
 	Buffer buffer(.*);
     Packet_Display packet_Display(.clk50(clk), .*);

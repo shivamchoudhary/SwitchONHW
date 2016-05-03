@@ -24,7 +24,6 @@ module Scheduler(input logic clk,
     
     logic empty1, empty2, empty3;
     logic write_cycle;
-    logic s1, s2, s3;    
 
     initial begin
         write_cycle = 0;
@@ -33,7 +32,7 @@ module Scheduler(input logic clk,
         input_ram_rd_add1 = 0; input_ram_rd_add2 = 0; input_ram_rd_add3 = 0;
     end
 
-    function logic schedule(logic [31:0] data, logic empty);
+    function logic set_rd(logic [31:0] data, logic empty);
         if(!empty)
             case(data[1:0])
                 2'b00 : if(!out_ram_wr2) begin
@@ -57,7 +56,7 @@ module Scheduler(input logic clk,
                 end
                 else
                     return 0;
-                2'b00 : if(!out_ram_wr3) begin
+                2'b11 : if(!out_ram_wr3) begin
                     output3 = data;
                     out_ram_wr3 = 1;
                     return 1;
@@ -87,9 +86,10 @@ module Scheduler(input logic clk,
                     empty3 = 0;
                 else
                     empty3 = 1;
-                input_ram_rd_add1 = input_ram_rd_add1 + schedule(input1, empty1);
-                input_ram_rd_add2 = input_ram_rd_add2 + schedule(input2, empty2);
-                input_ram_rd_add3 = input_ram_rd_add3 + schedule(input3, empty3);
+
+                input_ram_rd_add1 = input_ram_rd_add1 + set_rd(input1, empty1);
+                input_ram_rd_add2 = input_ram_rd_add2 + set_rd(input2, empty2);
+                input_ram_rd_add3 = input_ram_rd_add3 + set_rd(input3, empty3);
             end
             else begin
                 write_cycle = 1;
