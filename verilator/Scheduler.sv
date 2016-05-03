@@ -15,7 +15,7 @@
 module Scheduler(input logic clk,
         input logic [31:0]  input1, input2, input3,
         input logic [11:0]  input_ram_wr_add1, input_ram_wr_add2, input_ram_wr_add3,
-        input logic         enable,
+        input logic         write_enable,
 
         output logic        out_ram_wr1, out_ram_wr2, out_ram_wr3,
         output logic [31:0] output1, output2, output3,
@@ -71,7 +71,7 @@ module Scheduler(input logic clk,
     always_ff @(posedge clk) begin
         input_ram_rden1 = 1; input_ram_rden2 = 1; input_ram_rden3 = 1;
         //all packets have been written to RAM
-        if(enable)begin
+        if(write_enable)begin
             if(write_cycle) begin
                 write_cycle = 0;
                 if(input_ram_rd_add1 < input_ram_wr_add1)

@@ -3,6 +3,7 @@
 #include "verilated_vcd_c.h" 
 #include <stdlib.h>
 #include <time.h>
+#include <iostream>
 // This is required otherwise the module doesn't get instantiated and the linker
 // throws an error.
 vluint64_t main_time = 0;       // Current simulation time
@@ -29,102 +30,24 @@ int main(int argc, char** argv)
     top->write =1;
     top->reset =0;
     top->read = 0;
+    int num_packets = 15;
     srand((unsigned) time(&t));
     // run simulation for 100 clock periods
     for(int i = 0; i < 100; i++)
     {   
-        if (i>=10 && i<12 && i%2==0){
-                top->address = 1;
-                top->writedata = rand()+1;
+        if(i>=10 && i<10+2*num_packets && i%2==0){
+            top->address = i/2%3+1;
+            top->writedata = rand()+1;
         }
-        else if (i>=12 && i<14 && i%2==0){
-                top->address = 2;
-                top->writedata = rand()+1;
-        }
-        else if (i>=14 && i<16 && i%2==0){
-                top->address = 3;
-                top->writedata = rand()+1;
-        }
-        else if (i>=16 && i<18 && i%2==0){
-                top->address = 1;
-                top->writedata = rand()+1;
-        }
-        else if (i>=18 && i<20 && i%2==0){
-                top->address = 2;
-                top->writedata = rand()+1;
-        }
-        else if (i>=20 && i<22 && i%2==0){
-                top->address = 3;
-                top->writedata = rand()+1;
-        }
-        else if (i>=22 && i<24 && i%2==0){
-                top->address = 1;
-                top->writedata = rand()+1;
-        }
-        else if (i>=24 && i<26 && i%2==0){
-                top->address = 2;
-                top->writedata = rand()+1;
-        }
-        else if (i>=26 && i<28 && i%2==0){
-                top->address = 3;
-                top->writedata = rand()+1;
-        }
-        else if (i>=30 && i<32 && i%2==0){
-                top->address = 15;
+        else if(i>=12+2*num_packets && i<14+2*num_packets && i%2==0){
+                top->address =15;
                 top->writedata = 0;
         }
         else{
                 top->address =0;
                 top->writedata = 0;
-
         }
-
-//*/  
-    //for(int i = 0; i < 100; i++)
-
-    //{   
-        //if (i>=10 &&i<12){
-                //top->address = 1;
-                //top->writedata = 14;
-        //}
-
-        //else if (i>=12 &&i <14){
-                //top->address = 2;
-                //top->writedata = 1;
-        //}
-        //else if (i>=14 && i<16){
-                //top->address = 3;
-                //top->writedata = 3;
-        //}
-        //else if (i>=16 && i<18){
-                //top->address = 1;
-                //top->writedata = 7;
-        //}
-        //else if (i>=18 && i<20){
-                //top->address = 2;
-                //top->writedata = 6;
-        //}
-        //else if (i>=20 && i<22){
-                //top->address = 3;
-                //top->writedata = 33;
-        //}
-        //else if (i>=22 && i<24){
-                //top->address = 1;
-                //top->writedata = 30;
-        //}
-        //else if (i>=24 && i<26){
-                //top->address = 2;
-                //top->writedata = 34;
-        //}
-        //else if (i>=26 && i<28){
-                //top->address = 3;
-                //top->writedata = 62;
-        //}
-        //else{
-                //top->address =0;
-                //top->writedata = 0;
-
-        //}
+        
         for(int clk = 0; clk < 2; ++clk)
         {
             top->eval();
@@ -135,5 +58,44 @@ int main(int argc, char** argv)
          }
     }
 
+    int ram1_size = top->v__DOT__buffer__DOT__ram1_wraddress;
+    int ram2_size = top->v__DOT__buffer__DOT__ram2_wraddress;
+    int ram3_size = top->v__DOT__buffer__DOT__ram3_wraddress;
+    int j = 1;
+
+
+    for(int i = 100; i < 200; i++)
+    {   
+        if(i < 112){
+            top->address = 14;
+            top->write = 1;
+        }else if(j <= ram1_size){
+            top->address = 1;
+            top->read = 1;
+        }
+        else if(j > ram1_size && j <= ram1_size + ram2_size){
+            top->address = 2;
+            top->read = 1;
+        }
+        else if(j > ram1_size + ram2_size && j <= ram1_size + ram2_size + ram3_size){
+            top->address = 3;
+            top->read = 1;
+        }else{
+            top->address = 0;
+            top->read = 0;
+        }
+
+        if(i>=112 && i%4==3)
+            j++;
+        
+        for(int clk = 0; clk < 2; ++clk)
+        {
+            top->eval();
+            tfp->dump((2 * i) + clk);
+            if (clk==1){
+                    top->clk =!top->clk;
+            }
+         }
+    }
     tfp->close();
 }

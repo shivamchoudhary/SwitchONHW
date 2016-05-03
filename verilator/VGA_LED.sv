@@ -31,10 +31,11 @@ module VGA_LED(input logic      clk,
 	logic [31:0]    output1, output2, output3;
 
     logic [7:0]     hex1, hex2, hex3, hex4, hex5, hex6;
-    logic           enable;
+    logic           write_enable, read_enable;
 					
 	initial begin
-	    enable = 0;
+	    write_enable = 0;
+	    read_enable = 0;
 		fifo_wr1 = 0; fifo_wr2 = 0; fifo_wr3 = 0;
 		fifo_rd1 = 0; fifo_rd2 = 0; fifo_rd3 = 0;
 		input_ram_wr_add1 = 0; input_ram_wr_add2 = 0; input_ram_wr_add3 = 0;
@@ -79,35 +80,19 @@ module VGA_LED(input logic      clk,
 				1 : begin 				
 					input_ram_wren1 <= 1; 				
 					input_ram_wr_in1 <= writedata[31:0];
-					//write1 <= 1;
-					//if (input_ram_wren2) 
-						//input_ram_wren2 <= 0;
-					//if (input_ram_wren3) 
-						//input_ram_wren3 <= 0;
 				end
 			
 				2 : begin
 					input_ram_wren2 <= 1; 				
 					input_ram_wr_in2 <= writedata[31:0];
-					//write2 <= 1;
-					//if (input_ram_wren1) 
-						//input_ram_wren1 <= 0;
-					//if (input_ram_wren3) 
-						//input_ram_wren3 <= 0;
 				end
 				
 				3 : begin
 					input_ram_wren3 <= 1; 				
 					input_ram_wr_in3 <= writedata[31:0];		
-					//write3 <= 1;
-					//if (input_ram_wren2) 
-						//input_ram_wren2 <= 0;
-					//if (input_ram_wren1) 
-						//input_ram_wren1 <= 0;
 				end
-                15 : begin
-                    enable <= 1;
-                end
+                15 : write_enable <= 1;
+                14 : read_enable <= 1;
 				default : begin
 					input_ram_wren1 <= 0; input_ram_wren2 <= 0; input_ram_wren3 <= 0;
 				end
