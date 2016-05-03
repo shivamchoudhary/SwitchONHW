@@ -5,6 +5,7 @@
 // ************************************************************
 // 
 // ************************************************************
+
         
 module Buffer(input logic clk,
   input logic [31:0]  output1, output2, output3,
@@ -44,19 +45,19 @@ module Buffer(input logic clk,
     hex2 <= seven_segment(input2[1:0]);
     hex3 <= seven_segment(input3[1:0]);
 
-    if(out_ram_wr1) begin
+    if(out_ram_wr1 && output1) begin
       hex4 <= seven_segment(output1[1:0]);
       ram_wr_add1 <= ram_wr_add1 + 1;
     end
     else
       hex4 <= 0;
-    if(out_ram_wr2) begin
+    if(out_ram_wr2 && output2) begin
       hex5 <= seven_segment(output2[1:0]);
       ram_wr_add2 <= ram_wr_add2 + 1;
     end
     else
       hex5 <= 0;
-    if(out_ram_wr3) begin
+    if(out_ram_wr3 && output3) begin
       hex6 <= seven_segment(output3[1:0]);
       ram_wr_add3 <= ram_wr_add3 + 1;
     end

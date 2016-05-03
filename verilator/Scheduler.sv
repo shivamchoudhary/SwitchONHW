@@ -13,116 +13,88 @@
 
 
 module Scheduler(input logic clk,
-    input logic [31:0] input1, input2, input3,
-    input logic [11:0] input_ram_wr_add1, input_ram_wr_add2, input_ram_wr_add3,
-        
-    output logic [11:0] input_ram_rd_add1, input_ram_rd_add2, input_ram_rd_add3,
-    output logic [1:0]  mux_sel1, mux_sel2, mux_sel3,
-    output logic        out_ram_wr1, out_ram_wr2, out_ram_wr3,
-    output logic        input_ram_rden1, input_ram_rden2, input_ram_rden3);
+        input logic [31:0]  input1, input2, input3,
+        input logic [11:0]  input_ram_wr_add1, input_ram_wr_add2, input_ram_wr_add3,
+        input logic         enable,
 
-	logic write_cycle;
-	logic ram_not_empty1, ram_not_empty2, ram_not_empty3;
-	logic read1, read2, read3;
+        output logic        out_ram_wr1, out_ram_wr2, out_ram_wr3,
+        output logic [31:0] output1, output2, output3,
+        output logic [11:0] input_ram_rd_add1, input_ram_rd_add2, input_ram_rd_add3,
+        output logic        input_ram_rden1, input_ram_rden2, input_ram_rden3); 
+    
+    logic empty1, empty2, empty3;
+    logic write_cycle;
+    logic s1, s2, s3;    
 
-	initial begin
-		write_cycle = 0;
-		input_ram_rd_add1 = 0; input_ram_rd_add2 = 0; input_ram_rd_add3 = 0;
-		mux_sel1 = 0; mux_sel2 = 0; mux_sel3 = 0;
-		out_ram_wr1 = 0; out_ram_wr2 = 0; out_ram_wr3 = 0;	
-		ram_not_empty1 = 0; ram_not_empty2 = 0; ram_not_empty3 = 0;
-		read1 = 0; read2 = 0; read3 = 0;
-	end 
-	
-	function logic set_rd(logic[31:0] data, logic[1:0] in, logic size);
-		if(data)
-			case(data[1:0])
-				2'b01 : begin
+    initial begin
+        write_cycle = 0;
+        output1 = 0; output2 = 0; output3 = 0;
+        out_ram_wr1 = 0; out_ram_wr2 = 0; out_ram_wr3 = 0;
+        input_ram_rd_add1 = 0; input_ram_rd_add2 = 0; input_ram_rd_add3 = 0;
+    end
 
-					if(!out_ram_wr1 && size)begin
-						out_ram_wr1 = 1;
-						mux_sel1 = in;
-						return 1;
-					end
-					else
-						return 0;
-				end
+    function logic schedule(logic [31:0] data, logic empty);
+        if(!empty)
+            case(data[1:0])
+                2'b00 : if(!out_ram_wr2) begin
+                    output2 = data;
+                    out_ram_wr2 = 1;
+                    return 1;
+                end
+                else
+                    return 0;
+                2'b10 : if(!out_ram_wr2) begin
+                    output2 = data;
+                    out_ram_wr2 = 1;
+                    return 1;
+                end
+                else
+                    return 0;
+                2'b01 : if(!out_ram_wr1) begin
+                    output1 = data;
+                    out_ram_wr1 = 1;
+                    return 1;
+                end
+                else
+                    return 0;
+                2'b00 : if(!out_ram_wr3) begin
+                    output3 = data;
+                    out_ram_wr3 = 1;
+                    return 1;
+                end
+                else
+                    return 0;
+            endcase
+        else
+            return 0;
+    endfunction
 
-				2'b10 : begin
-					if(!out_ram_wr2 && size)begin
-						out_ram_wr2 = 1;
-						mux_sel2 = in;
-					return 1;
-					end
-					else 
-						return 0;
-				end
-
-				2'b11 : begin
-					if(!out_ram_wr3 && size)begin
-						out_ram_wr3 = 1;
-						mux_sel3 = in;
-						return 1;
-					end
-					else 
-						return 0;			
-				end
-
-				2'b00 : begin
-					if(!out_ram_wr2 && size)begin
-						out_ram_wr2 = 1;
-						mux_sel2 = in;
-						return 1;
-					end
-					else 
-						return 0;
-				end
-				
-				default : return 0;
-			endcase
-    else
-			return 0;
-	endfunction
-	
-    always_ff @(posedge clk) begin 
-		input_ram_rden1 = 1; input_ram_rden2 = 1; input_ram_rden3 = 1;
-        if(write_cycle) begin
-        // Init en's to Zero. We later set these to 1 as an data becomes available
-        // on the corresponding output port. 
-        // Makes sure that more than one packet is not sent to the same o/p port in 
-        // one clock cycle.
-        // en1 = 0; en2 = 0; en3 = 0;	
-        // Similar to en. But, sel is an external signal to Scheduler and is required
-        // in megamux and setting ramen1.
-        // sel1 = 0; sel2 = 0; sel3 = 0;
-        // Analyze each incoming packet and send them through the crossbar.	
-            write_cycle = 0;
-            if(input_ram_rd_add1 < input_ram_wr_add1)
-                ram_not_empty1 = 1;
-            if(input_ram_rd_add2 < input_ram_wr_add2)
-                ram_not_empty2 = 1;
-            if(input_ram_rd_add3 < input_ram_wr_add3)
-                ram_not_empty3 = 1;
-            read1 = set_rd(input1, 01, ram_not_empty1);
-            read2 = set_rd(input2, 10, ram_not_empty2);
-            read3 = set_rd(input3, 11, ram_not_empty3);
+    always_ff @(posedge clk) begin
+        input_ram_rden1 = 1; input_ram_rden2 = 1; input_ram_rden3 = 1;
+        //all packets have been written to RAM
+        if(enable)begin
+            if(write_cycle) begin
+                write_cycle = 0;
+                if(input_ram_rd_add1 < input_ram_wr_add1)
+                    empty1 = 0;
+                else
+                    empty1 = 1;
+                if(input_ram_rd_add2 < input_ram_wr_add2)
+                    empty2 = 0;
+                else
+                    empty2 = 1;
+                if(input_ram_rd_add3 < input_ram_wr_add3)
+                    empty3 = 0;
+                else
+                    empty3 = 1;
+                input_ram_rd_add1 = input_ram_rd_add1 + schedule(input1, empty1);
+                input_ram_rd_add2 = input_ram_rd_add2 + schedule(input2, empty2);
+                input_ram_rd_add3 = input_ram_rd_add3 + schedule(input3, empty3);
+            end
+            else begin
+                write_cycle = 1;
+                out_ram_wr1 = 0; out_ram_wr2 = 0; out_ram_wr3 = 0;
+            end
         end
-        else begin
-            write_cycle = 1;
-            mux_sel1 = 0; mux_sel2 = 0; mux_sel3 = 0;
-            out_ram_wr1 = 0; out_ram_wr2 = 0; out_ram_wr3 = 0;	
-				if(read1) begin
-					read1 = 0;
-					input_ram_rd_add1 = input_ram_rd_add1 + 1;
-				end
-				if(read2) begin
-                input_ram_rd_add2 = input_ram_rd_add2 + 1;
-					 read2 = 0;
-				end
-				if(read3) begin
-					read3 = 0;
-					input_ram_rd_add3 =	input_ram_rd_add3 + 1;
-				end
-        end	
     end
 endmodule

@@ -69,11 +69,16 @@ int main(int argc, char** argv)
                 top->address = 3;
                 top->writedata = rand()+1;
         }
+        else if (i>=30 && i<32 && i%2==0){
+                top->address = 15;
+                top->writedata = 0;
+        }
         else{
                 top->address =0;
                 top->writedata = 0;
 
         }
+
 //*/  
     //for(int i = 0; i < 100; i++)
 
