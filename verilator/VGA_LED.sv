@@ -38,6 +38,7 @@ module VGA_LED(input logic      clk,
 	    read_enable = 0;
 		fifo_wr1 = 0; fifo_wr2 = 0; fifo_wr3 = 0;
 		fifo_rd1 = 0; fifo_rd2 = 0; fifo_rd3 = 0;
+    input_ram_wren1 = 0; input_ram_wren2 = 0; input_ram_wren3 = 0;
 		input_ram_wr_add1 = 0; input_ram_wr_add2 = 0; input_ram_wr_add3 = 0;
 	end
 
@@ -64,42 +65,42 @@ module VGA_LED(input logic      clk,
 	
     always_ff @(posedge clk)begin
 		if(input_ram_wren1)begin
-			input_ram_wren1 <= 0;
-			input_ram_wr_add1 <= input_ram_wr_add1 + 1;	
+			input_ram_wren1 = 0;
+			input_ram_wr_add1 = input_ram_wr_add1 + 1;
 		end
 		if(input_ram_wren2)begin
-			input_ram_wren2 <= 0;
-			input_ram_wr_add2 <= input_ram_wr_add2 + 1;	
+			input_ram_wren2 = 0;
+			input_ram_wr_add2 = input_ram_wr_add2 + 1;
 		end
 		if(input_ram_wren3)begin
-			input_ram_wren3 <= 0;
-			input_ram_wr_add3 <= input_ram_wr_add3 + 1;	
+			input_ram_wren3 = 0;
+			input_ram_wr_add3 = input_ram_wr_add3 + 1;
 		end
-		if (chipselect && write) begin   
-			case(address) 						
-				1 : begin 				
-					input_ram_wren1 <= 1; 				
-					input_ram_wr_in1 <= writedata[31:0];
+    if (chipselect && write) begin
+			case(address)
+        1 : begin
+					input_ram_wren1 = 1;
+					input_ram_wr_in1 = writedata[31:0];
 				end
 			
 				2 : begin
-					input_ram_wren2 <= 1; 				
-					input_ram_wr_in2 <= writedata[31:0];
+					input_ram_wren2 = 1; 				
+					input_ram_wr_in2 = writedata[31:0];
 				end
 				
 				3 : begin
-					input_ram_wren3 <= 1; 				
-					input_ram_wr_in3 <= writedata[31:0];		
+					input_ram_wren3 = 1; 				
+					input_ram_wr_in3 = writedata[31:0];		
 				end
-                15 : write_enable <= 1;
-                14 : read_enable <= 1;
+                15 : write_enable = 1;
+                14 : read_enable = 1;
 				default : begin
-					input_ram_wren1 <= 0; input_ram_wren2 <= 0; input_ram_wren3 <= 0;
+					input_ram_wren1 = 0; input_ram_wren2 = 0; input_ram_wren3 = 0;
 				end
 			endcase
 		end
 		else begin
-			input_ram_wren1 <= 0; input_ram_wren2 <= 0; input_ram_wren3 <= 0;
+			input_ram_wren1 = 0; input_ram_wren2 = 0; input_ram_wren3 = 0;
 		end
 	end
 endmodule

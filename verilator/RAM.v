@@ -55,9 +55,9 @@ module RAM (
 `ifndef ALTERA_RESERVED_QIS
 // synopsys translate_off
 `endif
-	wire	  clock;
-	wire	  rden;
-	wire	  wren;
+	logic	  clock;
+	logic	  rden;
+	logic	  wren;
 `ifndef ALTERA_RESERVED_QIS
 // synopsys translate_on
 `endif

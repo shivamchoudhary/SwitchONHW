@@ -26,8 +26,7 @@ int main(int argc, char** argv)
     tfp->open("vgaled.vcd");
     // initialize simulation inputs
     top->clk    = 1;
-    top->chipselect = 1;
-    top->write =1;
+    top->write = 0;
     top->reset =0;
     top->read = 0;
     int num_packets = 15;
@@ -36,14 +35,20 @@ int main(int argc, char** argv)
     for(int i = 0; i < 100; i++)
     {   
         if(i>=10 && i<10+2*num_packets && i%2==0){
+            top->write=1;
+            top->chipselect = 1;
             top->address = i/2%3+1;
             top->writedata = rand()+1;
         }
         else if(i>=12+2*num_packets && i<14+2*num_packets && i%2==0){
+                top->write=1;
+                top->chipselect = 1;
                 top->address =15;
                 top->writedata = 0;
         }
-        else{
+        else if(i%2 == 0){
+                top->write=0;
+                top->chipselect = 0;
                 top->address =0;
                 top->writedata = 0;
         }
@@ -67,20 +72,29 @@ int main(int argc, char** argv)
     for(int i = 100; i < 200; i++)
     {   
         if(i < 112){
+            top->chipselect = 1;
             top->address = 14;
             top->write = 1;
         }else if(j <= ram1_size){
+            top->write = 0;
+            top->chipselect = 1;
             top->address = 1;
             top->read = 1;
         }
         else if(j > ram1_size && j <= ram1_size + ram2_size){
+            top->write = 0;
+            top->chipselect = 1;
             top->address = 2;
             top->read = 1;
         }
         else if(j > ram1_size + ram2_size && j <= ram1_size + ram2_size + ram3_size){
+            top->write = 0;
+            top->chipselect = 1;
             top->address = 3;
             top->read = 1;
         }else{
+            top->write = 0;
+            top->chipselect = 0;
             top->address = 0;
             top->read = 0;
         }

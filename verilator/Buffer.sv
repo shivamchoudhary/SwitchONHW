@@ -32,6 +32,7 @@ module Buffer(input logic clk,
         .q(ram3_q));
 
     initial begin
+        read_cycle1 = 1; read_cycle2 = 1; read_cycle3 = 1;
         ram1_wraddress = 0; ram2_wraddress = 0; ram3_wraddress = 0;
         ram1_rdaddress = 0; ram2_rdaddress = 0; ram3_rdaddress = 0;
     end
@@ -64,31 +65,31 @@ module Buffer(input logic clk,
                 1 : if(ram1_rdaddress <= ram1_wraddress) begin
                     if(read_cycle1) begin
                         read_cycle1 <= 0;
-                        readdata <= ram1_q;
+                        ram1_rdaddress <= ram1_rdaddress + 1;
                     end
                     else begin
+                        readdata <= ram1_q;
                         read_cycle1 <= 1;
-                        ram1_rdaddress <= ram1_rdaddress + 1;
                     end
                 end
                 2 : if(ram2_rdaddress <= ram2_wraddress) begin
                     if(read_cycle2) begin
                         read_cycle2 <= 0;
-                        readdata <= ram2_q;
+                        ram2_rdaddress <= ram2_rdaddress + 1;
                     end
                     else begin
+                        readdata <= ram2_q;
                         read_cycle2 <= 1;
-                        ram2_rdaddress <= ram2_rdaddress + 1;
                     end
                 end
                 3 : if(ram3_rdaddress <= ram3_wraddress) begin
                     if(read_cycle3) begin
                         read_cycle3 <= 0;
-                        readdata <= ram3_q;
+                        ram3_rdaddress <= ram3_rdaddress + 1;
                     end
                     else begin
+                        readdata <= ram3_q;
                         read_cycle3 <= 1;
-                        ram3_rdaddress <= ram3_rdaddress + 1;
                     end
                 end
                default : readdata <= 255; 
