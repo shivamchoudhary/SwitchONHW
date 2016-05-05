@@ -29,7 +29,7 @@ int main(int argc, char** argv)
     top->write = 0;
     top->reset =0;
     top->read = 0;
-    int num_packets = 15;
+    int num_packets = 10;
     srand((unsigned) time(&t));
     // run simulation for 100 clock periods
     for(int i = 0; i < 100; i++)
@@ -37,7 +37,8 @@ int main(int argc, char** argv)
         if(i>=10 && i<10+2*num_packets && i%2==0){
             top->write=1;
             top->chipselect = 1;
-            top->address = i/2%3+1;
+//            top->address = i/2%3+1;
+            top->address = 1;
             top->writedata = rand()+1;
         }
         else if(i>=12+2*num_packets && i<14+2*num_packets && i%2==0){
@@ -81,13 +82,13 @@ int main(int argc, char** argv)
             top->address = 1;
             top->read = 1;
         }
-        else if(j > ram1_size && j <= ram1_size + ram2_size){
+        else if(j > ram1_size + 1 && j <= ram1_size + ram2_size + 1){
             top->write = 0;
             top->chipselect = 1;
             top->address = 2;
             top->read = 1;
         }
-        else if(j > ram1_size + ram2_size && j <= ram1_size + ram2_size + ram3_size){
+        else if(j > ram1_size + ram2_size + 2 && j <= ram1_size + ram2_size + ram3_size + 2){
             top->write = 0;
             top->chipselect = 1;
             top->address = 3;
