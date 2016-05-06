@@ -12,9 +12,12 @@ module Buffer(input logic clk,
         input logic [3:0]   address,
         input logic [31:0] output1, output2, output3,
         input logic out_ram_wr1, out_ram_wr2, out_ram_wr3,
+		input logic [11:0]  input_ram_rd_add1, input_ram_rd_add2, input_ram_rd_add3,
+		input logic [11:0]  input_ram_wr_add1, input_ram_wr_add2, input_ram_wr_add3,
         
         output logic [31:0]  readdata);
 
+    logic[31:0] finalRead;
     logic       ram1_wren, ram2_wren, ram3_wren;
     logic[11:0] ram1_rdaddress, ram2_rdaddress, ram3_rdaddress;
     logic[11:0] ram1_wraddress, ram2_wraddress, ram3_wraddress;
@@ -77,13 +80,21 @@ module Buffer(input logic clk,
 
     always_ff @(posedge clk) begin
         if(read_enable)begin
-            ram1_rden = 1; //ram2_rden = 1; ram3_rden = 1;
+            ram1_rden = 1; 
         end
     end
 
     always_ff @(posedge clk) begin
+        readdata <= finalRead;
         if(chipselect && read) begin
             case(address)
+                0 : readdata <= finalRead;
+                4 : readdata <= input_ram_rd_add1;
+                5 : readdata <= input_ram_rd_add2;
+                6 : readdata <= input_ram_rd_add3;
+                7 : readdata <= input_ram_wr_add1;
+                8 : readdata <= input_ram_wr_add2;
+                9 : readdata <= input_ram_wr_add3;
                 10 : readdata <= ram1_rdaddress;
                 11 : readdata <= ram2_rdaddress;
                 12 : readdata <= ram3_rdaddress;
@@ -98,7 +109,7 @@ module Buffer(input logic clk,
                             read_cycle1 <= 0;
                         end
                         else begin
-                            readdata <= ram1_q;
+                            finalRead <= ram1_q;
                             read_cycle1 <= 1;
                         end
                     end
@@ -115,9 +126,8 @@ module Buffer(input logic clk,
                             read_cycle2 <= 0;
                         end
                         else begin
-                            readdata <= ram2_q;
+                            finalRead <= ram2_q;
                             read_cycle2 <= 1;
-                            //ram2_rden <= 0;
                         end
                     end
                     if(ram2_rdaddress == ram2_wraddress)begin
@@ -132,9 +142,8 @@ module Buffer(input logic clk,
                         read_cycle3 <= 0;
                     end
                     else begin
-                        readdata <= ram3_q;
+                        finalRead <= ram3_q;
                         read_cycle3 <= 1;
-                        //ram3_rden <= 0;
                     end
                 end
                default : readdata <= 255; 
