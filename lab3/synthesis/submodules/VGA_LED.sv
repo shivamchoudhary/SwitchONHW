@@ -39,16 +39,16 @@ module VGA_LED(input logic      clk,
 		fifo_wr1 = 0; fifo_wr2 = 0; fifo_wr3 = 0;
 		fifo_rd1 = 0; fifo_rd2 = 0; fifo_rd3 = 0;
     input_ram_wren1 = 0; input_ram_wren2 = 0; input_ram_wren3 = 0;
-		input_ram_wr_add1 = 0; input_ram_wr_add2 = 0; input_ram_wr_add3 = 0;
+		input_ram_wr_add1 = 13; input_ram_wr_add2 = 13; input_ram_wr_add3 = 13;
 	end
 
-    RAM input_ram1(.clock(clk), .data(input_ram_wr_in1), 
+    Input_RAM_1 input_ram1(.clock(clk), .data(input_ram_wr_in1), 
         .rdaddress(input_ram_rd_add1), .rden(input_ram_rden1),
           .wraddress(input_ram_wr_add1), .wren(input_ram_wren1), .q(input1));
-    RAM input_ram2(.clock(clk), .data(input_ram_wr_in2), 
+    Input_RAM_2 input_ram2(.clock(clk), .data(input_ram_wr_in2), 
         .rdaddress(input_ram_rd_add2), .rden(input_ram_rden2),
           .wraddress(input_ram_wr_add2), .wren(input_ram_wren2), .q(input2));
-    RAM input_ram3(.clock(clk), .data(input_ram_wr_in3), 
+    Input_RAM_3 input_ram3(.clock(clk), .data(input_ram_wr_in3), 
         .rdaddress(input_ram_rd_add3), .rden(input_ram_rden3),
           .wraddress(input_ram_wr_add3), .wren(input_ram_wren3), .q(input3));
 

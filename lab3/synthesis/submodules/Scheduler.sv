@@ -23,7 +23,7 @@ module Scheduler(input logic clk,
         output logic        input_ram_rden1, input_ram_rden2, input_ram_rden3); 
     
     logic empty1, empty2, empty3;
-    logic write_cycle;
+    logic[1:0] write_cycle;
 
     initial begin
         write_cycle = 0;
@@ -72,17 +72,17 @@ module Scheduler(input logic clk,
         input_ram_rden1 = 1; input_ram_rden2 = 1; input_ram_rden3 = 1;
         //all packets have been written to RAM
         if(write_enable)begin
-            if(write_cycle) begin
+            if(write_cycle == 2) begin
                 write_cycle = 0;
-                if(input_ram_rd_add1 <= input_ram_wr_add1)
+                if(input_ram_rd_add1 < input_ram_wr_add1)
                     empty1 = 0;
                 else
                     empty1 = 1;
-                if(input_ram_rd_add2 <= input_ram_wr_add2)
+                if(input_ram_rd_add2 < input_ram_wr_add2)
                     empty2 = 0;
                 else
                     empty2 = 1;
-                if(input_ram_rd_add3 <= input_ram_wr_add3)
+                if(input_ram_rd_add3 < input_ram_wr_add3)
                     empty3 = 0;
                 else
                     empty3 = 1;
@@ -92,7 +92,7 @@ module Scheduler(input logic clk,
                 input_ram_rd_add3 = input_ram_rd_add3 + set_rd(input3, empty3);
             end
             else begin
-                write_cycle = 1;
+                write_cycle = write_cycle + 1;
                 out_ram_wr1 = 0; out_ram_wr2 = 0; out_ram_wr3 = 0;
             end
         end
