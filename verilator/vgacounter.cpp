@@ -32,16 +32,20 @@ int main(int argc, char** argv)
     int num_packets = 10;
     srand((unsigned) time(&t));
     // run simulation for 100 clock periods
-    for(int i = 0; i < 100; i++)
+    for(int i = 0; i < 200; i++)
     {   
-        if(i>=10 && i<10+2*num_packets && i%2==0){
+        if(i>=8 && i<8+8*num_packets){
             top->write=1;
             top->chipselect = 1;
-//            top->address = i/2%3+1;
-            top->address = 1;
-            top->writedata = rand()+1;
+            //top->address = 1;
+            if(i%8==0)
+                top->address = i/8%3 + 1;
+            if(i%2 == 0 && i%8 < 6)
+                top->writedata = rand()+1;
+            else if(i%8 == 6)
+                top->writedata = 0;
         }
-        else if(i>=12+2*num_packets && i<14+2*num_packets && i%2==0){
+        else if(i>=10+8*num_packets && i<12+8*num_packets && i%2==0){
                 top->write=1;
                 top->chipselect = 1;
                 top->address =15;
@@ -70,9 +74,9 @@ int main(int argc, char** argv)
     int j = 1;
 
 
-    for(int i = 100; i < 200; i++)
+    for(int i = 200; i < 400; i++)
     {   
-        if(i < 112){
+        if(i < 212){
             top->chipselect = 1;
             top->address = 14;
             top->write = 1;
@@ -100,7 +104,7 @@ int main(int argc, char** argv)
             top->read = 0;
         }
 
-        if(i>=112 && i%4==3)
+        if(i>=212 && i%4==3)
             j++;
         
         for(int clk = 0; clk < 2; ++clk)

@@ -12,14 +12,6 @@ module VGA_LED(input logic      clk,
 
     // Naming convention is the part of module the signal is for followed by
     // the use of the signal, written in camel case. For example, fifo_in
-	logic [31:0]    fifo_in1, fifo_in2, fifo_in3;						
-	logic [31:0]    fifo_out1, fifo_out2, fifo_out3;		
-	logic [1:0]     fifo_size1, fifo_size2, fifo_size3; 
-	logic           fifo_rd1, fifo_rd2, fifo_rd3;						
-	logic           fifo_wr1, fifo_wr2, fifo_wr3;					
-	logic           fifo_empty1, fifo_empty2, fifo_empty3; 
-	logic           fifo_full1, fifo_full2, fifo_full3;
-
     logic [31:0]    input1, input2, input3;
     logic [11:0]    input_ram_rd_add1, input_ram_rd_add2, input_ram_rd_add3;
     logic           input_ram_rden1, input_ram_rden2, input_ram_rden3;
@@ -36,9 +28,7 @@ module VGA_LED(input logic      clk,
 	initial begin
 	    write_enable = 0;
 	    read_enable = 0;
-		fifo_wr1 = 0; fifo_wr2 = 0; fifo_wr3 = 0;
-		fifo_rd1 = 0; fifo_rd2 = 0; fifo_rd3 = 0;
-    input_ram_wren1 = 0; input_ram_wren2 = 0; input_ram_wren3 = 0;
+        input_ram_wren1 = 0; input_ram_wren2 = 0; input_ram_wren3 = 0;
 		input_ram_wr_add1 = 0; input_ram_wr_add2 = 0; input_ram_wr_add3 = 0;
 	end
 
@@ -51,13 +41,6 @@ module VGA_LED(input logic      clk,
     RAM input_ram3(.clock(clk), .data(input_ram_wr_in3), 
         .rdaddress(input_ram_rd_add3), .rden(input_ram_rden3),
           .wraddress(input_ram_wr_add3), .wren(input_ram_wren3), .q(input3));
-
-    Fifo fifo1(.clock(clk), .data(fifo_in1), .rdreq(fifo_rd1), .wrreq(fifo_wr1), 
-        .empty(fifo_empty1), .full(fifo_full1), .q(fifo_out1), .usedw(fifo_size1));	
-    Fifo fifo2(.clock(clk), .data(fifo_in2), .rdreq(fifo_rd2), .wrreq(fifo_wr2), 
-        .empty(fifo_empty2), .full(fifo_full2), .q(fifo_out2), .usedw(fifo_size2));	
-    Fifo fifo3(.clock(clk), .data(fifo_in3), .rdreq(fifo_rd3), .wrreq(fifo_wr3), 
-        .empty(fifo_empty3), .full(fifo_full3), .q(fifo_out3), .usedw(fifo_size3));	
 
     Scheduler scheduler(.*);
 	Buffer buffer(.*);
