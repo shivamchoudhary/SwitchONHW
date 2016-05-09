@@ -39,7 +39,7 @@ int main(int argc, char** argv)
             top->chipselect = 1;
             //top->address = 1;
             if(i%8==0)
-                top->address = i/8%3 + 1;
+                top->address = i/8%4;
             if(i%2 == 0 && i%8 < 6)
                 top->writedata = rand()+1;
             else if(i%8 == 6)
@@ -68,9 +68,10 @@ int main(int argc, char** argv)
          }
     }
 
-    int ram1_size = top->v__DOT__buffer__DOT__ram1_wraddress;
-    int ram2_size = top->v__DOT__buffer__DOT__ram2_wraddress;
-    int ram3_size = top->v__DOT__buffer__DOT__ram3_wraddress;
+    int ram0_size = top->v__DOT__ram0_wraddress;
+    int ram1_size = top->v__DOT__ram1_wraddress;
+    int ram2_size = top->v__DOT__ram2_wraddress;
+    int ram3_size = top->v__DOT__ram3_wraddress;
     int j = 1;
 
 
@@ -80,23 +81,34 @@ int main(int argc, char** argv)
             top->chipselect = 1;
             top->address = 14;
             top->write = 1;
-        }else if(j <= ram1_size){
+        }else if(j <= ram0_size){
+            top->write = 0;
+            top->chipselect = 1;
+            top->address = 0;
+            top->read = 1;
+        }
+        else if(j > ram0_size + 1 && j <= ram1_size + ram0_size + 1){
             top->write = 0;
             top->chipselect = 1;
             top->address = 1;
             top->read = 1;
         }
-        else if(j > ram1_size + 1 && j <= ram1_size + ram2_size + 1){
+        else if(j > ram1_size + ram0_size + 2 && j <= ram1_size + ram2_size + ram0_size + 2){
             top->write = 0;
             top->chipselect = 1;
             top->address = 2;
             top->read = 1;
         }
-        else if(j > ram1_size + ram2_size + 2 && j <= ram1_size + ram2_size + ram3_size + 2){
+        else if(j > ram1_size + ram0_size + ram2_size + 3 && j <= ram1_size + ram2_size + ram3_size + ram0_size + 3){
             top->write = 0;
             top->chipselect = 1;
             top->address = 3;
             top->read = 1;
+        }else if(i >= 390 && i<392){
+            top->write = 1;
+            top->chipselect = 1;
+            top->address = 13;
+            top->read = 0;
         }else{
             top->write = 0;
             top->chipselect = 0;
