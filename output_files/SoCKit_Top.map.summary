@@ -1,13 +1,13 @@
-Analysis & Synthesis Status : Successful - Thu May  5 23:34:21 2016
+Analysis & Synthesis Status : Successful - Sun May  8 22:05:52 2016
 Quartus II 32-bit Version : 13.1.1 Build 166 11/26/2013 SJ Full Version
 Revision Name : SoCKit_Top
 Top-level Entity Name : SoCKit_Top
 Family : Cyclone V
 Logic utilization (in ALMs) : N/A
-Total registers : 1434
+Total registers : 1475
 Total pins : 289
 Total virtual pins : 0
-Total block memory bits : 590,336
+Total block memory bits : 786,944
 Total DSP Blocks : 0
 Total HSSI RX PCSs : 0
 Total HSSI PMA RX Deserializers : 0

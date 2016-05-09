@@ -14,6 +14,7 @@ module Buffer(input logic clk,
         input logic out_ram_wr1, out_ram_wr2, out_ram_wr3,
 		  input logic [11:0]  input_ram_rd_add1, input_ram_rd_add2, input_ram_rd_add3,
 		  input logic [11:0]  input_ram_wr_add1, input_ram_wr_add2, input_ram_wr_add3,
+		  input logic [31:0]	 total_time,
         
         output logic [31:0]  readdata);
 
@@ -86,12 +87,13 @@ module Buffer(input logic clk,
     always_ff @(posedge clk) begin
         if(chipselect && read) begin
             case(address)
-					  4 : readdata <= input_ram_rd_add1;
-					  5 : readdata <= input_ram_rd_add2;
-					  6 : readdata <= input_ram_rd_add3;
-					  7 : readdata <= input_ram_wr_add1;
-					  8 : readdata <= input_ram_wr_add2;
-					  9 : readdata <= input_ram_wr_add3;
+                0 : readdata <= total_time;
+					 4 : readdata <= input_ram_rd_add1;
+					 5 : readdata <= input_ram_rd_add2;
+					 6 : readdata <= input_ram_rd_add3;
+                7 : readdata <= input_ram_wr_add1;
+                8 : readdata <= input_ram_wr_add2;
+                9 : readdata <= input_ram_wr_add3;
                 10 : readdata <= ram1_rdaddress;
                 11 : readdata <= ram2_rdaddress;
                 12 : readdata <= ram3_rdaddress;
