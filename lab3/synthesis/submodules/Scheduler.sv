@@ -14,10 +14,10 @@
 
 module Scheduler(input logic clk,
         input logic [31:0]  input0, input1, input2, input3,
-        input logic         write_enable,
+        input logic         write_enable, reset_rams,
         input logic [11:0]  input_ram_wr_add0, input_ram_wr_add1, input_ram_wr_add2, input_ram_wr_add3,
 
-        output logic [31:0]	total_time,
+        output logic [31:0] total_time,
         output logic        out_ram_wr0, out_ram_wr1, out_ram_wr2, out_ram_wr3,
         output logic [31:0] output0, output1, output2, output3,
         output logic [11:0] input_ram_rd_add0, input_ram_rd_add1, input_ram_rd_add2, input_ram_rd_add3,
@@ -110,6 +110,11 @@ module Scheduler(input logic clk,
     endfunction
     
     always_ff @(posedge clk) begin
+			if(reset_rams) begin
+				input_ram_rd_add0 = 0; input_ram_rd_add1 = 0;
+				input_ram_rd_add2 = 0; input_ram_rd_add3 = 0;
+			end
+				
         input_ram_rden0 = 1; input_ram_rden1 = 1; input_ram_rden2 = 1; input_ram_rden3 = 1;
         if(write_enable) begin
             if(!((input_ram_rd_add0 >= input_ram_wr_add0)&&

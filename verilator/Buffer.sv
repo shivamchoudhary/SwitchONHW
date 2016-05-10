@@ -8,17 +8,17 @@
 
         
 module Buffer(input logic clk,
-        input logic         chipselect, read, read_enable,
-        input logic [3:0]   address,
+        input logic         chipselect, read, read_enable, reset_rams,
+        input logic [3:0]   address, 
         input logic [31:0]  output0, output1, output2, output3,
         input logic         out_ram_wr0, out_ram_wr1, out_ram_wr2, out_ram_wr3,
 	    input logic [31:0]	total_time,
 
-        output logic[11:0] ram0_rdaddress, ram1_rdaddress, ram2_rdaddress, ram3_rdaddress,
-        output logic[11:0] ram0_wraddress, ram1_wraddress, ram2_wraddress, ram3_wraddress,    
         output logic [31:0] readdata);
-
-	logic       ram0_wren, ram1_wren, ram2_wren, ram3_wren;
+		  
+    logic[11:0]     ram0_rdaddress, ram1_rdaddress, ram2_rdaddress, ram3_rdaddress;
+    logic[11:0]     ram0_wraddress, ram1_wraddress, ram2_wraddress, ram3_wraddress;
+	 logic       ram0_wren, ram1_wren, ram2_wren, ram3_wren;
     logic       ram0_rden, ram1_rden, ram2_rden, ram3_rden;
     logic[31:0] ram0_q, ram1_q, ram2_q, ram3_q;
     logic       read_cycle0, read_cycle1, read_cycle2, read_cycle3;
@@ -37,12 +37,17 @@ module Buffer(input logic clk,
         .q(ram3_q));
 
     initial begin
+	      ram0_wraddress = 0; ram1_wraddress = 0; ram2_wraddress = 0; ram3_wraddress = 0;
+			ram0_rdaddress = 0; ram1_rdaddress = 0; ram2_rdaddress = 0; ram3_rdaddress = 0;
         ram0_wren = 0; ram1_wren = 0; ram2_wren = 0; ram3_wren = 0;
         ram0_rden = 0; ram1_rden = 0; ram2_rden = 0; ram3_rden = 0;
         read_cycle0 = 1; read_cycle1 = 1; read_cycle2 = 1; read_cycle3 = 1;
     end
 
     always_ff @(posedge clk) begin
+			if(reset_rams)begin
+				ram0_wraddress <= 0; ram1_wraddress <= 0; ram2_wraddress <= 0; ram3_wraddress <= 0;
+			end
         if(out_ram_wr0)
             if(ram0_wren)
                 ram0_wraddress <= ram0_wraddress + 1;
@@ -90,11 +95,14 @@ module Buffer(input logic clk,
 
     always_ff @(posedge clk) begin
         if(read_enable)begin
-            ram0_rden <= 1; //ram2_rden = 1; ram3_rden = 1;
+            ram0_rden <= 1; ram1_rden = 1; ram2_rden = 1; ram3_rden = 1;
         end
     end
 
     always_ff @(posedge clk) begin
+		if(reset_rams)begin
+			ram0_rdaddress <= 0; ram1_rdaddress <= 0; ram2_rdaddress <= 0; ram3_rdaddress <= 0;
+		end
         if(chipselect && read) begin
             case(address)
                 7 : readdata <= total_time;
@@ -120,11 +128,8 @@ module Buffer(input logic clk,
                     end
 						  else
 								readdata <= ram0_q;
-                    if(ram0_rdaddress == ram0_wraddress)begin
-                        //ram1_rden <= 0;
-								ram1_rden <= 1;
-                    end
                 end
+					 
                 1 : begin
                     if(ram1_rdaddress <= ram1_wraddress) begin
                         if(read_cycle1) begin
@@ -138,10 +143,6 @@ module Buffer(input logic clk,
                     end
 						  else
 								readdata <= ram1_q;
-                    if(ram1_rdaddress == ram1_wraddress)begin
-                        //ram1_rden <= 0;
-								ram2_rden <= 1;
-                    end
                 end
 
                 2 : begin
@@ -153,15 +154,10 @@ module Buffer(input logic clk,
                         end
                         else begin
                             read_cycle2 <= 1;
-                            //ram2_rden <= 0;
                         end
                     end
 						  else
 								readdata <= ram2_q;
-                    if(ram2_rdaddress == ram2_wraddress)begin
-                        ram2_rden <= 0;
-                        ram3_rden <= 1;
-                    end
                 end
 
                 3 : begin
@@ -173,7 +169,6 @@ module Buffer(input logic clk,
 							  end
 							  else begin
 									read_cycle3 <= 1;
-									//ram3_rden <= 0;
 							  end
 						 end
 						 else

@@ -20,22 +20,20 @@ module VGA_LED(input logic      clk,
    logic           input_ram_wren0, input_ram_wren1, input_ram_wren2, input_ram_wren3;
 
 	logic           out_ram_wr0, out_ram_wr1, out_ram_wr2, out_ram_wr3;
-    logic[11:0]     ram0_rdaddress, ram1_rdaddress, ram2_rdaddress, ram3_rdaddress;
-    logic[11:0]     ram0_wraddress, ram1_wraddress, ram2_wraddress, ram3_wraddress;
 	logic [31:0]    output0, output1, output2, output3;
 
    logic [7:0]     hex1, hex2, hex3, hex4, hex5, hex6;
-   logic           write_enable, read_enable;
+   logic           write_enable, read_enable, reset_rams;
 	logic [31:0]	 total_time;
 
 	initial begin
+		reset_rams = 0;
 	   write_enable = 0;
 	   read_enable = 0;
+		total_time = 0;
 		input_ram_wren0 = 0; input_ram_wren1 = 0; input_ram_wren2 = 0; input_ram_wren3 = 0;
 		input_ram_wr_add0 = 0; input_ram_wr_add1 = 0; input_ram_wr_add2 = 0; input_ram_wr_add3 = 0;
-        input_ram_rd_add0 = 0; input_ram_rd_add1 = 0; input_ram_rd_add2 = 0; input_ram_rd_add3 = 0;
-        ram0_wraddress = 0; ram1_wraddress = 0; ram2_wraddress = 0; ram3_wraddress = 0;
-        ram0_rdaddress = 0; ram1_rdaddress = 0; ram2_rdaddress = 0; ram3_rdaddress = 0;
+      input_ram_rd_add0 = 0; input_ram_rd_add1 = 0; input_ram_rd_add2 = 0; input_ram_rd_add3 = 0;
 	end
 
    RAM input_ram0(.clock(clk), .data(input_ram_wr_in0), 
@@ -56,6 +54,10 @@ module VGA_LED(input logic      clk,
    Packet_Display packet_Display(.clk50(clk), .*);
 
 	always_ff @(posedge clk)begin
+		if(reset_rams)begin
+			reset_rams = 0;
+		end
+
 		if(input_ram_wren0)begin
 			input_ram_wren0 = 0;
 			input_ram_wr_add0 = input_ram_wr_add0 + 1;
@@ -93,13 +95,11 @@ module VGA_LED(input logic      clk,
 					input_ram_wr_in3 = writedata[31:0];		
 				end
 				15 : write_enable = 1;
-                14 : read_enable = 1;
-                13 : begin 
-                    input_ram_wr_add0 = 0; input_ram_wr_add1 = 0; input_ram_wr_add2 = 0; input_ram_wr_add3 = 0;
-                    input_ram_rd_add0 = 0; input_ram_rd_add1 = 0; input_ram_rd_add2 = 0; input_ram_rd_add3 = 0;
-                    ram0_wraddress = 0; ram1_wraddress = 0; ram2_wraddress = 0; ram3_wraddress = 0;
-                    ram0_rdaddress = 0; ram1_rdaddress = 0; ram2_rdaddress = 0; ram3_rdaddress = 0;
-                end
+				 14 : read_enable = 1;
+				 13 : begin 
+					  input_ram_wr_add0 = 0; input_ram_wr_add1 = 0; input_ram_wr_add2 = 0; input_ram_wr_add3 = 0;
+					  	reset_rams = 1;
+				 end
 				default : begin
 					input_ram_wren0 = 0; input_ram_wren1 = 0; input_ram_wren2 = 0; input_ram_wren3 = 0;
 				end
