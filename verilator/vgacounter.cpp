@@ -68,10 +68,10 @@ int main(int argc, char** argv)
          }
     }
 
-    int ram0_size = top->v__DOT__ram0_wraddress;
-    int ram1_size = top->v__DOT__ram1_wraddress;
-    int ram2_size = top->v__DOT__ram2_wraddress;
-    int ram3_size = top->v__DOT__ram3_wraddress;
+    int ram0_size = top->v__DOT__buffer__DOT__ram0_wraddress;
+    int ram1_size = top->v__DOT__buffer__DOT__ram1_wraddress;
+    int ram2_size = top->v__DOT__buffer__DOT__ram2_wraddress;
+    int ram3_size = top->v__DOT__buffer__DOT__ram3_wraddress;
     int j = 1;
 
 
