@@ -32,7 +32,7 @@ int main(int argc, char** argv)
     int num_packets = 10;
     srand((unsigned) time(&t));
     // run simulation for 100 clock periods
-    for(int i = 0; i < 200; i++)
+    for(int i = 0; i < 300; i++)
     {   
         if(i>=8 && i<8+8*num_packets){
             top->write=1;
@@ -72,39 +72,51 @@ int main(int argc, char** argv)
     int ram1_size = top->v__DOT__buffer__DOT__ram1_wraddress;
     int ram2_size = top->v__DOT__buffer__DOT__ram2_wraddress;
     int ram3_size = top->v__DOT__buffer__DOT__ram3_wraddress;
-    int j = 1;
+    int j = 0;
 
 
-    for(int i = 200; i < 400; i++)
+    for(int i = 300; i < 600; i++)
     {   
-        if(i < 212){
+        if(i < 312){
             top->chipselect = 1;
             top->address = 14;
             top->write = 1;
-        }else if(j <= ram0_size){
+        }else if(j < ram0_size){
             top->write = 0;
             top->chipselect = 1;
             top->address = 0;
-            top->read = 1;
+            if(i%6 < 4)
+                top->read = 1;
+            else
+                top->read = 0;
         }
-        else if(j > ram0_size + 1 && j <= ram1_size + ram0_size + 1){
+        else if(j >= ram0_size && j < ram1_size + ram0_size){
             top->write = 0;
             top->chipselect = 1;
             top->address = 1;
-            top->read = 1;
+            if(i%6 < 4)
+                top->read = 1;
+            else
+                top->read = 0;
         }
-        else if(j > ram1_size + ram0_size + 2 && j <= ram1_size + ram2_size + ram0_size + 2){
+        else if(j >= ram1_size + ram0_size && j < ram1_size + ram2_size + ram0_size){
             top->write = 0;
             top->chipselect = 1;
             top->address = 2;
-            top->read = 1;
+            if(i%6 < 4)
+                top->read = 1;
+            else
+                top->read = 0;
         }
-        else if(j > ram1_size + ram0_size + ram2_size + 3 && j <= ram1_size + ram2_size + ram3_size + ram0_size + 3){
+        else if(j >= ram1_size + ram0_size + ram2_size && j < ram1_size + ram2_size + ram3_size + ram0_size){
             top->write = 0;
             top->chipselect = 1;
             top->address = 3;
-            top->read = 1;
-        }else if(i >= 390 && i<392){
+            if(i%6 < 4)
+                top->read = 1;
+            else
+                top->read = 0;
+        }else if(i >= 590 && i<592){
             top->write = 1;
             top->chipselect = 1;
             top->address = 13;
@@ -116,7 +128,7 @@ int main(int argc, char** argv)
             top->read = 0;
         }
 
-        if(i>=212 && i%4==3)
+        if(i>312 && i%6==5)
             j++;
         
         for(int clk = 0; clk < 2; ++clk)
