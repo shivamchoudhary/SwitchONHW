@@ -1,2 +1,0 @@
-`verilator_config
-lint_off -msg MULTIDRIVEN -file "altera_mf.v"
