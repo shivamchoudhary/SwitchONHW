@@ -8,21 +8,15 @@ module VGA_LED(input logic      clk,
 				output logic [7:0]  VGA_R, VGA_G, VGA_B,
 				output logic 	    VGA_CLK, VGA_HS, VGA_VS, VGA_BLANK_n,
 				output logic 	    VGA_SYNC_n,
-            output logic [31:0] readdata);
+                output logic [31:0] readdata);
 
     // Naming convention is the part of module the signal is for followed by
     // the use of the signal, written in camel case. For example, fifo_in
-    logic [31:0]    inp[4][4];
-    logic [11:0]    input_ram_rd_add[4][4];
-    logic           input_ram_rden[4][4];
-    logic [31:0]    input_ram_wr_in[4][4];
-    logic [11:0]    input_ram_wr_add[4][4];
-    logic           input_ram_wren[4][4];
+    logic [31:0]    inp[4][4], outp[4], input_ram_wr_in[4][4];
+    logic [11:0]    input_ram_rd_add[4][4], input_ram_wr_add[4][4];
+    logic           input_ram_rden[4][4], input_ram_wren[4][4];
+	logic           out_ram_wr[4];
 
-	logic           out_ram_wr0, out_ram_wr1, out_ram_wr2, out_ram_wr3;
-	logic [31:0]    output0, output1, output2, output3;
-
-    logic [7:0]     hex1, hex2, hex3, hex4, hex5, hex6;
     logic           write_enable, read_enable, reset_rams;
 	logic [31:0]    total_time;
     logic [1:0]     port[4];
@@ -93,7 +87,6 @@ module VGA_LED(input logic      clk,
 
    Scheduler scheduler(.*);
 	Buffer buffer(.*);
-   Packet_Display packet_Display(.clk50(clk), .*);
 
 	always_ff @(posedge clk)begin
 		if(reset_rams)begin
@@ -102,7 +95,7 @@ module VGA_LED(input logic      clk,
         
         for(int i=0; i<4; i++) begin
             for(int j=0; j<4; j++) begin
-                if(port[i]==j)begin
+                if(input_ram_wren[i][j])begin
                     input_ram_wren[i][j] = 0;
                     input_ram_wr_add[i][j] = input_ram_wr_add[i][j] + 1;
                 end
@@ -125,7 +118,7 @@ module VGA_LED(input logic      clk,
                         end
                     end
                     if(!writedata)begin
-                        eop[0] = 0;
+                        eop[0] = 1;
                     end
 				end
 
@@ -143,7 +136,7 @@ module VGA_LED(input logic      clk,
                         end
                     end
                     if(!writedata)begin
-                        eop[1] = 0;
+                        eop[1] = 1;
                     end
 				end
 			
@@ -161,7 +154,7 @@ module VGA_LED(input logic      clk,
                         end
                     end
                     if(!writedata)begin
-                        eop[2] = 0;
+                        eop[2] = 1;
                     end
 				end
 				
@@ -179,7 +172,7 @@ module VGA_LED(input logic      clk,
                         end
                     end
                     if(!writedata)begin
-                        eop[3] = 0;
+                        eop[3] = 1;
                     end
 				end
                 15 : write_enable = 1;

@@ -10,8 +10,8 @@
 module Buffer(input logic clk,
         input logic         chipselect, read, read_enable, reset_rams,
         input logic [3:0]   address, 
-        input logic [31:0]  output0, output1, output2, output3,
-        input logic         out_ram_wr0, out_ram_wr1, out_ram_wr2, out_ram_wr3,
+        input logic [31:0]  outp[4],
+        input logic         out_ram_wr[4],
 	    input logic [31:0]	total_time,
 
         output logic [31:0] readdata);
@@ -23,16 +23,16 @@ module Buffer(input logic clk,
     logic[31:0] ram0_q, ram1_q, ram2_q, ram3_q;
     logic       read_cycle0, read_cycle1, read_cycle2, read_cycle3;
 
-    RAM output_ram0(.clock(clk), .data(output0), .rdaddress(ram0_rdaddress),
+    RAM output_ram0(.clock(clk), .data(outp[0]), .rdaddress(ram0_rdaddress),
         .rden(ram0_rden), .wraddress(ram0_wraddress), .wren(ram0_wren),
         .q(ram0_q));
-    RAM output_ram1(.clock(clk), .data(output1), .rdaddress(ram1_rdaddress),
+    RAM output_ram1(.clock(clk), .data(outp[1]), .rdaddress(ram1_rdaddress),
         .rden(ram1_rden), .wraddress(ram1_wraddress), .wren(ram1_wren),
         .q(ram1_q));
-    RAM output_ram2(.clock(clk), .data(output2), .rdaddress(ram2_rdaddress),
+    RAM output_ram2(.clock(clk), .data(outp[2]), .rdaddress(ram2_rdaddress),
         .rden(ram2_rden), .wraddress(ram2_wraddress), .wren(ram2_wren),
         .q(ram2_q));
-    RAM output_ram3(.clock(clk), .data(output3), .rdaddress(ram3_rdaddress),
+    RAM output_ram3(.clock(clk), .data(outp[3]), .rdaddress(ram3_rdaddress),
         .rden(ram3_rden), .wraddress(ram3_wraddress), .wren(ram3_wren),
         .q(ram3_q));
 
@@ -48,7 +48,7 @@ module Buffer(input logic clk,
 			if(reset_rams)begin
 				ram0_wraddress <= 0; ram1_wraddress <= 0; ram2_wraddress <= 0; ram3_wraddress <= 0;
 			end
-        if(out_ram_wr0)
+        if(out_ram_wr[0])
             if(ram0_wren)
                 ram0_wraddress <= ram0_wraddress + 1;
             else
@@ -59,7 +59,7 @@ module Buffer(input logic clk,
                 ram0_wraddress <= ram0_wraddress + 1;
             end
 
-        if(out_ram_wr1)
+        if(out_ram_wr[1])
             if(ram1_wren)
                 ram1_wraddress <= ram1_wraddress + 1;
             else
@@ -70,7 +70,7 @@ module Buffer(input logic clk,
                 ram1_wraddress <= ram1_wraddress + 1;
             end
 
-        if(out_ram_wr2)
+        if(out_ram_wr[2])
             if(ram2_wren)
                 ram2_wraddress <= ram2_wraddress + 1;
             else
@@ -81,7 +81,7 @@ module Buffer(input logic clk,
                 ram2_wraddress <= ram2_wraddress + 1;
             end
 
-        if(out_ram_wr3)
+        if(out_ram_wr[3])
             if(ram3_wren)
                 ram3_wraddress <= ram3_wraddress + 1;
             else
