@@ -1,0 +1,1 @@
+set_global_assignment -name VERILOG_NON_CONSTANT_LOOP_LIMIT 300

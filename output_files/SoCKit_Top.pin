@@ -195,7 +195,7 @@ GND                          : AC26      : gnd    :                   :         
 AUD_ADCDAT                   : AC27      : input  : 2.5 V             :         : 5A        : Y              
 SW[2]                        : AC28      : input  : 2.5 V             :         : 5B        : Y              
 SW[3]                        : AC29      : input  : 2.5 V             :         : 5B        : Y              
-hps_io_hps_io_gpio_inst_GPIO00 : AC30      : bidir  : 2.5 V             :         : 5B        : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AC30      :        :                   :         : 5B        :                
 GND                          : AD1       : gnd    :                   :         :           :                
 GND                          : AD2       : gnd    :                   :         :           :                
 GXB_NC                       : AD3       :        :                   :         : B0L       :                
@@ -212,7 +212,7 @@ VCCIO3B                      : AD13      : power  :                   : 2.5V    
 USB_RESET_n                  : AD14      : input  : 2.5 V             :         : 3B        : Y              
 DNU                          : AD15      :        :                   :         :           :                
 VCCPD3B4A                    : AD16      : power  :                   : 2.5V    :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : AD17      :        :                   :         : 4A        :                
+hps_io_hps_io_gpio_inst_GPIO00 : AD17      : bidir  : 2.5 V             :         : 4A        : N              
 VCCIO4A                      : AD18      : power  :                   : 2.5V    : 4A        :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : AD19      :        :                   :         : 4A        :                
 USB_B2_DATA[1]               : AD20      : bidir  : 2.5 V             :         : 4A        : Y              

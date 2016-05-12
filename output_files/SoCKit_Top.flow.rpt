@@ -1,5 +1,5 @@
 Flow report for SoCKit_Top
-Tue May 10 02:27:55 2016
+Wed May 11 21:20:07 2016
 Quartus II 32-bit Version 13.1.1 Build 166 11/26/2013 SJ Full Version
 
 
@@ -40,18 +40,18 @@ applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Flow Summary                                                                  ;
 +---------------------------------+---------------------------------------------+
-; Flow Status                     ; Successful - Tue May 10 02:27:55 2016       ;
+; Flow Status                     ; Successful - Wed May 11 21:20:06 2016       ;
 ; Quartus II 32-bit Version       ; 13.1.1 Build 166 11/26/2013 SJ Full Version ;
 ; Revision Name                   ; SoCKit_Top                                  ;
 ; Top-level Entity Name           ; SoCKit_Top                                  ;
 ; Family                          ; Cyclone V                                   ;
 ; Device                          ; 5CSXFC6D6F31C8ES                            ;
 ; Timing Models                   ; Preliminary                                 ;
-; Logic utilization (in ALMs)     ; 1,137 / 41,910 ( 3 % )                      ;
-; Total registers                 ; 1653                                        ;
+; Logic utilization (in ALMs)     ; 1,800 / 41,910 ( 4 % )                      ;
+; Total registers                 ; 2415                                        ;
 ; Total pins                      ; 289 / 499 ( 58 % )                          ;
 ; Total virtual pins              ; 0                                           ;
-; Total block memory bits         ; 1,049,088 / 5,662,720 ( 19 % )              ;
+; Total block memory bits         ; 2,621,952 / 5,662,720 ( 46 % )              ;
 ; Total DSP Blocks                ; 0 / 112 ( 0 % )                             ;
 ; Total HSSI RX PCSs              ; 0 / 9 ( 0 % )                               ;
 ; Total HSSI PMA RX Deserializers ; 0 / 9 ( 0 % )                               ;
@@ -67,7 +67,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 05/10/2016 02:19:21 ;
+; Start date & time ; 05/11/2016 21:10:52 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; SoCKit_Top          ;
 +-------------------+---------------------+
@@ -78,7 +78,7 @@ applicable agreement for further details.
 +---------------------------------------+--------------------------------------------------------------------+---------------+---------------------------------------+----------------+
 ; Assignment Name                       ; Value                                                              ; Default Value ; Entity Name                           ; Section Id     ;
 +---------------------------------------+--------------------------------------------------------------------+---------------+---------------------------------------+----------------+
-; COMPILER_SIGNATURE_ID                 ; 206915886283158.146286116103210                                    ; --            ; --                                    ; --             ;
+; COMPILER_SIGNATURE_ID                 ; 206915886283112.146301545215681                                    ; --            ; --                                    ; --             ;
 ; ECO_REGENERATE_REPORT                 ; On                                                                 ; Off           ; --                                    ; --             ;
 ; EDA_OUTPUT_DATA_FORMAT                ; Vhdl                                                               ; --            ; --                                    ; eda_simulation ;
 ; EDA_SIMULATION_TOOL                   ; ModelSim-Altera (VHDL)                                             ; <None>        ; --                                    ; --             ;
@@ -124,9 +124,6 @@ applicable agreement for further details.
 ; IP_TOOL_ENV                           ; Qsys                                                               ; --            ; lab3_mm_interconnect_0_rsp_xbar_demux ; --             ;
 ; IP_TOOL_ENV                           ; Qsys                                                               ; --            ; lab3_mm_interconnect_0_rsp_xbar_mux   ; --             ;
 ; IP_TOOL_NAME                          ; RAM: 2-PORT                                                        ; --            ; --                                    ; --             ;
-; IP_TOOL_NAME                          ; RAM: 2-PORT                                                        ; --            ; --                                    ; --             ;
-; IP_TOOL_NAME                          ; RAM: 2-PORT                                                        ; --            ; --                                    ; --             ;
-; IP_TOOL_NAME                          ; RAM: 2-PORT                                                        ; --            ; --                                    ; --             ;
 ; IP_TOOL_NAME                          ; altera_avalon_packets_to_master                                    ; --            ; altera_avalon_packets_to_master       ; --             ;
 ; IP_TOOL_NAME                          ; altera_avalon_sc_fifo                                              ; --            ; altera_avalon_sc_fifo                 ; --             ;
 ; IP_TOOL_NAME                          ; altera_avalon_st_bytes_to_packets                                  ; --            ; altera_avalon_st_bytes_to_packets     ; --             ;
@@ -154,9 +151,6 @@ applicable agreement for further details.
 ; IP_TOOL_NAME                          ; altera_merlin_router                                               ; --            ; lab3_mm_interconnect_0_id_router      ; --             ;
 ; IP_TOOL_NAME                          ; altera_merlin_demultiplexer                                        ; --            ; lab3_mm_interconnect_0_rsp_xbar_demux ; --             ;
 ; IP_TOOL_NAME                          ; altera_merlin_multiplexer                                          ; --            ; lab3_mm_interconnect_0_rsp_xbar_mux   ; --             ;
-; IP_TOOL_VERSION                       ; 13.1                                                               ; --            ; --                                    ; --             ;
-; IP_TOOL_VERSION                       ; 13.1                                                               ; --            ; --                                    ; --             ;
-; IP_TOOL_VERSION                       ; 13.1                                                               ; --            ; --                                    ; --             ;
 ; IP_TOOL_VERSION                       ; 13.1                                                               ; --            ; --                                    ; --             ;
 ; IP_TOOL_VERSION                       ; 13.1                                                               ; --            ; altera_avalon_packets_to_master       ; --             ;
 ; IP_TOOL_VERSION                       ; 13.1                                                               ; --            ; altera_avalon_sc_fifo                 ; --             ;
@@ -204,9 +198,6 @@ applicable agreement for further details.
 ; MISC_FILE                             ; lab3/synthesis/submodules/sequencer/sequencer_auto.pre.h           ; --            ; --                                    ; --             ;
 ; MISC_FILE                             ; lab3/synthesis/submodules/hps.pre.xml                              ; --            ; --                                    ; --             ;
 ; MISC_FILE                             ; RAM_bb.v                                                           ; --            ; --                                    ; --             ;
-; MISC_FILE                             ; Input_RAM_1.cmp                                                    ; --            ; --                                    ; --             ;
-; MISC_FILE                             ; Input_RAM_2.cmp                                                    ; --            ; --                                    ; --             ;
-; MISC_FILE                             ; Input_RAM_3.cmp                                                    ; --            ; --                                    ; --             ;
 ; PARTITION_COLOR                       ; 16764057                                                           ; --            ; --                                    ; Top            ;
 ; PARTITION_FITTER_PRESERVATION_LEVEL   ; PLACEMENT_AND_ROUTING                                              ; --            ; --                                    ; Top            ;
 ; PARTITION_NETLIST_TYPE                ; SOURCE                                                             ; --            ; --                                    ; Top            ;
@@ -227,12 +218,12 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:39     ; 1.0                     ; 533 MB              ; 00:00:36                           ;
-; Fitter                    ; 00:04:47     ; 1.2                     ; 1782 MB             ; 00:05:30                           ;
-; Assembler                 ; 00:00:36     ; 1.0                     ; 530 MB              ; 00:00:35                           ;
-; TimeQuest Timing Analyzer ; 00:01:49     ; 1.3                     ; 1197 MB             ; 00:02:00                           ;
-; EDA Netlist Writer        ; 00:00:05     ; 1.0                     ; 427 MB              ; 00:00:04                           ;
-; Total                     ; 00:07:56     ; --                      ; --                  ; 00:08:45                           ;
+; Analysis & Synthesis      ; 00:00:34     ; 1.0                     ; 563 MB              ; 00:00:31                           ;
+; Fitter                    ; 00:05:04     ; 1.3                     ; 1810 MB             ; 00:06:09                           ;
+; Assembler                 ; 00:00:39     ; 1.0                     ; 540 MB              ; 00:00:38                           ;
+; TimeQuest Timing Analyzer ; 00:02:16     ; 1.5                     ; 1238 MB             ; 00:02:31                           ;
+; EDA Netlist Writer        ; 00:00:04     ; 1.0                     ; 454 MB              ; 00:00:04                           ;
+; Total                     ; 00:08:37     ; --                      ; --                  ; 00:09:53                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -241,11 +232,11 @@ applicable agreement for further details.
 +---------------------------+------------------+----------------+------------+----------------+
 ; Module Name               ; Machine Hostname ; OS Name        ; OS Version ; Processor type ;
 +---------------------------+------------------+----------------+------------+----------------+
-; Analysis & Synthesis      ; micro15          ; CentOS release ; 5          ; x86_64         ;
-; Fitter                    ; micro15          ; CentOS release ; 5          ; x86_64         ;
-; Assembler                 ; micro15          ; CentOS release ; 5          ; x86_64         ;
-; TimeQuest Timing Analyzer ; micro15          ; CentOS release ; 5          ; x86_64         ;
-; EDA Netlist Writer        ; micro15          ; CentOS release ; 5          ; x86_64         ;
+; Analysis & Synthesis      ; micro6           ; CentOS release ; 5          ; x86_64         ;
+; Fitter                    ; micro6           ; CentOS release ; 5          ; x86_64         ;
+; Assembler                 ; micro6           ; CentOS release ; 5          ; x86_64         ;
+; TimeQuest Timing Analyzer ; micro6           ; CentOS release ; 5          ; x86_64         ;
+; EDA Netlist Writer        ; micro6           ; CentOS release ; 5          ; x86_64         ;
 +---------------------------+------------------+----------------+------------+----------------+
 
 
