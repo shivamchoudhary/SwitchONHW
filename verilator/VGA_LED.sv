@@ -15,11 +15,17 @@ module VGA_LED(input logic      clk,
     logic [31:0]    inp[4][4], outp[4], input_ram_wr_in[4][4];
     logic [11:0]    input_ram_rd_add[4][4], input_ram_wr_add[4][4];
     logic           input_ram_rden[4][4], input_ram_wren[4][4];
-	 logic           out_ram_wr[4];
+	logic           out_ram_wr[4];
 
+    // logic signals to enable write and read to the output RAM.
     logic           write_enable, read_enable;
-	 logic [1:0] reset_rams;
-	 logic [31:0]    total_time;
+    // signal to reset rams. Not being used right now. Was giving us problems.
+    // We burn the hardware again after each test run of packets.
+    // The only visible option.
+    logic [1:0]     reset_rams;
+    //  Calculates the number of clock cycles it takes to transfer the entire
+    //  data from the input rams. Necessary to calculate the effective speed.
+    logic [31:0]    total_time;
     logic [1:0]     port[4];
     logic           eop[4];
 
@@ -37,6 +43,8 @@ module VGA_LED(input logic      clk,
         end
 	end
 
+    //Incoming packets modeled as 16 rams, 1 for each combination of input and
+    //output port
    RAM input_ram00(.clock(clk), .data(input_ram_wr_in[0][0]),
         .rdaddress(input_ram_rd_add[0][0]), .rden(input_ram_rden[0][0]),
           .wraddress(input_ram_wr_add[0][0]), .wren(input_ram_wren[0][0]), .q(inp[0][0]));
@@ -109,10 +117,16 @@ module VGA_LED(input logic      clk,
 		if (chipselect && write) begin
 			case(address)
 				0 : begin
+				    // If the previous packet has finished
+				    // transferring (characterized by 32 bit zero values, the
+				    // port information has to be re-established from the
+				    // packet header.
                     if(eop[0] && writedata) begin
                         eop[0] = 0;
                         port[0] = writedata[1:0];
                     end
+                    // If in between transfer of a packet, continue
+                    // transferring to the same port.
                     if(!eop[0]) begin
                         for(int i=0; i<4; i++)begin
                             if(port[0] == i) begin
@@ -121,6 +135,9 @@ module VGA_LED(input logic      clk,
                             end
                         end
                     end
+                    // If the end of packet is reached(32 bit zero value), eop
+                    // signal is set to high. In the next cycle the port
+                    // information will be re-established.
                     if(!writedata)begin
                         eop[0] = 1;
                     end
@@ -179,8 +196,16 @@ module VGA_LED(input logic      clk,
                         eop[3] = 1;
                     end
 				end
-            15 : write_enable = 1;
+				// Special signal to control the flow of data within the
+				// switch from input port to output port. Required to
+				// specifically determine the number of cycles it took for
+				// data transfer and hence the speed.
+                15 : write_enable = 1;
+                // Controls the read from the output rams. Not really
+                // necessary, but we have added this in our user space code
+                // and may have a valid use case.
 				14 : read_enable = 1;
+				// Reset all rams. Not being used.
 				13 : begin 
                     for(int i=0; i<4; i++)begin
                         for(int j=0; j<4; j++)begin
@@ -192,6 +217,7 @@ module VGA_LED(input logic      clk,
 			endcase
 		end
 		else begin
+		    // Disable rights to all rams, if write was low.
             for(int i=0; i<4; i++)begin
                 for(int j=0; j<4; j++)begin
                     input_ram_wren[i][j] = 0;

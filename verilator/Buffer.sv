@@ -9,21 +9,28 @@
         
 module Buffer(input logic clk,
         input logic         chipselect, read, read_enable, 
-		  input logic [1:0]	 reset_rams,
+		input logic [1:0]   reset_rams,
         input logic [3:0]   address, 
         input logic [31:0]  outp[4],
         input logic         out_ram_wr[4],
-		  input logic [31:0]	 total_time,
+        input logic [31:0]	total_time,
 
         output logic [31:0] readdata);
-		  
-    logic[11:0]     ram0_rdaddress, ram1_rdaddress, ram2_rdaddress, ram3_rdaddress;
-    logic[11:0]     ram0_wraddress, ram1_wraddress, ram2_wraddress, ram3_wraddress;
-	 logic       ram0_wren, ram1_wren, ram2_wren, ram3_wren;
+
+    // Output RAM signals. Read & Write address, enable signals and output
+    // signals.
+    logic[11:0] ram0_rdaddress, ram1_rdaddress, ram2_rdaddress, ram3_rdaddress;
+    logic[11:0] ram0_wraddress, ram1_wraddress, ram2_wraddress, ram3_wraddress;
+	logic       ram0_wren, ram1_wren, ram2_wren, ram3_wren;
     logic       ram0_rden, ram1_rden, ram2_rden, ram3_rden;
     logic[31:0] ram0_q, ram1_q, ram2_q, ram3_q;
+    // read cycle signals to ensure that address is incremented only once
+    // while reading from the RAM. We toggle these logic signals to ensure
+    // that all the work at Buffer happens only during one clock cycle out 
+    // of the two used by the Avalon bus.
     logic       read_cycle0, read_cycle1, read_cycle2, read_cycle3;
 
+    // Four output RAMs that model the four output ports.
     RAM output_ram0(.clock(clk), .data(outp[0]), .rdaddress(ram0_rdaddress),
         .rden(ram0_rden), .wraddress(ram0_wraddress), .wren(ram0_wren),
         .q(ram0_q));
@@ -38,17 +45,21 @@ module Buffer(input logic clk,
         .q(ram3_q));
 
     initial begin
-	      ram0_wraddress = 0; ram1_wraddress = 0; ram2_wraddress = 0; ram3_wraddress = 0;
-			ram0_rdaddress = 0; ram1_rdaddress = 0; ram2_rdaddress = 0; ram3_rdaddress = 0;
+	    ram0_wraddress = 0; ram1_wraddress = 0; ram2_wraddress = 0; ram3_wraddress = 0;
+		ram0_rdaddress = 0; ram1_rdaddress = 0; ram2_rdaddress = 0; ram3_rdaddress = 0;
         ram0_wren = 0; ram1_wren = 0; ram2_wren = 0; ram3_wren = 0;
         ram0_rden = 0; ram1_rden = 0; ram2_rden = 0; ram3_rden = 0;
         read_cycle0 = 1; read_cycle1 = 1; read_cycle2 = 1; read_cycle3 = 1;
     end
 
+    // We store the values in the outp[i] signals in the RAM passed by the 
+    // Scheduler along with the write signals controlled by the same.
+    // Here we are delaying the storage by one clock cycle just to make sure
+    // that the signal is strong when we save it to the RAM.
     always_ff @(posedge clk) begin
-			if(reset_rams)begin
-				ram0_wraddress <= 0; ram1_wraddress <= 0; ram2_wraddress <= 0; ram3_wraddress <= 0;
-			end
+		if(reset_rams)begin
+			ram0_wraddress <= 0; ram1_wraddress <= 0; ram2_wraddress <= 0; ram3_wraddress <= 0;
+		end
         if(out_ram_wr[0])
             if(ram0_wren)
                 ram0_wraddress <= ram0_wraddress + 1;
@@ -94,12 +105,15 @@ module Buffer(input logic clk,
             end
     end
 
+    // The read signals to all the RAMs are turned high as soon as the
+    // read_enable signal is turned on.
     always_ff @(posedge clk) begin
         if(read_enable)begin
             ram0_rden <= 1; ram1_rden = 1; ram2_rden = 1; ram3_rden = 1;
         end
     end
 
+    // Block to control the reads from the output RAM.
     always_ff @(posedge clk) begin
 		if(reset_rams)begin
 			ram0_rdaddress <= 0; ram1_rdaddress <= 0; ram2_rdaddress <= 0; ram3_rdaddress <= 0;
