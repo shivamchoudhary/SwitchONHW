@@ -77,7 +77,8 @@ vgaled:
 # The RAM's on the output port of the Switch
 buffer_SIM=buffercounter.cpp # Define the simulation file you for this module.
 buffer: 
-	verilator -Wno-lint -cc --trace Buffer.sv --exe $(buffer_SIM)$
+	verilator -Wno-lint -top-module Buffer -I $(INCLUDES) -cc \
+		--trace Buffer.sv --exe $(buffer_SIM)$
 	make -j -C obj_dir/ -f VBuffer.mk VBuffer
 	obj_dir/VBuffer
 
@@ -89,26 +90,21 @@ scheduler:
 	obj_dir/VScheduler
 
 # Compiles into Altera's scfifo depends on scfifo.v
-fifo_SIM=fifocounter.cpp
-fifo:
-	verilator -Wno-INITIALDLY -Wno-lint -Wno-MULTIDRIVEN --top-module Fifo \
-		-cc --trace Fifo.v --exe $(fifo_SIM) 
-	make -j -C obj_dir/ -f VFifo.mk VFifo
-	obj_dir/VFifo
-# Compiles the Megamuxes
-mux_SIM=muxcounter.cpp
-mux:
-	verilator -Wno-lint -cc --trace lpm_mux.v --top-module lpm_mux --exe \
-		$(mux_SIM)$ 
-	make -j -C obj_dir/ -f Vlpm_mux.mk Vlpm_mux
-	obj_dir/Vlpm_mux
+#fifo_SIM=fifocounter.cpp
+#fifo:
+	#verilator -Wno-INITIALDLY -Wno-lint -Wno-MULTIDRIVEN --top-module Fifo \
+		#-cc --trace Fifo.v --exe $(fifo_SIM) 
+	#make -j -C obj_dir/ -f VFifo.mk VFifo
+	#obj_dir/VFifo
+## Compiles the Megamuxes
+#mux_SIM=muxcounter.cpp
+#mux:
+	#verilator -Wno-lint -cc --trace lpm_mux.v --top-module lpm_mux --exe \
+		#$(mux_SIM)$ 
+	#make -j -C obj_dir/ -f Vlpm_mux.mk Vlpm_mux
+	#obj_dir/Vlpm_mux
 
 #Compiles the scheduler depends on None. This is the Crossbar switch 
-test_rand=testrandomcounter.cpp
-random:
-	verilator -Wno-lint -cc --trace test_random.sv --exe $(test_rand)$
-	make -j -C obj_dir/ -f Vtest_random.mk Vtest_random
-	obj_dir/Vtest_random
 ram:
 	verilator $(WFLAGS) -I $(INCLUDES)$  -cc --trace RAM.v -top-module RAM --exe ramcounter.cpp
 	make -j -C obj_dir/ -f VRAM.mk VRAM

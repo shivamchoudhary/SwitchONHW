@@ -14,13 +14,14 @@
 
 module Scheduler(input logic clk,
         input logic [31:0]  inp[4][4],
-        input logic         write_enable, reset_rams,
-        input logic [11:0]  input_ram_wr_add[4][4],
+        input logic         write_enable,
+		  input logic [1:0]	 reset_rams,
+		  input logic [12:0]  input_ram_wr_add[4][4],
 
         output logic [31:0] total_time,
         output logic        out_ram_wr[4],
         output logic [31:0] outp[4],
-        output logic [11:0] input_ram_rd_add[4][4],
+        output logic [12:0] input_ram_rd_add[4][4],
         output logic        input_ram_rden[4][4]);
 
     logic [1:0] write_cycle;
@@ -71,7 +72,8 @@ module Scheduler(input logic clk,
                             input_ram_rd_add[j][i] = input_ram_rd_add[j][i] + 1;
                             if(!inp[j][i])begin
                                 eop[i] = 1;
-                                j = 4;
+										  break;
+                                //j = 4;
                             end
                         end
                     end

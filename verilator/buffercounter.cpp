@@ -22,52 +22,52 @@ int main(int argc, char** argv)
 
     top->trace(tfp, 99);
     tfp->open("buffer.vcd");
+    top->read_enable = 1;
      
     // initialize simulation inputs
-    top->clk    = 0;
+    top->clk    = 1;
      // run simulation for 100 clock periods
+    int add = 0;
     for(int i = 0; i < 100; i++){
 
         // Place a dummy data on write bus. You need to write first.
         // Write to RAM 1
-        //RAM 1
-        if (i>10&&i<=14){
-                top->out_ram_wr1 = 1; //Enable ramen1 for 1 clock cycles
-                top ->output1 = 2; //Put data on the result signal
+        //RAM 0 & RAM 1
+        if (i>=10 && i<14){
+                top->out_ram_wr[0] = 1; //Enable ramen1 for 1 clock cycles
+                top->outp[0] = 1; //Put data on the result signal
+                
+                top->out_ram_wr[1] = 1;
+                top->outp[1] = 2;
         }
         else{
-                top->out_ram_wr1=0; //Toggle ramen1
-                top->output1 = 0; //Toggle result 1
+                top->out_ram_wr[0]=0; //Toggle ramen1
+                top->outp[0] = 0; //Toggle result 1
         }
-        //RAM 2
-        if (i>=15 && i<=19){
-                top->out_ram_wr2 = 1;
-                top->output2 = 1;
+        //RAM 2 & RAM 3 
+        if (i>=14 && i<18){
+                top->out_ram_wr[2] = 1;
+                top->outp[2] = 3;
 
+                top->out_ram_wr[3] = 1;
+                top->outp[3] = 4;
         }
         else{
-                top->out_ram_wr2 = 0;
-                top->output2 = 0;
-        }
-        //RAM3 
-        if (i>20 && i<=24){
-                top->out_ram_wr3=1;
-                top->output3=1;
-        }
-        else{
-                top->out_ram_wr3 = 0;
-                top->output3=0;
+                top->out_ram_wr[2] = 0;
+                top->outp[2] = 0;
         }
         // Generate read signals
-        
-        if(i>10&&i<19){
-                top->chipselect=1;
+        if(i>=20 && i<36){
+                top->chipselect = 1;
                 top->read = 1;
-                top->address = 1;
+                top->address = add;
+                if(i%4 == 3)
+                    add = add + 1;
+                printf("%i\n", add);
         }
         else{
                 top->chipselect = 0;
-                top->address =7;
+                top->address = 0;
                 top->read = 0;
 
         }
