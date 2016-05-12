@@ -1,22 +1,38 @@
-module VGA_LED(input logic      clk,
-				input logic 	    reset,
-				input logic [31:0]  writedata,
-				input logic 	    write, read, 
-				input               chipselect,
-				input logic [3:0]   address,
-			
-				output logic [7:0]  VGA_R, VGA_G, VGA_B,
-				output logic 	    VGA_CLK, VGA_HS, VGA_VS, VGA_BLANK_n,
-				output logic 	    VGA_SYNC_n,
-                output logic [31:0] readdata);
+//START_MODULE_NAME------------------------------------------------------------
+//
+// Module Name     :  VGA_LED (It's weird but it's here for legacy purposes)
+//
+// Original Author : Stephen Edwards
+//
+// Description     :  Main module which communicates with the Userspace using 
+//                      ioctl registers.
+//
+// Limitation      : Does not convert the input network to a flow network.
+// Results expected:  The Output RAMS should have the sorted values of the
+//                      data.
+//
+//END_MODULE_NAME--------------------------------------------------------------
 
-    // Naming convention is the part of module the signal is for followed by
-    // the use of the signal, written in camel case. For example, fifo_in
+module VGA_LED(
+        // INPUT PARAMETER DECLARATION
+        input logic      clk,
+        input logic 	    reset,
+        input logic [31:0]  writedata,
+        input logic 	    write, read, 
+        input               chipselect,
+        input logic [3:0]   address,
+
+        output logic [7:0]  VGA_R, VGA_G, VGA_B,
+        output logic 	    VGA_CLK, VGA_HS, VGA_VS, VGA_BLANK_n,
+        output logic 	    VGA_SYNC_n,
+        output logic [31:0] readdata);
+
+    // INTERNAL PARAMETER DECLARATION
+    
     logic [31:0]    inp[4][4], outp[4], input_ram_wr_in[4][4];
     logic [11:0]    input_ram_rd_add[4][4], input_ram_wr_add[4][4];
     logic           input_ram_rden[4][4], input_ram_wren[4][4];
 	logic           out_ram_wr[4];
-
     logic           write_enable, read_enable, reset_rams;
 	logic [31:0]    total_time;
     logic [1:0]     port[4];
@@ -35,57 +51,83 @@ module VGA_LED(input logic      clk,
             eop[i] = 1;
         end
 	end
-
+   // Declare Internal RAMS
+   // RAM_XX denotes Input+Output combination.
+   
+   /* Declare RAMS for PORT 0 */
    RAM input_ram00(.clock(clk), .data(input_ram_wr_in[0][0]),
         .rdaddress(input_ram_rd_add[0][0]), .rden(input_ram_rden[0][0]),
-          .wraddress(input_ram_wr_add[0][0]), .wren(input_ram_wren[0][0]), .q(inp[0][0]));
+          .wraddress(input_ram_wr_add[0][0]), .wren(input_ram_wren[0][0]), 
+          .q(inp[0][0]));
    RAM input_ram01(.clock(clk), .data(input_ram_wr_in[0][1]),
         .rdaddress(input_ram_rd_add[0][1]), .rden(input_ram_rden[0][1]),
-          .wraddress(input_ram_wr_add[0][1]), .wren(input_ram_wren[0][1]), .q(inp[0][1]));
+          .wraddress(input_ram_wr_add[0][1]), .wren(input_ram_wren[0][1]), 
+          .q(inp[0][1]));
    RAM input_ram02(.clock(clk), .data(input_ram_wr_in[0][2]),
         .rdaddress(input_ram_rd_add[0][2]), .rden(input_ram_rden[0][2]),
-          .wraddress(input_ram_wr_add[0][2]), .wren(input_ram_wren[0][2]), .q(inp[0][2]));
+          .wraddress(input_ram_wr_add[0][2]), .wren(input_ram_wren[0][2]), 
+          .q(inp[0][2]));
    RAM input_ram03(.clock(clk), .data(input_ram_wr_in[0][3]),
         .rdaddress(input_ram_rd_add[0][3]), .rden(input_ram_rden[0][3]),
-          .wraddress(input_ram_wr_add[0][3]), .wren(input_ram_wren[0][3]), .q(inp[0][3]));
+          .wraddress(input_ram_wr_add[0][3]), .wren(input_ram_wren[0][3]),
+          .q(inp[0][3]));
+
+   /* Declare RAMS for PORT 1 */
    RAM input_ram10(.clock(clk), .data(input_ram_wr_in[1][0]),
         .rdaddress(input_ram_rd_add[1][0]), .rden(input_ram_rden[1][0]),
-          .wraddress(input_ram_wr_add[1][0]), .wren(input_ram_wren[1][0]), .q(inp[1][0]));
+          .wraddress(input_ram_wr_add[1][0]), .wren(input_ram_wren[1][0]),
+          .q(inp[1][0]));
    RAM input_ram11(.clock(clk), .data(input_ram_wr_in[1][1]),
         .rdaddress(input_ram_rd_add[1][1]), .rden(input_ram_rden[1][1]),
-          .wraddress(input_ram_wr_add[1][1]), .wren(input_ram_wren[1][1]), .q(inp[1][1]));
+          .wraddress(input_ram_wr_add[1][1]), .wren(input_ram_wren[1][1]),
+          .q(inp[1][1]));
    RAM input_ram12(.clock(clk), .data(input_ram_wr_in[1][2]),
         .rdaddress(input_ram_rd_add[1][2]), .rden(input_ram_rden[1][2]),
-          .wraddress(input_ram_wr_add[1][2]), .wren(input_ram_wren[1][2]), .q(inp[1][2]));
+          .wraddress(input_ram_wr_add[1][2]), .wren(input_ram_wren[1][2]), 
+          .q(inp[1][2]));
    RAM input_ram13(.clock(clk), .data(input_ram_wr_in[1][3]),
         .rdaddress(input_ram_rd_add[1][3]), .rden(input_ram_rden[1][3]),
-          .wraddress(input_ram_wr_add[1][3]), .wren(input_ram_wren[1][3]), .q(inp[1][3]));
+          .wraddress(input_ram_wr_add[1][3]), .wren(input_ram_wren[1][3]), 
+          .q(inp[1][3]));
+   
+   /* Declare RAMS for PORT 2 */
    RAM input_ram20(.clock(clk), .data(input_ram_wr_in[2][0]),
         .rdaddress(input_ram_rd_add[2][0]), .rden(input_ram_rden[2][0]),
-          .wraddress(input_ram_wr_add[2][0]), .wren(input_ram_wren[2][0]), .q(inp[2][0]));
+          .wraddress(input_ram_wr_add[2][0]), .wren(input_ram_wren[2][0]),
+          .q(inp[2][0]));
    RAM input_ram21(.clock(clk), .data(input_ram_wr_in[2][1]),
         .rdaddress(input_ram_rd_add[2][1]), .rden(input_ram_rden[2][1]),
-          .wraddress(input_ram_wr_add[2][1]), .wren(input_ram_wren[2][1]), .q(inp[2][1]));
+          .wraddress(input_ram_wr_add[2][1]), .wren(input_ram_wren[2][1]),
+          .q(inp[2][1]));
    RAM input_ram22(.clock(clk), .data(input_ram_wr_in[2][2]),
         .rdaddress(input_ram_rd_add[2][2]), .rden(input_ram_rden[2][2]),
-          .wraddress(input_ram_wr_add[2][2]), .wren(input_ram_wren[2][2]), .q(inp[2][2]));
+          .wraddress(input_ram_wr_add[2][2]), .wren(input_ram_wren[2][2]),
+          .q(inp[2][2]));
    RAM input_ram23(.clock(clk), .data(input_ram_wr_in[2][3]),
         .rdaddress(input_ram_rd_add[2][3]), .rden(input_ram_rden[2][3]),
-          .wraddress(input_ram_wr_add[2][3]), .wren(input_ram_wren[2][3]), .q(inp[2][3]));
+          .wraddress(input_ram_wr_add[2][3]), .wren(input_ram_wren[2][3]), 
+          .q(inp[2][3]));
+
+   /* Declare RAMS for port 3 */
    RAM input_ram30(.clock(clk), .data(input_ram_wr_in[3][0]),
         .rdaddress(input_ram_rd_add[3][0]), .rden(input_ram_rden[3][0]),
-          .wraddress(input_ram_wr_add[3][0]), .wren(input_ram_wren[3][0]), .q(inp[3][0]));
+          .wraddress(input_ram_wr_add[3][0]), .wren(input_ram_wren[3][0]),
+          .q(inp[3][0]));
    RAM input_ram31(.clock(clk), .data(input_ram_wr_in[3][1]),
         .rdaddress(input_ram_rd_add[3][1]), .rden(input_ram_rden[3][1]),
-          .wraddress(input_ram_wr_add[3][1]), .wren(input_ram_wren[3][1]), .q(inp[3][1]));
+          .wraddress(input_ram_wr_add[3][1]), .wren(input_ram_wren[3][1]),
+          .q(inp[3][1]));
    RAM input_ram32(.clock(clk), .data(input_ram_wr_in[3][2]),
         .rdaddress(input_ram_rd_add[3][2]), .rden(input_ram_rden[3][2]),
-          .wraddress(input_ram_wr_add[3][2]), .wren(input_ram_wren[3][2]), .q(inp[3][2]));
+          .wraddress(input_ram_wr_add[3][2]), .wren(input_ram_wren[3][2]), 
+          .q(inp[3][2]));
    RAM input_ram33(.clock(clk), .data(input_ram_wr_in[3][3]),
         .rdaddress(input_ram_rd_add[3][3]), .rden(input_ram_rden[3][3]),
-          .wraddress(input_ram_wr_add[3][3]), .wren(input_ram_wren[3][3]), .q(inp[3][3]));
+          .wraddress(input_ram_wr_add[3][3]), .wren(input_ram_wren[3][3]),
+          .q(inp[3][3]));
 
-   Scheduler scheduler(.*);
+    // Connect the Components here.
+    Scheduler scheduler(.*);
 	Buffer buffer(.*);
 
 	always_ff @(posedge clk)begin
