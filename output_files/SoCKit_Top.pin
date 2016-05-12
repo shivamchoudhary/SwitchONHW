@@ -212,7 +212,7 @@ VCCIO3B                      : AD13      : power  :                   : 2.5V    
 USB_RESET_n                  : AD14      : input  : 2.5 V             :         : 3B        : Y              
 DNU                          : AD15      :        :                   :         :           :                
 VCCPD3B4A                    : AD16      : power  :                   : 2.5V    :           :                
-hps_io_hps_io_gpio_inst_GPIO00 : AD17      : bidir  : 2.5 V             :         : 4A        : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AD17      :        :                   :         : 4A        :                
 VCCIO4A                      : AD18      : power  :                   : 2.5V    : 4A        :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : AD19      :        :                   :         : 4A        :                
 USB_B2_DATA[1]               : AD20      : bidir  : 2.5 V             :         : 4A        : Y              
@@ -356,7 +356,7 @@ RESERVED_INPUT_WITH_WEAK_PULLUP : AJ7       :        :                   :      
 VCCIO3B                      : AJ8       : power  :                   : 2.5V    : 3B        :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : AJ9       :        :                   :         : 3B        :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : AJ10      :        :                   :         : 3B        :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : AJ11      :        :                   :         : 3B        :                
+hps_io_hps_io_gpio_inst_GPIO00 : AJ11      : bidir  : 2.5 V             :         : 3B        : N              
 RESERVED_INPUT_WITH_WEAK_PULLUP : AJ12      :        :                   :         : 3B        :                
 VCCIO3B                      : AJ13      : power  :                   : 2.5V    : 3B        :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : AJ14      :        :                   :         : 3B        :                

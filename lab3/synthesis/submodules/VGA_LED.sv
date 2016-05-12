@@ -13,7 +13,7 @@ module VGA_LED(input logic      clk,
     // Naming convention is the part of module the signal is for followed by
     // the use of the signal, written in camel case. For example, fifo_in
     logic [31:0]    inp[4][4], outp[4], input_ram_wr_in[4][4];
-    logic [12:0]    input_ram_rd_add[4][4], input_ram_wr_add[4][4];
+    logic [11:0]    input_ram_rd_add[4][4], input_ram_wr_add[4][4];
     logic           input_ram_rden[4][4], input_ram_wren[4][4];
 	 logic           out_ram_wr[4];
 

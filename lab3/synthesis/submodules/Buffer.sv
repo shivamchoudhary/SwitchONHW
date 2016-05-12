@@ -17,8 +17,8 @@ module Buffer(input logic clk,
 
         output logic [31:0] readdata);
 		  
-    logic[12:0]     ram0_rdaddress, ram1_rdaddress, ram2_rdaddress, ram3_rdaddress;
-    logic[12:0]     ram0_wraddress, ram1_wraddress, ram2_wraddress, ram3_wraddress;
+    logic[11:0]     ram0_rdaddress, ram1_rdaddress, ram2_rdaddress, ram3_rdaddress;
+    logic[11:0]     ram0_wraddress, ram1_wraddress, ram2_wraddress, ram3_wraddress;
 	 logic       ram0_wren, ram1_wren, ram2_wren, ram3_wren;
     logic       ram0_rden, ram1_rden, ram2_rden, ram3_rden;
     logic[31:0] ram0_q, ram1_q, ram2_q, ram3_q;
